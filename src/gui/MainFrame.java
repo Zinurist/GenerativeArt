@@ -9,6 +9,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 /**
  * Main frame of the application.
@@ -23,7 +24,7 @@ public class MainFrame implements Runnable{
     private JFrame frame;
     private OptionsFrame options;
 
-    private JButton btnStart, btnStop, btnStep, btnOptions, btnSave, btnResize;
+    private JButton btnStart, btnStop, btnStep, btnOptions, btnSave, btnResize, btnReset;
     private JComboBox<Algorithm> algorithms;
     private JSlider speedSlider;
     private JLabel speedLabel;
@@ -31,6 +32,7 @@ public class MainFrame implements Runnable{
     private DrawPanel drawPanel;
 
     public MainFrame(){
+
         frame = new JFrame("Generative Art");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -40,7 +42,7 @@ public class MainFrame implements Runnable{
         btnStep.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getSelectedAlgorithm().step(drawPanel.getImage());
+                getSelectedAlgorithm().step();
                 drawPanel.repaint();
             }
         });
@@ -84,7 +86,18 @@ public class MainFrame implements Runnable{
         btnResize.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO
+                //TODO get width/height
+                int width=500;
+                int height=500;
+                resetImage(width,height);
+            }
+        });
+
+        btnReset = new JButton("Reset");
+        btnReset.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetImage(-1,-1);
             }
         });
 
@@ -95,13 +108,13 @@ public class MainFrame implements Runnable{
             @Override
             public void stateChanged(ChangeEvent e) {
                 waitTime = speedSlider.getValue();
-                speedLabel.setText("Speed: "+waitTime + " ms");
+                speedLabel.setText("Speed: " + waitTime + " ms");
             }
         });
 
         algorithms = new JComboBox<Algorithm>(Algorithm.createAlgorithmsList());
 
-        drawPanel = new DrawPanel(500,500);
+        drawPanel = new DrawPanel();
         drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         controlPanel = new JPanel(new GridLayout(2,0,5,5));
@@ -112,22 +125,43 @@ public class MainFrame implements Runnable{
         controlPanel.add(btnOptions);
         controlPanel.add(btnSave);
         controlPanel.add(btnResize);
+        controlPanel.add(btnReset);
         controlPanel.add(speedLabel);
         controlPanel.add(speedSlider);
         controlPanel.setPreferredSize(new Dimension(500, 50));
-        controlPanel.setBorder(BorderFactory.createEmptyBorder(5,5,0,5));
+        controlPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
 
         contentPane = new JPanel(new BorderLayout(5,5));
         contentPane.add(drawPanel,BorderLayout.CENTER);
         contentPane.add(controlPanel,BorderLayout.NORTH);
         contentPane.add(new JPanel(),BorderLayout.EAST);
         contentPane.add(new JPanel(),BorderLayout.WEST);
-        contentPane.add(new JPanel(),BorderLayout.SOUTH);
+        contentPane.add(new JPanel(), BorderLayout.SOUTH);
 
         setButtonsEnabled();
+
+        resetImage(500, 500);
+
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setVisible(true);
+
+    }
+
+    /**
+     * Resizes drawPanel and image. Image will be emptied and the *current* algorithm will be reset.
+     * @param width new width
+     * @param height new height
+     */
+    public void resetImage(int width, int height){
+        if(width>0 && height>0) {
+            drawPanel.setPreferredSize(new Dimension(width, height));
+
+            Algorithm.IMG = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+            Algorithm.IMG.getGraphics().setColor(new Color(255, 255, 255));
+            Algorithm.IMG.getGraphics().fillRect(0, 0, width, height);
+        }
+        getSelectedAlgorithm().reset();
     }
 
     /**
@@ -141,6 +175,7 @@ public class MainFrame implements Runnable{
         btnOptions.setEnabled(paused);
         btnSave.setEnabled(paused);
         btnResize.setEnabled(paused);
+        btnReset.setEnabled(paused);
     }
 
     private Algorithm getSelectedAlgorithm(){
@@ -161,7 +196,7 @@ public class MainFrame implements Runnable{
                 }
             }
 
-            getSelectedAlgorithm().step(drawPanel.getImage());
+            getSelectedAlgorithm().step();
             drawPanel.repaint();
 
             try {

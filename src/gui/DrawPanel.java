@@ -1,5 +1,7 @@
 package gui;
 
+import algorithms.Algorithm;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,31 +11,9 @@ import java.awt.image.BufferedImage;
  */
 public class DrawPanel extends JPanel {
 
-    private BufferedImage img;
-
-    public DrawPanel(int width, int height){
-        setSize(width,height);
-    }
-
-    /**
-     * Resizes component and image. Image will be emptied.
-     * @param width new width
-     * @param height new height
-     */
-    public void setSize(int width, int height){
-        setPreferredSize(new Dimension(width,height));
-        img = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-        img.getGraphics().setColor(new Color(255,255,255));
-        img.getGraphics().fillRect(0,0,width,height);
-    }
-
     @Override
     public void paintComponent(Graphics g){
-        g.drawImage(img,0,0,null);
-    }
-
-    public BufferedImage getImage(){
-        return img;
+        g.drawImage(Algorithm.IMG,0,0,null);
     }
 
 }

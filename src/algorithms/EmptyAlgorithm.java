@@ -5,8 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class EmptyAlgorithm extends Algorithm{
 
-    public EmptyAlgorithm(){
-
+    protected EmptyAlgorithm() {
     }
 
     @Override
@@ -15,7 +14,12 @@ public class EmptyAlgorithm extends Algorithm{
     }
 
     @Override
-    public void step(BufferedImage img) {
+    public void step() {
+        //nuffin
+    }
+
+    @Override
+    public void reset() {
         //nuffin
     }
 }
