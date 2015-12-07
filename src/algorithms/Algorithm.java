@@ -15,12 +15,22 @@ public abstract class Algorithm {
      * Creates an array of all algorithms.
      */
     public static Algorithm[] createAlgorithmsList(){
-        int N = 5;
+        int N = 15;
         Algorithm[] alg = new Algorithm[N];
         alg[0] = new RandomPixels();
-        alg[1] = new RandomConnectedRifts();
-        alg[2] = new RandomRifts();
-        alg[3] = new RandomPixelFog();
+        alg[1] = new RandomPixelFog();
+        alg[2] = new RandomFadingPixels();
+        alg[3] = new RandomConcentratingPixels();
+        alg[4] = new RandomRifts();
+        alg[5] = new RandomConnectedRifts();
+        alg[6] = new RandomThinRifts();
+        alg[7] = new RandomPixelBlocks();
+        alg[8] = new RandomLines();
+        alg[9] = new RandomVerticalPreset();
+        alg[10] = new RandomQuadrables();
+        alg[11] = new RandomPolygon();
+        alg[12] = new RandomStrings();
+        alg[13] = new RandomCircles();
 
         alg[N-1] = new EmptyAlgorithm();
         return alg;

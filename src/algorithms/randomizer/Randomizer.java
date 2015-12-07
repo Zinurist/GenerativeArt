@@ -8,6 +8,7 @@ import java.util.Random;
 
 public abstract class Randomizer extends Algorithm {
 
+    protected boolean[][] bools;
     protected boolean color;
     protected Random r;
     //TODO options for color selection
@@ -24,4 +25,8 @@ public abstract class Randomizer extends Algorithm {
 
     public abstract void step(Graphics g, int width, int height);
 
+    @Override
+    public void reset() {
+        bools = new boolean[IMG.getHeight()][IMG.getWidth()];
+    }
 }

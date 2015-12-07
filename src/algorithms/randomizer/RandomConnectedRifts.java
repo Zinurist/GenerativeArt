@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 
 public class RandomConnectedRifts extends Randomizer{
 
-    boolean[][] bools;
-
     @Override
     public void step(Graphics g, int width, int height) {
         for(int row=0;row<height;row++){
@@ -32,10 +30,5 @@ public class RandomConnectedRifts extends Randomizer{
     @Override
     public String toString() {
         return "Connected rifts";
-    }
-
-    @Override
-    public void reset() {
-        bools = new boolean[IMG.getHeight()][IMG.getWidth()];
     }
 }

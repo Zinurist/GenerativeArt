@@ -2,7 +2,7 @@ package algorithms.randomizer;
 
 import java.awt.*;
 
-public class RandomPixelFog extends Randomizer {
+public class RandomConcentratingPixels extends Randomizer{
 
     @Override
     public void step(Graphics g, int width, int height) {
@@ -11,14 +11,11 @@ public class RandomPixelFog extends Randomizer {
                 g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
             }
             for(int column=0;column<width;column++){
-                int rate=5;//01234||56789
-                if(row>4){
-                    rate+=(bools[row-5][column]?2:-2);
+                int rate=width;
+                for(int column2=0;column2<column;column2++){
+                    rate+=bools[row][column2]?5:-5;
                 }
-                if(column>4){
-                    rate+=(bools[row][column-5]?2:-2);
-                }
-                bools[row][column]=r.nextInt(10)<rate;
+                bools[row][column]=r.nextInt(width*2)<rate;
                 if(bools[row][column]){
                     g.drawLine(column, row, column, row);
                 }
@@ -28,6 +25,6 @@ public class RandomPixelFog extends Randomizer {
 
     @Override
     public String toString() {
-        return "Pixel Fog";
+        return "Concentrating Pixels";
     }
 }
