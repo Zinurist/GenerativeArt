@@ -115,7 +115,8 @@ public class MainFrame implements Runnable{
         algorithms = new JComboBox<Algorithm>(Algorithm.createAlgorithmsList());
 
         drawPanel = new DrawPanel();
-        drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        //drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        //drawPanel.setBorder(BorderFactory.createEmptyBorder(0,5,5,5));
 
         controlPanel = new JPanel(new GridLayout(2,0,5,5));
         controlPanel.add(algorithms);
@@ -133,10 +134,11 @@ public class MainFrame implements Runnable{
 
         contentPane = new JPanel(new BorderLayout(5,5));
         contentPane.add(drawPanel,BorderLayout.CENTER);
-        contentPane.add(controlPanel,BorderLayout.NORTH);
-        contentPane.add(new JPanel(),BorderLayout.EAST);
-        contentPane.add(new JPanel(),BorderLayout.WEST);
-        contentPane.add(new JPanel(), BorderLayout.SOUTH);
+        contentPane.add(controlPanel, BorderLayout.NORTH);
+
+
+        controlPanel.setBackground(new Color(16643811));
+        contentPane.setBackground(new Color(16643811));
 
         setButtonsEnabled();
 
