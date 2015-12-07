@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Algorithm {
 
-    public static BufferedImage IMG = new BufferedImage(500, 500, BufferedImage.TYPE_3BYTE_BGR);
+    public static BufferedImage IMG = new BufferedImage(500, 500, BufferedImage.TYPE_INT_RGB);
 
     /**
      * Creates an array of all algorithms.
