@@ -1,9 +1,7 @@
 package algorithms;
 
-import algorithms.randomizer.RandomPixels;
-import algorithms.randomizer.RandomRifts;
+import algorithms.randomizer.*;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -17,11 +15,14 @@ public abstract class Algorithm {
      * Creates an array of all algorithms.
      */
     public static Algorithm[] createAlgorithmsList(){
-        Algorithm[] alg = new Algorithm[3];
-        alg[0] = new EmptyAlgorithm();
-        alg[1] = new RandomPixels();
+        int N = 5;
+        Algorithm[] alg = new Algorithm[N];
+        alg[0] = new RandomPixels();
+        alg[1] = new RandomConnectedRifts();
         alg[2] = new RandomRifts();
+        alg[3] = new RandomPixelFog();
 
+        alg[N-1] = new EmptyAlgorithm();
         return alg;
     }
 

@@ -13,6 +13,7 @@ public class DrawPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g){
+        g.clearRect(0,0,getWidth(),getHeight());
         g.drawImage(Algorithm.IMG,0,0,null);
     }
 
