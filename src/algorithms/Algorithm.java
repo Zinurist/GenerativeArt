@@ -19,7 +19,7 @@ public abstract class Algorithm {
      * Creates an array of all algorithms.
      */
     public static Algorithm[] createAlgorithmsList(){
-        int N = 16;
+        int N = 17;
         Algorithm[] alg = new Algorithm[N];
         alg[0] = new RandomPixels();
         alg[1] = new RandomPixelFog();
@@ -36,6 +36,7 @@ public abstract class Algorithm {
         alg[12] = new RandomStrings();
         alg[13] = new RandomCircles();
         alg[14] = new ChaosAlgorithm();
+        alg[15] = new AntsAlgorithm();
 
         alg[N-1] = new EmptyAlgorithm();
         return alg;

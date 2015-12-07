@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -21,7 +20,7 @@ public abstract class Randomizer extends Algorithm {
 
     protected Randomizer(){
         r = new Random();
-        color = false;
+        color = true;
     }
 
     public void step(){
