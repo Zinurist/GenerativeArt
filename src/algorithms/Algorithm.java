@@ -2,8 +2,11 @@ package algorithms;
 
 import algorithms.randomizer.*;
 
+import java.util.List;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 /**
  * The base structure for a algorithm used as drawing program.
@@ -45,6 +48,10 @@ public abstract class Algorithm {
     public abstract String toString();
     public abstract void step();
     public abstract void reset();
+
+    public List<Component> getOptionList(){
+        return new LinkedList<Component>();
+    }
 
     public void init(){
         Graphics g = IMG.createGraphics();
