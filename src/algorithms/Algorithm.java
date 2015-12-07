@@ -8,6 +8,16 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Algorithm {
 
+    /**
+     * Creates an array of all algorithms.
+     */
+    public static Algorithm[] createAlgorithmsList(){
+        Algorithm[] alg = new Algorithm[5];
+        alg[0] = new EmptyAlgorithm();
+        alg[1] = new EmptyAlgorithm();
+
+        return alg;
+    }
 
     public abstract String toString();
     public abstract void step(BufferedImage img);

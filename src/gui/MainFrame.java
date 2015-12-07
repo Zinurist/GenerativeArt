@@ -1,6 +1,7 @@
 package gui;
 
 import algorithms.Algorithm;
+import algorithms.EmptyAlgorithm;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -23,7 +24,7 @@ public class MainFrame implements Runnable{
     private OptionsFrame options;
 
     private JButton btnStart, btnStop, btnStep, btnOptions, btnSave, btnResize;
-    private JList<Algorithm> algorithms;
+    private JComboBox<Algorithm> algorithms;
     private JSlider speedSlider;
     private JLabel speedLabel;
     private JPanel contentPane, controlPanel;
@@ -39,7 +40,7 @@ public class MainFrame implements Runnable{
         btnStep.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                algorithms.getSelectedValue().step(drawPanel.getImage());
+                getSelectedAlgorithm().step(drawPanel.getImage());
                 drawPanel.repaint();
             }
         });
@@ -66,7 +67,7 @@ public class MainFrame implements Runnable{
         btnOptions.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                options.setAlgorithm(algorithms.getSelectedValue());
+                options.setAlgorithm(getSelectedAlgorithm());
                 options.setVisible(true);
             }
         });
@@ -98,7 +99,7 @@ public class MainFrame implements Runnable{
             }
         });
 
-        algorithms = createAlgorithmsList();
+        algorithms = new JComboBox<Algorithm>(Algorithm.createAlgorithmsList());
 
         drawPanel = new DrawPanel(500,500);
         drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -133,11 +134,17 @@ public class MainFrame implements Runnable{
      * Used to set all buttons en/disabled accordingly to the running-status of the thread/algorithm.
      */
     private void setButtonsEnabled(){
+        algorithms.setEnabled(paused);
         btnStart.setEnabled(paused);
         btnStop.setEnabled(!paused);
         btnStep.setEnabled(paused);
         btnOptions.setEnabled(paused);
         btnSave.setEnabled(paused);
+        btnResize.setEnabled(paused);
+    }
+
+    private Algorithm getSelectedAlgorithm(){
+        return (Algorithm) algorithms.getSelectedItem();
     }
 
     @Override
@@ -154,7 +161,7 @@ public class MainFrame implements Runnable{
                 }
             }
 
-            algorithms.getSelectedValue().step(drawPanel.getImage());
+            getSelectedAlgorithm().step(drawPanel.getImage());
             drawPanel.repaint();
 
             try {
@@ -166,11 +173,4 @@ public class MainFrame implements Runnable{
         }
     }
 
-
-    /**
-     * Creates a JList of all algorithms.
-     */
-    public static JList<Algorithm> createAlgorithmsList(){
-        return new JList<Algorithm>();
-    }
 }

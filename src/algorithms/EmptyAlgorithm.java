@@ -1,7 +1,21 @@
 package algorithms;
 
-/**
- * Created by user on 12/7/2015.
- */
-public class EmptyAlgorithm {
+
+import java.awt.image.BufferedImage;
+
+public class EmptyAlgorithm extends Algorithm{
+
+    public EmptyAlgorithm(){
+
+    }
+
+    @Override
+    public String toString() {
+        return "Empty";
+    }
+
+    @Override
+    public void step(BufferedImage img) {
+        //nuffin
+    }
 }
