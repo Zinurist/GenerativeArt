@@ -19,8 +19,10 @@ public abstract class Randomizer extends Algorithm {
     }
 
     public void step(){
-        IMG.getGraphics().setColor(Color.BLACK);
-        step(IMG.getGraphics(), IMG.getWidth(), IMG.getHeight());
+        init();
+        Graphics g = IMG.createGraphics();
+        g.setColor(Color.BLACK);
+        step(g, IMG.getWidth(), IMG.getHeight());
     }
 
     public abstract void step(Graphics g, int width, int height);

@@ -158,10 +158,8 @@ public class MainFrame implements Runnable{
             drawPanel.setPreferredSize(new Dimension(width, height));
 
             Algorithm.IMG = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            Algorithm.IMG.getGraphics().setColor(new Color(255, 255, 255));
-            Algorithm.IMG.getGraphics().fillRect(0, 0, width, height);
         }
-        getSelectedAlgorithm().reset();
+        getSelectedAlgorithm().init();
 
         drawPanel.repaint();
     }

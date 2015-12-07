@@ -15,7 +15,7 @@ public class EmptyAlgorithm extends Algorithm{
 
     @Override
     public void step() {
-        //nuffin
+        init();
     }
 
     @Override

@@ -2,6 +2,7 @@ package algorithms;
 
 import algorithms.randomizer.*;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -37,11 +38,18 @@ public abstract class Algorithm {
     }
 
     protected Algorithm(){
-        reset();
+        init();
     }
 
     public abstract String toString();
     public abstract void step();
     public abstract void reset();
+
+    public void init(){
+        Graphics g = IMG.createGraphics();
+        g.setColor(new Color(255, 255, 255));
+        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+        reset();
+    }
 
 }
