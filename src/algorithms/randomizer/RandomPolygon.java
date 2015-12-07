@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class RandomPolygon extends Randomizer {
 
-    JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 100, 15));
+    JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 100, 10));
 
     @Override
     public void step(Graphics g, int width, int height) {
