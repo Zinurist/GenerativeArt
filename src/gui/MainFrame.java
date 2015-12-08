@@ -142,7 +142,7 @@ public class MainFrame implements Runnable{
 
         setButtonsEnabled();
 
-        resetImage(500, 500);
+        resetImage(1000, 1000);
 
         frame.setContentPane(contentPane);
         frame.pack();

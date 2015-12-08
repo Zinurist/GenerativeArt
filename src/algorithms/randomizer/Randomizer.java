@@ -13,18 +13,17 @@ import java.util.Random;
 
 public abstract class Randomizer extends Algorithm {
 
-    protected boolean[][] bools;
-    protected boolean color;
-    protected Random r;
+    protected static boolean[][] bools;
+    public static boolean color = true;
+    private static boolean empty = false;
+    public static Random r = new Random();
     //TODO options for color selection
 
-    protected Randomizer(){
-        r = new Random();
-        color = true;
-    }
 
     public void step(){
-        init();
+        if(empty) {
+            init();
+        }
         Graphics g = IMG.createGraphics();
         g.setColor(Color.BLACK);
         step(g, IMG.getWidth(), IMG.getHeight());
@@ -43,8 +42,19 @@ public abstract class Randomizer extends Algorithm {
             }
         });
 
+
+        JCheckBox emptyBox = new JCheckBox("Empty");
+        emptyBox.setSelected(empty);
+        emptyBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                empty = emptyBox.isSelected();
+            }
+        });
+
         List<Component> list = new LinkedList<Component>();
         list.add(colorBox);
+        list.add(emptyBox);
         return list;
     }
 
