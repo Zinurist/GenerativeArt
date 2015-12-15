@@ -1,6 +1,6 @@
 package algorithms.randomizer;
 
-import algorithms.Algorithm;
+import algorithms.*;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import java.util.Random;
 public abstract class Randomizer extends Algorithm {
 
     protected static boolean[][] bools;
+    private static boolean changed = true;
     public static boolean color = true;
     private static boolean empty = false;
     public static Random r = new Random();
@@ -21,6 +22,7 @@ public abstract class Randomizer extends Algorithm {
 
 
     public void step(){
+        changed=true;
         if(empty) {
             init();
         }
@@ -60,6 +62,9 @@ public abstract class Randomizer extends Algorithm {
 
     @Override
     public void reset() {
-        bools = new boolean[IMG.getHeight()][IMG.getWidth()];
+        if(changed) {
+            bools = new boolean[IMG.getHeight()][IMG.getWidth()];
+            changed=false;
+        }
     }
 }

@@ -3,8 +3,6 @@ package algorithms.randomizer;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class RandomLines extends Randomizer{

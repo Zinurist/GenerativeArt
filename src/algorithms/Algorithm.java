@@ -15,40 +15,54 @@ public abstract class Algorithm {
 
     public static BufferedImage IMG = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
 
-    /**
-     * Creates an array of all algorithms.
-     */
-    public static Algorithm[] createAlgorithmsList(){
-        int N = 26;
-        Algorithm[] alg = new Algorithm[N];
-        alg[0] = new RandomPixels();
-        alg[1] = new RandomPixelFog();
-        alg[2] = new RandomFadingPixels();
-        alg[3] = new RandomConcentratingPixels();
-        alg[4] = new RandomRifts();
-        alg[5] = new RandomConnectedRifts();
-        alg[6] = new RandomThinRifts();
-        alg[7] = new RandomPixelBlocks();
-        alg[8] = new RandomLines();
-        alg[9] = new RandomVerticalPreset();
-        alg[10] = new RandomQuadrables();
-        alg[11] = new RandomPolygon();
-        alg[12] = new RandomStrings();
-        alg[13] = new RandomCircles();
-        alg[14] = new ChaosAlgorithm();
-        alg[15] = new AntsAlgorithm();
-        alg[16] = new RandomHLines();
-        alg[17] = new RandomVLines();
-        alg[18] = new RandomHVLines();
-        alg[19] = new Squares();
-        alg[20] = new SimpleHLines();
-        alg[21] = new ShadowRifts();
-        alg[22] = new ShadowRiftsLines();
-        alg[23] = new ShadowPixelBlocks();
-        alg[24] = new ShadowPixelBlocksLines();
-
+    private static Randomizer[] randAlg;
+    private static Algorithm[] alg;
+    private static void initAlgorithms(){
+        int R=17;
+        randAlg = new Randomizer[R];
+        randAlg[0] = new RandomPixels();
+        randAlg[1] = new RandomPixelFog();
+        randAlg[2] = new RandomFadingPixels();
+        randAlg[3] = new RandomConcentratingPixels();
+        randAlg[4] = new RandomRifts();
+        randAlg[5] = new RandomConnectedRifts();
+        randAlg[6] = new RandomThinRifts();
+        randAlg[7] = new RandomPixelBlocks();
+        randAlg[8] = new RandomLines();
+        randAlg[9] = new RandomVerticalPreset();
+        randAlg[10] = new RandomQuadrables();
+        randAlg[11] = new RandomPolygon();
+        randAlg[12] = new RandomStrings();
+        randAlg[13] = new RandomCircles();
+        randAlg[14] = new RandomHLines();
+        randAlg[15] = new RandomVLines();
+        randAlg[16] = new RandomHVLines();
+        int N=R+8;
+        alg = new Algorithm[N];
+        for(int i=0; i<R; i++) alg[i] = randAlg[i];
+        alg[R] = new ChaosAlgorithm();
+        alg[R+1] = new AntsAlgorithm();
+        alg[R+2] = new Squares();
+        alg[R+3] = new SimpleLines();
+        alg[R+4] = new Grid();
+        alg[R+5] = new Shadow();
+        alg[R+6] = new RandomSquares();
         alg[N-1] = new EmptyAlgorithm();
+    }
+    /**
+     * Returns the array of all algorithms.
+     */
+    public static Algorithm[] getAlgorithmsList(){
+        if(alg==null) initAlgorithms();
         return alg;
+    }
+
+    /**
+     * Returns the array of all randomizers.
+     */
+    public static Randomizer[] getRandomizersList(){
+        if(randAlg==null) initAlgorithms();
+        return randAlg;
     }
 
     protected Algorithm(){

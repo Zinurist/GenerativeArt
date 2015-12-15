@@ -8,12 +8,12 @@ import java.util.Random;
 
 public class ShadowPixelBlocksLines extends Algorithm {
 
-    private SimpleHLines sl;
+    private SimpleLines sl;
     private RandomPixelBlocks bs, blocks;
 
     public ShadowPixelBlocksLines(){
         super();
-        sl = new SimpleHLines();
+        sl = new SimpleLines();
         bs = new RandomPixelBlocks();
         blocks = new RandomPixelBlocks();
     }

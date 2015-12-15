@@ -8,12 +8,12 @@ import java.util.Random;
 
 public class ShadowRiftsLines extends Algorithm {
 
-    private SimpleHLines sl;
+    private SimpleLines sl;
     private RandomRifts rs, rifts;
 
     public ShadowRiftsLines(){
         super();
-        sl = new SimpleHLines();
+        sl = new SimpleLines();
         rs = new RandomRifts();
         rifts = new RandomRifts();
     }

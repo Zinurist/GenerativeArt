@@ -32,7 +32,6 @@ public class MainFrame implements Runnable{
     private DrawPanel drawPanel;
 
     public MainFrame(){
-
         frame = new JFrame("Generative Art");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -112,7 +111,7 @@ public class MainFrame implements Runnable{
             }
         });
 
-        algorithms = new JComboBox<Algorithm>(Algorithm.createAlgorithmsList());
+        algorithms = new JComboBox<Algorithm>(Algorithm.getAlgorithmsList());
 
         drawPanel = new DrawPanel();
         //drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
