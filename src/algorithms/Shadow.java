@@ -69,6 +69,8 @@ public class Shadow extends Algorithm {
 
     @Override
     public void step() {
+        init();
+
         Graphics g = IMG.createGraphics();
         g.setColor(Color.BLACK);
         g.translate((Integer)xOffset.getValue(), (Integer)yOffset.getValue());
