@@ -14,10 +14,13 @@ public class RandomSplitSquares extends Algorithm{
 
     private LinkedList<S> squares;
     private Random r;
+    private JCheckBox randomBox;
 
     public RandomSplitSquares(){
         super();
         r=new Random();
+        randomBox = new JCheckBox("random");
+        randomBox.setSelected(true);
     }
 
     @Override
@@ -40,6 +43,19 @@ public class RandomSplitSquares extends Algorithm{
                 s.x2 = s.x1+width/2-1;
                 s.y2 = s.y1+height/2-1;
 
+                if(randomBox.isSelected()){
+                    int rangeX = width>40? width/8:3;
+                    int rangeY = height>40? height/8:3;
+                    s.x2 -= r.nextInt(rangeX);
+                    s.y2 -= r.nextInt(rangeY);
+                    s1.x1 += r.nextInt(rangeX);
+                    s1.y2 -= r.nextInt(rangeY);
+                    s2.x1 += r.nextInt(rangeX);
+                    s2.y1 += r.nextInt(rangeY);
+                    s3.x2 -= r.nextInt(rangeX);
+                    s3.y1 += r.nextInt(rangeY);
+                }
+
                 //...calculations
                 newS.add(s1);
                 newS.add(s2);
@@ -61,6 +77,13 @@ public class RandomSplitSquares extends Algorithm{
     @Override
     public String toString() {
         return "Split Squares";
+    }
+
+    @Override
+    public List<Component> getOptionList(){
+        List<Component> list = new LinkedList<Component>();
+        list.add(randomBox);
+        return list;
     }
 
     @Override
