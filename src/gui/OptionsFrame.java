@@ -21,6 +21,7 @@ public class OptionsFrame extends JFrame {
         setTitle("Options");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initContentPane(new LinkedList<Component>());
+        setPreferredSize(new Dimension(300,100));
     }
 
     public void setAlgorithm(Algorithm algo){
