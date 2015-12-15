@@ -10,14 +10,17 @@ import java.util.List;
 import java.awt.*;
 import java.util.Random;
 
-public class RandomSplitSquares extends Algorithm{
+public class RandomSplitSquaresBugged extends Algorithm{
 
     private LinkedList<S> squares;
     private Random r;
+    private JCheckBox typeBox;
 
-    public RandomSplitSquares(){
+    public RandomSplitSquaresBugged(){
         super();
         r=new Random();
+        typeBox = new JCheckBox("First type");
+        typeBox.setSelected(true);
     }
 
     @Override
@@ -30,15 +33,20 @@ public class RandomSplitSquares extends Algorithm{
             //choose split point near middle
             //split into 4 squares
             //add 3 to newS, change current
-            width = s.x2-s.x1;
+            width = s.x2-s.y1;//<- Bug, should be s.x1
             height = s.y2-s.y1;
-            if(width >4 && height >4){
+            if(width >10 && height >10){
                 //s = top left
                 s1 = new S(s.x1+width/2+1,s.y1,s.x2,s.y1+height/2-1);//top right
                 s2 = new S(s.x1+width/2+1,s.y1+height/2+1,s.x2,s.y2);//bottom right
                 s3 = new S(s.x1,s.y1+height/2+1,s.x1+width/2-1,s.y2);//bottom left
-                s.x2 = s.x1+width/2-1;
-                s.y2 = s.y1+height/2-1;
+                if(typeBox.isSelected()) {
+                    s.x2 = width / 2 - 1;//<- Bug
+                    s.y2 = height / 2 - 1;//<- Bug
+                }else{
+                    s.x2 = s.x1 + width / 2 - 1;
+                    s.y2 = s.y1 + height / 2 - 1;
+                }
 
                 //...calculations
                 newS.add(s1);
@@ -60,7 +68,14 @@ public class RandomSplitSquares extends Algorithm{
 
     @Override
     public String toString() {
-        return "Split Squares";
+        return "Split Squares Bugged";
+    }
+
+    @Override
+    public List<Component> getOptionList(){
+        List<Component> list = new LinkedList<Component>();
+        list.add(typeBox);
+        return list;
     }
 
     @Override
