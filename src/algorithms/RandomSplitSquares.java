@@ -10,12 +10,12 @@ import java.util.List;
 import java.awt.*;
 import java.util.Random;
 
-public class RandomSquares extends Algorithm{
+public class RandomSplitSquares extends Algorithm{
 
-    private List<S> squares;
+    private LinkedList<S> squares;
     private Random r;
 
-    public RandomSquares(){
+    public RandomSplitSquares(){
         super();
         r=new Random();
     }
@@ -23,6 +23,14 @@ public class RandomSquares extends Algorithm{
     @Override
     public void step() {
         //TODO split
+        LinkedList<S> newS = new LinkedList<S>();
+        for(S s:squares){
+            //choose split point near middle
+            //split into 4 squares
+            //add 3 to newS, change current
+
+        }
+        squares.addAll(newS);
 
         //draw
         Graphics g = IMG.createGraphics();
@@ -30,13 +38,13 @@ public class RandomSquares extends Algorithm{
         g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
         g.setColor(Color.BLACK);
         for(S s : squares){
-
+            g.fillRect(s.x1,s.y1,s.x2-s.x1,s.y2-s.y1);
         }
     }
 
     @Override
     public String toString() {
-        return "Squares";
+        return "Split Squares";
     }
 
     @Override

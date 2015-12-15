@@ -44,7 +44,7 @@ public abstract class Algorithm {
         alg[R+3] = new SimpleLines();
         alg[R+4] = new Grid();
         alg[R+5] = new Shadow();
-        alg[R+6] = new RandomSquares();
+        alg[R+6] = new RandomSplitSquares();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**
