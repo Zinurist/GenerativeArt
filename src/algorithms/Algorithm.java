@@ -18,7 +18,7 @@ public abstract class Algorithm {
     private static Randomizer[] randAlg;
     private static Algorithm[] alg;
     private static void initAlgorithms(){
-        int R=17;
+        int R=15;
         randAlg = new Randomizer[R];
         randAlg[0] = new RandomPixels();
         randAlg[1] = new RandomPixelFog();
@@ -34,9 +34,7 @@ public abstract class Algorithm {
         randAlg[11] = new RandomPolygon();
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
-        randAlg[14] = new RandomHLines();
-        randAlg[15] = new RandomVLines();
-        randAlg[16] = new RandomHVLines();
+        randAlg[14] = new RandomHVLines(true, true);
         int N=R+8;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
