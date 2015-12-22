@@ -13,8 +13,6 @@ import java.awt.*;
  */
 public class OptionsFrame extends JFrame {
 
-    private Algorithm algo;
-
     private JPanel contentPane;
 
     public OptionsFrame(){
@@ -25,7 +23,6 @@ public class OptionsFrame extends JFrame {
     }
 
     public void setAlgorithm(Algorithm algo){
-        this.algo = algo;
         initContentPane(algo.getOptionList());
     }
 
