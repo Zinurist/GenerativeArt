@@ -1,7 +1,6 @@
 package algorithms.randomizer;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class RandomConnectedRifts extends Randomizer{
 

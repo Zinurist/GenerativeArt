@@ -2,7 +2,6 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
 
 public class RandomHVLines extends Randomizer {
 

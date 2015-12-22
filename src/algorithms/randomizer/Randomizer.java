@@ -18,7 +18,6 @@ public abstract class Randomizer extends Algorithm {
     public static boolean color = true;
     private static boolean empty = false;
     public static Random r = new Random();
-    //TODO options for color selection
 
 
     public void step(){

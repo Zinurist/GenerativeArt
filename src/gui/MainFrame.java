@@ -1,7 +1,6 @@
 package gui;
 
 import algorithms.Algorithm;
-import algorithms.EmptyAlgorithm;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

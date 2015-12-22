@@ -1,10 +1,6 @@
 package algorithms;
 
-import algorithms.randomizer.Randomizer;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;

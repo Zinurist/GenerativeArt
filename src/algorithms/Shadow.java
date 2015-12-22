@@ -1,6 +1,5 @@
 package algorithms;
 
-import algorithms.randomizer.RandomPixelBlocks;
 import algorithms.randomizer.RandomRifts;
 import algorithms.randomizer.Randomizer;
 

@@ -1,8 +1,6 @@
 package algorithms;
 
 
-import java.awt.image.BufferedImage;
-
 public class EmptyAlgorithm extends Algorithm{
 
     protected EmptyAlgorithm() {

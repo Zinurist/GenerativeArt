@@ -1,10 +1,6 @@
 package algorithms;
 
-import algorithms.randomizer.Randomizer;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
@@ -25,7 +21,7 @@ public class RandomSplitSquaresBugged extends Algorithm{
 
     @Override
     public void step() {
-        //TODO split
+        //split
         LinkedList<S> newS = new LinkedList<S>();
         int width, height;
         S s1,s2,s3;
