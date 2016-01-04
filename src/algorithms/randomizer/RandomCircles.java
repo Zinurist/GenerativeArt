@@ -5,14 +5,13 @@ import java.awt.*;
 
 public class RandomCircles extends Randomizer{
 
-    JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 100, 10));
+    JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 1000, 10));
 
     @Override
     public void step(Graphics g, int width, int height) {
-        int num1 = (Integer) num.getValue();
-        num1 = num1==0? r.nextInt(90)+10 : num1;
-        int num2, num3;
-        for(int i=0; i<num1; i++){
+        int numTmp = (Integer) num.getValue();
+        int num1, num2, num3;
+        for(int i=0; i<numTmp; i++){
             num1=r.nextInt(50)+50;
             num2=r.nextInt(width)-(num1/2);
             num3=r.nextInt(height)-(num1/2);
