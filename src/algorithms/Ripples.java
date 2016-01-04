@@ -1,4 +1,4 @@
-package algorithms.randomizer;
+package algorithms;
 
 
 import algorithms.Algorithm;

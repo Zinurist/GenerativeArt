@@ -35,7 +35,7 @@ public abstract class Algorithm {
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
         randAlg[14] = new RandomHVLines(true, true);
-        int N=R+10;
+        int N=R+11;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         alg[R] = new ChaosAlgorithm();
@@ -47,6 +47,7 @@ public abstract class Algorithm {
         alg[R+6] = new RandomSplitSquares();
         alg[R+7] = new RandomSplitSquaresBugged();
         alg[R+8] = new Ripples();
+        alg[R+9] = new SimpleSine();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**

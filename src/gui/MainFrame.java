@@ -172,7 +172,7 @@ public class MainFrame implements Runnable{
         btnStart.setEnabled(paused);
         btnStop.setEnabled(!paused);
         btnStep.setEnabled(paused);
-        btnOptions.setEnabled(paused);
+        //btnOptions.setEnabled(paused);
         btnSave.setEnabled(paused);
         btnResize.setEnabled(paused);
         btnReset.setEnabled(paused);
