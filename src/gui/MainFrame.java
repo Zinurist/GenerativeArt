@@ -168,13 +168,13 @@ public class MainFrame implements Runnable{
      * Used to set all buttons en/disabled accordingly to the running-status of the thread/algorithm.
      */
     private void setButtonsEnabled(){
-        algorithms.setEnabled(paused);
+        //algorithms.setEnabled(paused);
         btnStart.setEnabled(paused);
         btnStop.setEnabled(!paused);
         btnStep.setEnabled(paused);
         //btnOptions.setEnabled(paused);
         btnSave.setEnabled(paused);
-        btnResize.setEnabled(paused);
+        //btnResize.setEnabled(paused);
         btnReset.setEnabled(paused);
     }
 
