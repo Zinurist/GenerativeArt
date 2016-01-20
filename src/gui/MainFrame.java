@@ -91,7 +91,7 @@ public class MainFrame implements Runnable{
             }
         });
 
-        btnReset = new JButton("Reset");
+        btnReset = new JButton("Reset/Init");
         btnReset.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,13 +118,13 @@ public class MainFrame implements Runnable{
 
         controlPanel = new JPanel(new GridLayout(2,0,5,5));
         controlPanel.add(algorithms);
+        controlPanel.add(btnReset);
         controlPanel.add(btnStep);
         controlPanel.add(btnStart);
         controlPanel.add(btnStop);
         controlPanel.add(btnOptions);
         controlPanel.add(btnSave);
         controlPanel.add(btnResize);
-        controlPanel.add(btnReset);
         controlPanel.add(speedLabel);
         controlPanel.add(speedSlider);
         controlPanel.setPreferredSize(new Dimension(500, 50));

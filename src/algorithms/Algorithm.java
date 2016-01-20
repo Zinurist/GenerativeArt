@@ -35,7 +35,7 @@ public abstract class Algorithm {
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
         randAlg[14] = new RandomHVLines(true, true);
-        int N=R+11;
+        int N=R+13;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         alg[R] = new ChaosAlgorithm();
@@ -48,6 +48,8 @@ public abstract class Algorithm {
         alg[R+7] = new RandomSplitSquaresBugged();
         alg[R+8] = new Ripples();
         alg[R+9] = new SimpleSine();
+        alg[R+10] = new Polar();
+        alg[R+11] = new EndlessCircles();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**
@@ -79,10 +81,14 @@ public abstract class Algorithm {
     }
 
     public void init(){
+        emptyIMG();
+        reset();
+    }
+
+    public void emptyIMG(){
         Graphics g = IMG.createGraphics();
         g.setColor(new Color(255, 255, 255));
         g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
-        reset();
     }
 
 }
