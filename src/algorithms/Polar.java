@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Polar extends Algorithm{
 
-    private static int POINT_SIZE = 8;
+    private static final int POINT_SIZE = 8;
 
     private JSlider r_step_slider;
     private int t, max_r;
