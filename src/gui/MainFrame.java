@@ -15,6 +15,8 @@ import java.awt.image.BufferedImage;
  */
 public class MainFrame implements Runnable{
 
+    public static MainFrame MF;
+
     private boolean paused = true;
     private boolean running = false;
     private int waitTime= 100;//in ms
@@ -146,6 +148,13 @@ public class MainFrame implements Runnable{
         frame.pack();
         frame.setVisible(true);
 
+    }
+
+    public Point getMouseLocation(){
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        Point s = drawPanel.getLocationOnScreen();
+        p.translate(-s.x,-s.y);
+        return p;
     }
 
     /**

@@ -8,8 +8,8 @@ public class Main {
      */
     public static void main(String[] args){
 
-        MainFrame mf = new MainFrame();
-        new Thread(mf).start();
+        MainFrame.MF = new MainFrame();
+        new Thread(MainFrame.MF).start();
 
     }
 

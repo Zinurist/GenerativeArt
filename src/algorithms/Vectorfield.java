@@ -1,22 +1,28 @@
 package algorithms;
 
+import gui.MainFrame;
+
 import java.awt.*;
 import java.util.Random;
 
 public class Vectorfield extends Algorithm{
 
     private static final boolean MOUSE_INTERACTION = true;
+    private static final boolean DRAW_FIELD = true;
 
     private static final int VEC_DISTANCE = 16;
     private static final int VEC_LENGTH = 8;
-    private static final int NUM_FLYERS = 15;
+    private static final int NUM_FLYERS = 1500;
     private static final double VEC_STRENGTH = 1.0/8.0;
     private static final int POINT_SIZE = 4;
     private static final double MINIMUM_R = 1.0;
     private static final double DECAY_WEIGHT = 1.0/2.0;
+    private static final int MOUSE_RATE = 1;
 
-    double[][][] field;
-    double[][] flyers;
+    private double[][][] field;
+    private double[][] flyers;
+    private Point mNew,mOld;
+    private int counter;
 
     public Vectorfield(){
         reset();
@@ -37,12 +43,43 @@ public class Vectorfield extends Algorithm{
     }
 
     private void updateMouse(){
-        //TODO
-        //MouseInfo.getPointerInfo().getLocation()
+        Point m = MainFrame.MF.getMouseLocation();
+        mOld = mNew;
+        mNew = m;
     }
 
     private void updateField(){
-        //TODO
+        if(mOld != null && mNew != null && !mNew.equals(mOld) && (mNew.x>=0 && mNew.y>=0 && mNew.x<IMG.getWidth() && mNew.y<IMG.getHeight())){
+            int dx = mNew.x-mOld.x;
+            int dy = mNew.y-mOld.y;
+            int fx = mNew.x/VEC_DISTANCE;
+            int fy = mNew.y/VEC_DISTANCE;
+            double r = Math.sqrt(dx * dx + dy * dy);
+            double phi = Math.acos(dy / r);
+            if(dx<0) phi=2*Math.PI-phi;
+
+            //r/(r+VEC_LENGTH) of (dx,dy),  VEC_LENGTH/(r+VEC_LENGTH) of (field.dx,field.dy)
+            double p1 = r/(r+VEC_LENGTH);
+            double p2 = VEC_LENGTH/(r+VEC_LENGTH);
+            int x2 = (fx+1)>=field[0].length? 0 : (fx+1);
+            int y2 = (fy+1)>=field.length? 0 : (fy+1);
+
+            apply(fx,fy,phi,p1,p2);
+            apply(x2,fy,phi,p1,p2);
+            apply(fx,y2,phi,p1,p2);
+            apply(x2,y2,phi,p1,p2);
+        }
+    }
+
+    private void apply(int x, int y, double phi, double p1, double p2){
+        double phi2 = Math.acos(field[y][x][1]/VEC_LENGTH);
+        if(field[y][x][0]<0) phi2=2*Math.PI-phi2;
+
+        if(Math.abs(phi-phi2) > Math.abs(360-phi-phi2)) phi=360-phi;
+
+        phi2 = p1*phi+p2*phi2;
+        field[y][x][0] = VEC_LENGTH*Math.sin(phi2);
+        field[y][x][1] = VEC_LENGTH*Math.cos(phi2);
     }
 
     private void calc(){
@@ -101,10 +138,11 @@ public class Vectorfield extends Algorithm{
 
         Graphics g = IMG.createGraphics();
         g.setColor(Color.BLACK);
-
-        for(int y = 0; y<field.length; y++){
-            for(int x = 0; x<field[y].length; x++){
-                g.drawLine(VEC_DISTANCE*x,VEC_DISTANCE*y,VEC_DISTANCE*x+(int)field[y][x][0],VEC_DISTANCE*y+(int)field[y][x][1]);
+        if(DRAW_FIELD) {
+            for (int y = 0; y < field.length; y++) {
+                for (int x = 0; x < field[y].length; x++) {
+                    g.drawLine(VEC_DISTANCE * x, VEC_DISTANCE * y, VEC_DISTANCE * x + (int) field[y][x][0], VEC_DISTANCE * y + (int) field[y][x][1]);
+                }
             }
         }
 
@@ -123,8 +161,13 @@ public class Vectorfield extends Algorithm{
     @Override
     public void step() {
         if(MOUSE_INTERACTION){
-            updateMouse();
-            updateField();
+            if(counter>=MOUSE_RATE) {
+                updateMouse();
+                updateField();
+                counter = 0;
+            }else{
+                counter++;
+            }
         }
         calc();
         draw();
@@ -134,16 +177,19 @@ public class Vectorfield extends Algorithm{
     public void reset() {
         Random r = new Random();
 
-        int width = IMG.getWidth()/VEC_DISTANCE;
-        int height = IMG.getHeight()/VEC_DISTANCE;
+        int width = IMG.getWidth()/VEC_DISTANCE+1;
+        int height = IMG.getHeight()/VEC_DISTANCE+1;
         field = new double[height][width][2];
         double x_v,y_v;
 
         for(int y = 0; y<height; y++){
             for(int x = 0; x<width; x++){
-                x_v = (r.nextDouble()*2.0-1.0)*VEC_LENGTH;
-                y_v = Math.sqrt(VEC_LENGTH*VEC_LENGTH - x_v*x_v);
-                if(r.nextBoolean()) y_v*=-1;
+                double phi = Math.toRadians(r.nextInt(360));
+                x_v = VEC_LENGTH*Math.sin(phi);
+                y_v = VEC_LENGTH*Math.cos(phi);
+                //x_v = (r.nextDouble()*2.0-1.0)*VEC_LENGTH;
+                //y_v = Math.sqrt(VEC_LENGTH*VEC_LENGTH - x_v*x_v);
+                //if(r.nextBoolean()) y_v*=-1;
                 field[y][x][0] = x_v;
                 field[y][x][1] = y_v;
             }
@@ -156,6 +202,10 @@ public class Vectorfield extends Algorithm{
             flyers[i][2] = 0;
             flyers[i][3] = 0;
         }
+
+        mNew = null;
+        mOld = null;
+        counter = 0;
     }
 
 
