@@ -20,7 +20,7 @@ public abstract class ImageEffect extends Algorithm {
 
     public ImageEffect(){
         original = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
-        location = new TextField("test.png");
+        location = new TextField("test.jpg");
         btnLoad = new JButton("Load");
         btnLoad.addActionListener(e -> loadImage());
         lbl = new JLabel("");

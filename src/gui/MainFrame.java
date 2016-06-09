@@ -2,6 +2,7 @@ package gui;
 
 import algorithms.Algorithm;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -9,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Main frame of the application.
@@ -78,7 +81,14 @@ public class MainFrame implements Runnable{
         btnSave.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO
+                String path = "tmp.png";
+                //TODO get path
+                try {
+                    ImageIO.write(Algorithm.IMG, "png", new File(path));
+                } catch (IOException e1) {
+                    //TODO print error
+                    e1.printStackTrace();
+                }
             }
         });
 
