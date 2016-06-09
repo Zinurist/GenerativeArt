@@ -19,7 +19,7 @@ public abstract class Randomizer extends Algorithm {
     private static boolean empty = false;
     public static Random r = new Random();
 
-
+    @Override
     public void step(){
         changed=true;
         if(empty) {

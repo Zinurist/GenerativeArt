@@ -1,5 +1,8 @@
 package algorithms;
 
+import algorithms.imgeffects.ColorSwap;
+import algorithms.imgeffects.ImageBlur;
+import algorithms.imgeffects.ImageEffect;
 import algorithms.randomizer.*;
 
 import java.util.List;
@@ -16,6 +19,7 @@ public abstract class Algorithm {
     public static BufferedImage IMG = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
 
     private static Randomizer[] randAlg;
+    private static ImageEffect[] imgAlg;
     private static Algorithm[] alg;
     private static void initAlgorithms(){
         int R=15;
@@ -35,9 +39,15 @@ public abstract class Algorithm {
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
         randAlg[14] = new RandomHVLines(true, true);
-        int N=R+15;
+        int I = 2;
+        imgAlg = new ImageEffect[I];
+        imgAlg[0] = new ImageBlur();
+        imgAlg[1] = new ColorSwap();
+        int N=R+I+16;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
+        for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
+        R+=I;
         alg[R] = new ChaosAlgorithm();
         alg[R+1] = new AntsAlgorithm();
         alg[R+2] = new Squares();
@@ -52,6 +62,7 @@ public abstract class Algorithm {
         alg[R+11] = new EndlessCircles();
         alg[R+12] = new Vectorfield();
         alg[R+13] = new ImageBlur();
+        alg[R+14] = new ColorSwap();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**

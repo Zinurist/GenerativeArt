@@ -1,44 +1,14 @@
-package algorithms;
+package algorithms.imgeffects;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.LinkedList;
 
-public class ImageBlur extends Algorithm {
+public class ImageBlur extends ImageEffect {
 
-    private BufferedImage original;
     private int factor;
     private boolean up;
 
-    private TextField location;
-    private JButton btnLoad;
-    private JLabel lbl;
-
     public ImageBlur(){
-        original = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
-        location = new TextField("test.png");
-        btnLoad = new JButton("Load");
-        btnLoad.addActionListener(e -> loadImage());
-        lbl = new JLabel("");
-
-        loadImage();
-    }
-
-    private void loadImage(){
-        try {
-            original = ImageIO.read(new File(location.getText()));
-            lbl.setText("Loaded image!");
-        } catch (IOException e) {
-            lbl.setText("Error: "+e.getMessage());
-        }
+        super();
     }
 
     @Override
@@ -87,18 +57,14 @@ public class ImageBlur extends Algorithm {
 
     @Override
     public void reset() {
-        Graphics g = IMG.getGraphics();
-        g.drawImage(original, 0, 0, null);
+        super.reset();
         factor = 1;
         up = true;
     }
 
     @Override
     public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<Component>();
-        list.add(location);
-        list.add(btnLoad);
-        list.add(lbl);
+        java.util.List<Component> list = super.getOptionList();
         return list;
     }
 }
