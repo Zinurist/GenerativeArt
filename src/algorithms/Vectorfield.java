@@ -80,6 +80,7 @@ public class Vectorfield extends Algorithm{
         phi2 = p1*phi+p2*phi2;
         field[y][x][0] = VEC_LENGTH*Math.sin(phi2);
         field[y][x][1] = VEC_LENGTH*Math.cos(phi2);
+
     }
 
     private void calc(){

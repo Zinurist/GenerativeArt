@@ -103,7 +103,7 @@ public class MainFrame implements Runnable{
 
         speedLabel = new JLabel("Speed: "+waitTime+" ms");
 
-        speedSlider = new JSlider(10, 1000, waitTime);
+        speedSlider = new JSlider(1, 1000, waitTime);
         speedSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
