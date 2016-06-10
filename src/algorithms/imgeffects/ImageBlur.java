@@ -7,10 +7,6 @@ public class ImageBlur extends ImageEffect {
     private int factor;
     private boolean up;
 
-    public ImageBlur(){
-        super();
-    }
-
     @Override
     public String toString() {
         return "Image blur";
@@ -62,9 +58,4 @@ public class ImageBlur extends ImageEffect {
         up = true;
     }
 
-    @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-        return list;
-    }
 }
