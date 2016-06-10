@@ -37,14 +37,15 @@ public abstract class Algorithm {
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
         randAlg[14] = new RandomHVLines(true, true);
-        int I = 5;
+        int I = 6;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new ImageBlur();
-        imgAlg[1] = new ColorSwap();
-        imgAlg[2] = new SineEffect();
-        imgAlg[3] = new ExponentialEffect();
-        imgAlg[4] = new BlackPixels();
-        int N=R+I+16;
+        imgAlg[1] = new ImageSmooth();
+        imgAlg[2] = new ColorSwap();
+        imgAlg[3] = new SineEffect();
+        imgAlg[4] = new ExponentialEffect();
+        imgAlg[5] = new BlackPixels();
+        int N=R+I+14;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
@@ -62,8 +63,6 @@ public abstract class Algorithm {
         alg[R+10] = new Polar();
         alg[R+11] = new EndlessCircles();
         alg[R+12] = new Vectorfield();
-        alg[R+13] = new ImageBlur();
-        alg[R+14] = new ColorSwap();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**
