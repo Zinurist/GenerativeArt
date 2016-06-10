@@ -37,6 +37,7 @@ public class ImageBlur extends ImageEffect {
                 avgg /= count;
                 avgb /= count;
 
+
                 g.setColor(new Color(avgr,avgg,avgb));
                 g.fillRect(x, y, factor, factor);
             }
@@ -44,7 +45,7 @@ public class ImageBlur extends ImageEffect {
 
         if(up){
             factor++;
-            if(factor>=original.getWidth()/20) up = false;
+            if(factor>=width/20) up = false;
         }else{
             factor--;
             if(factor<=1) up = true;
