@@ -19,13 +19,13 @@ public class ImageBlur extends ImageEffect {
         Color c;
 
         //blur using averaging algorithm
-        for(int y=0; y<original.getHeight(); y+=factor){
-            for(int x=0; x<original.getWidth(); x+=factor){
+        for(int y=0; y<height; y+=factor){
+            for(int x=0; x<width; x+=factor){
                 avgr = 0; avgg = 0; avgb = 0; count = 0;
                 for(int i=0; i<factor; i++){
-                    if(y+i >= original.getHeight()) break;
+                    if(y+i >= height) break;
                     for(int j=0; j<factor; j++){
-                        if(x+j >= original.getWidth()) break;
+                        if(x+j >= width) break;
                         c = new Color(original.getRGB(x+j, y+i));
                         avgr += c.getRed();
                         avgg += c.getGreen();

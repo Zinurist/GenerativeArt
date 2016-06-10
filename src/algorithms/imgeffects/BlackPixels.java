@@ -20,8 +20,8 @@ public class BlackPixels extends ImageEffect {
 
         g.setColor(Color.BLACK);
         //blur using averaging algorithm
-        for(int y=0; y<IMG.getHeight(); y++){
-            for(int x=(y%2==n? 0:1); x<IMG.getWidth(); x+=2){
+        for(int y=0; y<height; y++){
+            for(int x=(y%2==n? 0:1); x<width; x+=2){
                 g.drawLine(x, y, x, y);
             }
         }

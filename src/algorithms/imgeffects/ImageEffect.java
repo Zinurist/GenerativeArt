@@ -13,10 +13,12 @@ import java.util.LinkedList;
 public abstract class ImageEffect extends Algorithm {
 
     protected BufferedImage original;
+    protected int width, height;
 
     private TextField location;
     private JButton btnLoad;
     private JLabel lbl;
+    private JCheckBox box;
 
     public ImageEffect(){
         original = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
@@ -24,6 +26,16 @@ public abstract class ImageEffect extends Algorithm {
         btnLoad = new JButton("Load");
         btnLoad.addActionListener(e -> loadImage());
         lbl = new JLabel("");
+        box = new JCheckBox("Ignore img size");
+        box.addActionListener(e -> {
+            if(box.isSelected()){
+                width = IMG.getWidth();
+                height = IMG.getHeight();
+            }else{
+                width = Math.min(IMG.getWidth(), original.getWidth());
+                height = Math.min(IMG.getHeight(), original.getHeight());
+            }
+        });
 
         loadImage();
     }
@@ -32,8 +44,12 @@ public abstract class ImageEffect extends Algorithm {
         try {
             original = ImageIO.read(new File(location.getText()));
             lbl.setText("Loaded image!");
+            width = Math.min(IMG.getWidth(), original.getWidth());
+            height = Math.min(IMG.getHeight(), original.getHeight());
         } catch (IOException e) {
             lbl.setText("Error: "+e.getMessage());
+            width = IMG.getWidth();
+            height = IMG.getHeight();
         }
     }
 
@@ -55,6 +71,7 @@ public abstract class ImageEffect extends Algorithm {
         list.add(location);
         list.add(btnLoad);
         list.add(lbl);
+        list.add(box);
         return list;
     }
 }

@@ -15,8 +15,8 @@ public class ColorSwap extends ImageEffect {
         Color c;
 
         //blur using averaging algorithm
-        for(int y=0; y<IMG.getHeight(); y++){
-            for(int x=0; x<IMG.getWidth(); x++){
+        for(int y=0; y<height; y++){
+            for(int x=0; x<width; x++){
                 c = new Color(IMG.getRGB(x, y));
                 g.setColor(new Color(c.getBlue(),c.getRed(),c.getGreen()));
                 g.drawLine(x, y, x, y);
