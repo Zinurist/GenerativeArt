@@ -44,6 +44,7 @@ public abstract class ImageEffect extends Algorithm {
 
     @Override
     public void reset() {
+        emptyIMG();
         Graphics g = IMG.getGraphics();
         g.drawImage(original, 0, 0, null);
     }

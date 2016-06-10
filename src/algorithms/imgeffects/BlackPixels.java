@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class BlackPixels extends ImageEffect {
 
+    private boolean even = false;
+
     @Override
     public String toString() {
         return "Black pixels";
@@ -11,15 +13,20 @@ public class BlackPixels extends ImageEffect {
 
     @Override
     public void step() {
+        reset();
         Graphics g = IMG.getGraphics();
+
+        int n = even?0:1;
 
         g.setColor(Color.BLACK);
         //blur using averaging algorithm
-        for(int y=0; y<IMG.getHeight(); y+=2){
-            for(int x=(y%2==0? 0:1); x<IMG.getWidth(); x+=2){
+        for(int y=0; y<IMG.getHeight(); y++){
+            for(int x=(y%2==n? 0:1); x<IMG.getWidth(); x+=2){
                 g.drawLine(x, y, x, y);
             }
         }
+
+        even = !even;
     }
 
 }
