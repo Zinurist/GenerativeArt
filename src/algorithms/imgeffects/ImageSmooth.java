@@ -18,12 +18,12 @@ public class ImageSmooth extends ImageEffect {
         Color c;
 
         //blur using averaging algorithm
-        for(int y=-1; y<height; y++){
-            for(int x=-1; x<width; x++){
+        for(int y=-MASK.length/2; y<height; y++){
+            for(int x=-MASK.length/2; x<width; x++){
                 avgr = 0; avgg = 0; avgb = 0; count = 0;
-                for(int i=0; i<3; i++){
+                for(int i=0; i<MASK.length; i++){
                     if(!(y+i >= height || y+i < 0)) {
-                        for (int j = 0; j < 3; j++) {
+                        for (int j = 0; j < MASK.length; j++) {
                             if (!(x + j >= width || x + j < 0)) {
                                 c = new Color(original.getRGB(x + j, y + i));
                                 avgr += c.getRed() * MASK[i][j];
@@ -39,7 +39,7 @@ public class ImageSmooth extends ImageEffect {
                 avgb /= count;
 
                 g.setColor(new Color(avgr,avgg,avgb));
-                g.fillRect(x+1, y+1, x+1, y+1);
+                g.fillRect(x+MASK.length/2, y+MASK.length/2, x+MASK.length/2, y+MASK.length/2);
             }
         }
     }
