@@ -12,8 +12,8 @@ import java.util.LinkedList;
 
 public abstract class ImageEffect extends Algorithm {
 
-    protected BufferedImage original;
-    protected int width, height;
+    protected static BufferedImage original;
+    protected static int width, height;
 
     private TextField location;
     private JButton btnLoad;
