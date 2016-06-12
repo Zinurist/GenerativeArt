@@ -5,9 +5,9 @@ import java.awt.image.BufferedImage;
 
 public class ImageBlur extends ImageEffect {
 
-    private BufferedImage tmp;
-
     private static int[][] MASK = {{1,2,1},{2,4,2},{1,2,1}};
+
+    private BufferedImage tmp;
 
     @Override
     public String toString() {
