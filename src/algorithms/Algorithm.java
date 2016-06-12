@@ -39,8 +39,8 @@ public abstract class Algorithm {
         randAlg[14] = new RandomHVLines(true, true);
         int I = 7;
         imgAlg = new ImageEffect[I];
-        imgAlg[0] = new ImageBlur();
-        imgAlg[1] = new ImageSmooth();
+        imgAlg[0] = new Pixelate();
+        imgAlg[1] = new ImageBlur();
         imgAlg[2] = new ImageInvert();
         imgAlg[3] = new ColorSwap();
         imgAlg[4] = new SineEffect();
