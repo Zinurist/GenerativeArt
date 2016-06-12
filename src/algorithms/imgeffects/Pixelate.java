@@ -18,7 +18,6 @@ public class Pixelate extends ImageEffect {
         int avgr, avgb, avgg, count;
         Color c;
 
-        //blur using averaging algorithm
         for(int y=0; y<height; y+=factor){
             for(int x=0; x<width; x+=factor){
                 avgr = 0; avgg = 0; avgb = 0; count = 0;

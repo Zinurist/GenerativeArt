@@ -20,7 +20,7 @@ public class ImageBlur extends ImageEffect {
         int avgr, avgb, avgg, count;
         Color c;
 
-        //blur using averaging algorithm
+        //blur using gauss mask
         for(int y=-MASK.length/2; y<height; y++){
             for(int x=-MASK.length/2; x<width; x++){
                 avgr = 0; avgg = 0; avgb = 0; count = 0;
