@@ -1,8 +1,11 @@
 package algorithms.imgeffects;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class ImageSmooth extends ImageEffect {
+
+    private BufferedImage tmp;
 
     private static int[][] MASK = {{1,2,1},{2,4,2},{1,2,1}};
 
@@ -25,7 +28,7 @@ public class ImageSmooth extends ImageEffect {
                     if(!(y+i >= height || y+i < 0)) {
                         for (int j = 0; j < MASK.length; j++) {
                             if (!(x + j >= width || x + j < 0)) {
-                                c = new Color(original.getRGB(x + j, y + i));
+                                c = new Color(tmp.getRGB(x + j, y + i));
                                 avgr += c.getRed() * MASK[i][j];
                                 avgg += c.getGreen() * MASK[i][j];
                                 avgb += c.getBlue() * MASK[i][j];
@@ -39,9 +42,17 @@ public class ImageSmooth extends ImageEffect {
                 avgb /= count;
 
                 g.setColor(new Color(avgr,avgg,avgb));
-                g.fillRect(x+MASK.length/2, y+MASK.length/2, x+MASK.length/2, y+MASK.length/2);
+                g.drawLine(x + MASK.length / 2, y + MASK.length / 2, x + MASK.length / 2, y + MASK.length / 2);
             }
         }
+
+        tmp = IMG;
+    }
+
+    @Override
+    public void reset(){
+        super.reset();
+        tmp = original;
     }
 
 
