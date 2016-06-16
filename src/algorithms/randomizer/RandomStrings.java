@@ -10,9 +10,9 @@ public class RandomStrings extends Randomizer {
         for(int i=0; i<num1; i++){
             String s = "";
             num2=r.nextInt(5)+5;
-            for(int n=0; n<num2;n++){
-                char c=(char) (r.nextInt(26)+97);
-                s+=c;
+            for(int n=0; n<num2;n++) {
+                char c = (char) (r.nextInt(26) + 97);
+                s += c;
             }
 
             if(color){
