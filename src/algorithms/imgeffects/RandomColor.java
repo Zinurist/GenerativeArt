@@ -10,7 +10,7 @@ public class RandomColor extends ImageEffect {
 
     public RandomColor(){
         super();
-        box = new JComboBox<>(new String[]{"Blue", "Red", "Green"});
+        box = new JComboBox<>(new String[]{"Blue", "Red", "Green", "All"});
     }
 
     @Override
@@ -23,6 +23,8 @@ public class RandomColor extends ImageEffect {
         Graphics g = IMG.getGraphics();
         Color c;
         double factor = new Random().nextDouble()*2;
+        double factor2 = new Random().nextDouble()*2;
+        double factor3 = new Random().nextDouble()*2;
         //blur using averaging algorithm
         for(int y=0; y<height; y++){
             for(int x=0; x<width; x++){
@@ -36,6 +38,9 @@ public class RandomColor extends ImageEffect {
                         break;
                     case 2:
                         g.setColor(new Color(c.getRed(), (int)Math.min(Math.round(c.getGreen() * factor) , 255), c.getBlue() ));
+                        break;
+                    case 3:
+                        g.setColor(new Color((int)Math.min(Math.round(c.getRed() * factor) , 255), (int)Math.min(Math.round(c.getGreen() * factor2) , 255), (int)Math.min(Math.round(c.getBlue() * factor3) , 255) ));
                         break;
                     default:
                         System.out.println("shouldn't happen");
