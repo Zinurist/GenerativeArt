@@ -37,7 +37,7 @@ public abstract class Algorithm {
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
         randAlg[14] = new RandomHVLines(true, true);
-        int I = 11;
+        int I = 12;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
         imgAlg[1] = new ImageBlur();
@@ -50,6 +50,7 @@ public abstract class Algorithm {
         imgAlg[8] = new Grey();
         imgAlg[9] = new Rectify();
         imgAlg[10] = new RandomColor();
+        imgAlg[11] = new TransitionMask();
         int N=R+I+14;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
