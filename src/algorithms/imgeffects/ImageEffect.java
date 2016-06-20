@@ -51,7 +51,7 @@ public abstract class ImageEffect extends Algorithm {
         //loadImage(1);
     }
 
-    private void loadImage(int type){
+    protected void loadImage(int type){
         try {
             if(type == 0){
                 original = ImageIO.read(new File(locationOrg.getText()));
