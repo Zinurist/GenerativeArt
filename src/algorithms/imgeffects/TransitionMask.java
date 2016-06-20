@@ -19,8 +19,8 @@ public class TransitionMask extends ImageEffect {
         Color c;
 
         //blur using averaging algorithm
-        for(int y=0; y<height; y++){
-            for(int x=0; x<width; x++){
+        for(int y=0; y<mask.getHeight(); y++){
+            for(int x=0; x<mask.getWidth(); x++){
                 c = new Color(mask.getRGB(x, y));
 
                 if(c.getBlue() < tick){
