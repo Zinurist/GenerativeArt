@@ -2,6 +2,7 @@ package algorithms;
 
 import algorithms.imgeffects.*;
 import algorithms.randomizer.*;
+import gui.MainFrame;
 
 import java.util.List;
 
@@ -102,6 +103,14 @@ public abstract class Algorithm {
     public void init(){
         emptyIMG();
         reset();
+    }
+
+    protected void start(){
+        MainFrame.MF.startAnimation();
+    }
+
+    protected void stop(){
+        MainFrame.MF.stopAnimation();
     }
 
     public void emptyIMG(){

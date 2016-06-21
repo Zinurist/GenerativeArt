@@ -54,8 +54,7 @@ public class MainFrame implements Runnable{
         btnStart.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                paused = false;
-                setButtonsEnabled();
+                startAnimation();
             }
         });
 
@@ -63,8 +62,7 @@ public class MainFrame implements Runnable{
         btnStop.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                paused = true;
-                setButtonsEnabled();
+                stopAnimation();
             }
         });
 
@@ -195,6 +193,16 @@ public class MainFrame implements Runnable{
         btnSave.setEnabled(paused);
         //btnResize.setEnabled(paused);
         btnReset.setEnabled(paused);
+    }
+
+    public void startAnimation(){
+        paused = false;
+        setButtonsEnabled();
+    }
+
+    public void stopAnimation(){
+        paused = true;
+        setButtonsEnabled();
     }
 
     private Algorithm getSelectedAlgorithm(){
