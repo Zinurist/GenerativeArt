@@ -38,7 +38,7 @@ public abstract class Algorithm {
         randAlg[12] = new RandomStrings();
         randAlg[13] = new RandomCircles();
         randAlg[14] = new RandomHVLines(true, true);
-        int I = 12;
+        int I = 13;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
         imgAlg[1] = new ImageBlur();
@@ -52,6 +52,7 @@ public abstract class Algorithm {
         imgAlg[9] = new Rectify();
         imgAlg[10] = new RandomColor();
         imgAlg[11] = new TransitionMask();
+        imgAlg[12] = new ImageTransition();
         int N=R+I+14;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
@@ -97,7 +98,7 @@ public abstract class Algorithm {
     public abstract void reset();
 
     public List<Component> getOptionList(){
-        return new LinkedList<Component>();
+        return new LinkedList<>();
     }
 
     public void init(){
