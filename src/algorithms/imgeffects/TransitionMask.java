@@ -1,7 +1,5 @@
 package algorithms.imgeffects;
 
-import gui.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;

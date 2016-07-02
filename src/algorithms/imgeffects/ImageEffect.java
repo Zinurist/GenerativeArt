@@ -12,7 +12,9 @@ import java.util.LinkedList;
 
 public abstract class ImageEffect extends Algorithm {
 
+    //2 images, original should always be loaded, mask might be an empty image
     protected static BufferedImage original, mask;
+    //minimum width/height of original and IMG, can be used to safely access pixels of both IMG and original
     protected static int width, height;
 
     private TextField locationOrg, locationMask;
