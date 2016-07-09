@@ -46,7 +46,7 @@ public class RandomPixelBlocks extends Randomizer {
 
     @Override
     public void reset() {
-        super.reset();
+        resetBools();
         done = new boolean[IMG.getHeight()][IMG.getWidth()];
     }
 }

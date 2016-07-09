@@ -15,13 +15,13 @@ public abstract class Randomizer extends Algorithm {
 
     protected static boolean[][] bools;
     private static boolean changed = true;
-    public static boolean color = true;
+    public static boolean color = false;
     private static boolean empty = false;
     public static Random r = new Random();
 
     @Override
     public void step(){
-        changed=true;
+        changed = true;
         if(empty) {
             init();
         }
@@ -59,11 +59,10 @@ public abstract class Randomizer extends Algorithm {
         return list;
     }
 
-    @Override
-    public void reset() {
+    protected void resetBools() {
         if(changed) {
             bools = new boolean[IMG.getHeight()][IMG.getWidth()];
-            changed=false;
+            changed = false;
         }
     }
 }

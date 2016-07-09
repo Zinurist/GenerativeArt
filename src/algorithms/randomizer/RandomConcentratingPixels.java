@@ -27,4 +27,9 @@ public class RandomConcentratingPixels extends Randomizer{
     public String toString() {
         return "Concentrating Pixels";
     }
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }

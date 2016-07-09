@@ -36,4 +36,9 @@ public class RandomRifts extends Randomizer{
     public String toString() {
         return "Rifts";
     }
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }

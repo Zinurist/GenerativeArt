@@ -23,4 +23,10 @@ public class RandomFadingPixels extends Randomizer {
     public String toString() {
         return "Fading Pixels";
     }
+
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }

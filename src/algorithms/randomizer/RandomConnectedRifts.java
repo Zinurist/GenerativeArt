@@ -30,4 +30,9 @@ public class RandomConnectedRifts extends Randomizer{
     public String toString() {
         return "Connected rifts";
     }
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }

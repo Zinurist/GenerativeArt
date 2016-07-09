@@ -40,4 +40,9 @@ public class RandomThinRifts extends Randomizer {
     public String toString() {
         return "Thin rifts";
     }
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }

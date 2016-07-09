@@ -30,4 +30,10 @@ public class RandomLines extends Randomizer{
     public String toString() {
         return "Lines";
     }
+
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }

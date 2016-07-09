@@ -30,4 +30,9 @@ public class RandomPixelFog extends Randomizer {
     public String toString() {
         return "Pixel Fog";
     }
+
+    @Override
+    public void reset() {
+        resetBools();
+    }
 }
