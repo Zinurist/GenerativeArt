@@ -120,7 +120,7 @@ public class MainFrame implements Runnable{
             }
         });
 
-        algorithms = new JComboBox<Algorithm>(Algorithm.getAlgorithmsList());
+        algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
 
         drawPanel = new DrawPanel();
         //drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
