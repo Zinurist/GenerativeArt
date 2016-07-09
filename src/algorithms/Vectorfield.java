@@ -134,10 +134,9 @@ public class Vectorfield extends Algorithm{
         }
     }
 
-    private void draw(){
+    private void draw(Graphics g){
         emptyIMG();
 
-        Graphics g = IMG.createGraphics();
         g.setColor(Color.BLACK);
         if(DRAW_FIELD) {
             for (int y = 0; y < field.length; y++) {
@@ -160,7 +159,7 @@ public class Vectorfield extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         if(MOUSE_INTERACTION){
             if(counter>=MOUSE_RATE) {
                 updateMouse();
@@ -171,7 +170,7 @@ public class Vectorfield extends Algorithm{
             }
         }
         calc();
-        draw();
+        draw(g);
     }
 
     @Override

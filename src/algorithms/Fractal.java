@@ -15,10 +15,9 @@ public class Fractal extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         if(r<1) return;
 
-        Graphics g = IMG.getGraphics();
         g.setColor(Color.BLACK);
 
         LinkedList<int[]> newp = new LinkedList<>();

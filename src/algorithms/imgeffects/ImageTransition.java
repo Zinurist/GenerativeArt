@@ -22,14 +22,12 @@ public class ImageTransition extends ImageEffect {
 
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         if(offset > 1.0){
             reset();
             return;
         }
         offset += 0.05;
-
-        Graphics g = IMG.getGraphics();
 
         Color co, cm;
         double offset2 = (3*offset*offset - 2*offset*offset*offset);

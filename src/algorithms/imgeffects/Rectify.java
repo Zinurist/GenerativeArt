@@ -13,8 +13,7 @@ public class Rectify extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
         int w, h = 20;
         boolean dw, dh;
 

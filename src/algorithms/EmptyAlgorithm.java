@@ -1,6 +1,8 @@
 package algorithms;
 
 
+import java.awt.*;
+
 public class EmptyAlgorithm extends Algorithm{
 
     protected EmptyAlgorithm() {
@@ -12,7 +14,7 @@ public class EmptyAlgorithm extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         init();
     }
 

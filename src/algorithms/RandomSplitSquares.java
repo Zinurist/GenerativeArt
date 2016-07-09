@@ -22,9 +22,8 @@ public class RandomSplitSquares extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
 
-        Graphics g = IMG.createGraphics();
         g.setColor(Color.WHITE);
         if(!topLeftBox.isSelected()) {
             g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());

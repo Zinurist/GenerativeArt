@@ -26,8 +26,7 @@ public class SimpleLines extends Algorithm {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.createGraphics();
+    public void step(Graphics g) {
         g.setColor(Color.BLACK);
         if(verticalBox.isSelected()){
             for(int i=0; i<IMG.getWidth();){

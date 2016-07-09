@@ -19,8 +19,7 @@ public class RandomColor extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
         Color c;
         double factor = new Random().nextDouble()*2;
         double factor2 = new Random().nextDouble()*2;

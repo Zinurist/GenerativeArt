@@ -49,7 +49,7 @@ public class TransitionMask extends ImageEffect {
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         if(tick > 255){
             if(boxReset.isSelected() || reset) reset();
             else{
@@ -58,8 +58,6 @@ public class TransitionMask extends ImageEffect {
                 return;
             }
         }
-
-        Graphics g = IMG.getGraphics();
 
         /*
         Color c;

@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.List;
 import java.util.*;
 import java.util.function.Function;
 
@@ -39,7 +38,7 @@ public class SimpleSine extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         if(!plotted) {
             init();
             Plotter.plot(IMG, new Function<Double, Double>() {

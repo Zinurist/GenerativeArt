@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.awt.*;
+
 public class AntsAlgorithm extends Algorithm {
     @Override
     public String toString() {
@@ -7,7 +9,7 @@ public class AntsAlgorithm extends Algorithm {
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
 
     }
 

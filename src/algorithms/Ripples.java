@@ -34,8 +34,7 @@ public class Ripples extends Algorithm {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.createGraphics();
+    public void step(Graphics g) {
         g.setColor(c1);
         g.fillRect(0,0,IMG.getWidth(),IMG.getHeight());
 

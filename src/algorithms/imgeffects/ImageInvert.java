@@ -11,8 +11,7 @@ public class ImageInvert extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
 
         //blur using averaging algorithm
         for(int y=0; y<height; y++){

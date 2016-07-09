@@ -21,10 +21,9 @@ public class ChaosAlgorithm extends Algorithm {
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         w.step();
 
-        Graphics g=IMG.createGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0,0,IMG.getWidth(), IMG.getHeight());
         for(Actor a:w.actors){

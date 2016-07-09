@@ -15,8 +15,7 @@ public class ImageBlur extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
         int avgr, avgb, avgg, count;
         Color c;
 

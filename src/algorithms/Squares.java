@@ -28,12 +28,11 @@ public class Squares extends Algorithm {
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         int width=1;
         int drawn=0;
         int xStart = IMG.getWidth()/2;
         int yStart = IMG.getHeight()/2;
-        Graphics g = IMG.createGraphics();
         g.setColor(Color.BLACK);
         while(drawn<IMG.getWidth()){
             if(circles.isSelected()) {

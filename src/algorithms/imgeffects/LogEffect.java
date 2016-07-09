@@ -18,8 +18,7 @@ public class LogEffect extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
         Color c;
 
         if(mirrored.isSelected()){//rotated by 180° in [1;2]

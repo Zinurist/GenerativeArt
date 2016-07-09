@@ -18,8 +18,7 @@ public class SineEffect extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
         Color c;
 
         //blur using averaging algorithm

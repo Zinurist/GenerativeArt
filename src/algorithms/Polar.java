@@ -22,11 +22,10 @@ public class Polar extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         emptyIMG();
 
         int r_step = r_step_slider.getValue();
-        Graphics g = IMG.createGraphics();
         g.setColor(Color.BLACK);
 
         int x0 = IMG.getWidth()/2;

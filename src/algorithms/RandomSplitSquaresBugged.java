@@ -20,7 +20,7 @@ public class RandomSplitSquaresBugged extends Algorithm{
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         //split
         LinkedList<S> newS = new LinkedList<S>();
         int width, height;
@@ -53,7 +53,6 @@ public class RandomSplitSquaresBugged extends Algorithm{
         squares.addAll(newS);
 
         //draw
-        Graphics g = IMG.createGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
         g.setColor(Color.BLACK);

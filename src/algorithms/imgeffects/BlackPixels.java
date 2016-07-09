@@ -12,9 +12,8 @@ public class BlackPixels extends ImageEffect {
     }
 
     @Override
-    public void step() {
+    public void step(Graphics g) {
         reset();
-        Graphics g = IMG.getGraphics();
 
         int n = even?0:1;
 

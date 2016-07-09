@@ -10,8 +10,7 @@ public class ExponentialEffect extends ImageEffect {
     }
 
     @Override
-    public void step() {
-        Graphics g = IMG.getGraphics();
+    public void step(Graphics g) {
         Color c;
 
         for(int y=0; y<height; y++){

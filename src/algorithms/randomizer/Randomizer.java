@@ -20,12 +20,12 @@ public abstract class Randomizer extends Algorithm {
     public static Random r = new Random();
 
     @Override
-    public void step(){
+    public void step(Graphics g){
         changed = true;
         if(empty) {
             init();
         }
-        Graphics g = IMG.createGraphics();
+
         g.setColor(Color.BLACK);
         step(g, IMG.getWidth(), IMG.getHeight());
     }
