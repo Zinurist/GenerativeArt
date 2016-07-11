@@ -71,6 +71,7 @@ public class DrawPanel extends JPanel {
             public void keyTyped(KeyEvent e) {}
             @Override
             public void keyPressed(KeyEvent e) {
+                //doesnt work yet
                 System.out.println("rr");
                 if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_R){
                     reset();
@@ -83,7 +84,7 @@ public class DrawPanel extends JPanel {
         });
     }
 
-    private void reset(){
+    public void reset(){
         zoom = 1;
         xOffset = 0;
         yOffset = 0;
@@ -96,16 +97,21 @@ public class DrawPanel extends JPanel {
             g.clearRect(0,0,getWidth(),getHeight());
             changed = false;
         }
-        if(zoom - 1.0 < 1E-15) {
-            g.drawImage(Algorithm.IMG, xOffset, yOffset, null);
-        }else{
-            int height = Math.min(Algorithm.IMG.getHeight(), this.getHeight());
-            int width = Math.min(Algorithm.IMG.getWidth(), this.getWidth());
 
-            for(int y = 0; y<height; y++){
-                for(int x = 0; x<width; x++){
+        g.translate(xOffset, yOffset);
+        if(zoom == 1) {
+            g.drawImage(Algorithm.IMG, 0, 0, null);
+        }else{
+            //TODO optimise these bounds
+            int leftY = 0;
+            int leftX = 0;
+            int rightY = Algorithm.IMG.getHeight();
+            int rightX = Algorithm.IMG.getWidth();
+
+            for(int y = leftY; y<rightY; y++){
+                for(int x = leftX; x<rightX; x++){
                     g.setColor(new Color(Algorithm.IMG.getRGB(x,y)));
-                    g.fillRect((x + xOffset) * zoom, (y + yOffset) * zoom, zoom, zoom);
+                    g.fillRect(x * zoom, y * zoom, zoom, zoom);
 
                 }
             }

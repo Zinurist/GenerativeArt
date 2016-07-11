@@ -76,7 +76,10 @@ public class MainFrame implements Runnable{
         });
 
         btnReset = new JButton("Reset/Init");
-        btnReset.addActionListener(e -> resetImage(-1,-1) );
+        btnReset.addActionListener(e -> {
+            resetImage(-1,-1);
+            drawPanel.reset();
+        } );
 
         speedLabel = new JLabel("Speed: "+waitTime+" ms");
 
