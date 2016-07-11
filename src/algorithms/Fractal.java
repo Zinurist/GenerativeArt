@@ -25,8 +25,8 @@ public class Fractal extends Algorithm{
         for(int[] p : points){
             //drawing points
             //g.drawOval(p[0]-r,p[1]-r,r*2,r*2);
-            g.fillOval(p[0]-r,p[1]-r,r*2,r*2);
-            //g.drawRect(p[0]-r,p[1]-r,r*2,r*2);
+            //g.fillOval(p[0]-r,p[1]-r,r*2,r*2);
+            g.drawRect(p[0]-r,p[1]-r,r*2,r*2);
             //g.fillRect(p[0]-r,p[1]-r,r*2,r*2);
 
             //new points

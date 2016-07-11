@@ -22,7 +22,7 @@ public class Squares extends Algorithm {
 
     @Override
     public java.util.List<Component> getOptionList(){
-        List<Component> list = new LinkedList<Component>();
+        List<Component> list = new LinkedList<>();
         list.add(circles);
         return list;
     }

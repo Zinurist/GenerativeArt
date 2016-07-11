@@ -22,7 +22,7 @@ public class MainFrame implements Runnable{
 
     private boolean paused = true;
     private boolean running = false;
-    private int waitTime= 100;//in ms
+    private int waitTime= 25;//in ms
 
     //GUI elements
     private JFrame frame;
@@ -95,8 +95,8 @@ public class MainFrame implements Runnable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO get width/height
-                int width=500;
-                int height=500;
+                int width=1920;
+                int height=1080;
                 resetImage(width,height);
             }
         });
@@ -111,7 +111,7 @@ public class MainFrame implements Runnable{
 
         speedLabel = new JLabel("Speed: "+waitTime+" ms");
 
-        speedSlider = new JSlider(1, 1000, waitTime);
+        speedSlider = new JSlider(0, 1000, waitTime);
         speedSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -227,7 +227,8 @@ public class MainFrame implements Runnable{
             drawPanel.repaint();
 
             try {
-                Thread.sleep(waitTime);
+                if(waitTime > 0)
+                    Thread.sleep(waitTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
