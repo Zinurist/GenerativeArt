@@ -214,7 +214,7 @@ public class MainFrame implements Runnable{
 
             if(btnRecord.isSelected()){
                 //TODO convert to mp4 or whatever
-                saveImage("recordings/img"+recordCounter+".png");
+                saveImage("recordings/img"+String.format("%08d", recordCounter)+".png");
                 recordCounter++;
             }
 

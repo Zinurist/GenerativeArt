@@ -45,7 +45,7 @@ public class FillAnimation extends Algorithm{
         npoints.ensureCapacity(points.size());
 
         int num = points.size();
-        System.out.println(points.size() + " " + npoints.size());
+
         for(int i=0; i<num; i++){
             int[] p = points.get(i);
             g.drawLine(p[0],p[1],p[0],p[1]);
