@@ -45,6 +45,7 @@ public class DrawPanel extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                requestFocus();
             }
 
             @Override
@@ -68,20 +69,24 @@ public class DrawPanel extends JPanel {
 
         addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
+
             @Override
             public void keyPressed(KeyEvent e) {
-                //doesnt work yet
-                System.out.println("rr");
-                if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_R){
+                //click in the panel is needed (for focus)
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_R) {
                     reset();
                     repaint();
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
+            public void keyReleased(KeyEvent e) {
+            }
         });
+
+        setFocusable(true);
     }
 
     public void reset(){

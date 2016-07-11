@@ -5,6 +5,8 @@ import algorithms.Algorithm;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -88,6 +90,7 @@ public class MainFrame implements Runnable{
             waitTime = speedSlider.getValue();
             speedLabel.setText("Speed: " + waitTime + " ms");
         });
+
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
 
