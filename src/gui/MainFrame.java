@@ -42,82 +42,52 @@ public class MainFrame implements Runnable{
         options = new OptionsFrame();
 
         btnStep = new JButton("Step");
-        btnStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getSelectedAlgorithm().step();
-                drawPanel.repaint();
-            }
+        btnStep.addActionListener(e -> {
+            getSelectedAlgorithm().step();
+            drawPanel.repaint();
         });
 
         btnStart = new JButton("Start");
-        btnStart.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startAnimation();
-            }
-        });
+        btnStart.addActionListener(e -> startAnimation());
 
         btnStop = new JButton("Stop");
-        btnStop.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stopAnimation();
-            }
-        });
+        btnStop.addActionListener(e -> stopAnimation());
 
         btnOptions = new JButton("Options");
-        btnOptions.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                options.setAlgorithm(getSelectedAlgorithm());
-                options.setVisible(true);
-            }
+        btnOptions.addActionListener(e -> {
+            options.setAlgorithm(getSelectedAlgorithm());
+            options.setVisible(true);
         });
 
         btnSave = new JButton("Save");
-        btnSave.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String path = "tmp.png";
-                //TODO get path
-                try {
-                    ImageIO.write(Algorithm.IMG, "png", new File(path));
-                } catch (IOException e1) {
-                    //TODO print error
-                    e1.printStackTrace();
-                }
+        btnSave.addActionListener(e -> {
+            String path = "tmp.png";
+            //TODO get path
+            try {
+                ImageIO.write(Algorithm.IMG, "png", new File(path));
+            } catch (IOException e1) {
+                //TODO print error
+                e1.printStackTrace();
             }
         });
 
         btnResize = new JButton("Resize");
-        btnResize.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO get width/height
-                int width=1920;
-                int height=1080;
-                resetImage(width,height);
-            }
+        btnResize.addActionListener(e -> {
+            //TODO get width/height
+            int width = 1920;
+            int height = 1080;
+            resetImage(width, height);
         });
 
         btnReset = new JButton("Reset/Init");
-        btnReset.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetImage(-1,-1);
-            }
-        });
+        btnReset.addActionListener(e -> resetImage(-1,-1) );
 
         speedLabel = new JLabel("Speed: "+waitTime+" ms");
 
         speedSlider = new JSlider(0, 1000, waitTime);
-        speedSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                waitTime = speedSlider.getValue();
-                speedLabel.setText("Speed: " + waitTime + " ms");
-            }
+        speedSlider.addChangeListener(e -> {
+            waitTime = speedSlider.getValue();
+            speedLabel.setText("Speed: " + waitTime + " ms");
         });
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
