@@ -16,10 +16,6 @@ public class RandomPath extends Randomizer {
         spaceBox.setSelected(true);
     }
 
-    private boolean inBounds(int x, int y, int width, int height){
-        return (x>=0 && x<width && y>=0 && y<height);
-    }
-
     private boolean enoughSpace(int xtmp, int ytmp, int width, int height){
         for(int yi=ytmp-1; yi<=ytmp+1; yi++){
             for(int xi=xtmp-1; xi<=xtmp+1; xi++){

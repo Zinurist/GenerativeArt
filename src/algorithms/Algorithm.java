@@ -54,7 +54,7 @@ public abstract class Algorithm {
         imgAlg[10] = new RandomColor();
         imgAlg[11] = new TransitionMask();
         imgAlg[12] = new ImageTransition();
-        int N=R+I+15;
+        int N=R+I+16;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
@@ -73,6 +73,7 @@ public abstract class Algorithm {
         alg[R+11] = new EndlessCircles();
         alg[R+12] = new Vectorfield();
         alg[R+13] = new Fractal();
+        alg[R+14] = new FillAnimation();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**
@@ -119,6 +120,10 @@ public abstract class Algorithm {
 
     protected void stop(){
         MainFrame.MF.stopAnimation();
+    }
+
+    protected boolean inBounds(int x, int y, int width, int height){
+        return (x>=0 && x<width && y>=0 && y<height);
     }
 
     public void emptyIMG(){
