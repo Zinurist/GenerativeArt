@@ -20,7 +20,7 @@ public class DrawPanel extends JPanel {
         reset();
 
         addMouseWheelListener(e -> {
-            zoom += e.getWheelRotation();
+            zoom -= e.getWheelRotation();
             if (zoom < 1) zoom = 1;
             changed = true;
             repaint();
@@ -102,19 +102,7 @@ public class DrawPanel extends JPanel {
         if(zoom == 1) {
             g.drawImage(Algorithm.IMG, 0, 0, null);
         }else{
-            //TODO optimise these bounds
-            int leftY = 0;
-            int leftX = 0;
-            int rightY = Algorithm.IMG.getHeight();
-            int rightX = Algorithm.IMG.getWidth();
-
-            for(int y = leftY; y<rightY; y++){
-                for(int x = leftX; x<rightX; x++){
-                    g.setColor(new Color(Algorithm.IMG.getRGB(x,y)));
-                    g.fillRect(x * zoom, y * zoom, zoom, zoom);
-
-                }
-            }
+            g.drawImage(Algorithm.IMG, 0, 0, Algorithm.IMG.getWidth()*zoom, Algorithm.IMG.getHeight()*zoom, null);
         }
     }
 

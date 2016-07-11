@@ -46,7 +46,10 @@ public class Fractal extends Algorithm{
 
         r = r/2;
         if(r>=1) points = newp;
-        else    points = null;
+        else{
+            points = null;
+            stop();
+        }
 
     }
 
