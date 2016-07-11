@@ -15,7 +15,7 @@ import java.util.Random;
 public class Ripples extends Algorithm {
 
     private Color c1, c2;
-    private List<Integer[]> circles;
+    private List<int[]> circles;
     private int thresholdEnd = IMG.getWidth()/4;
     private int thresholdStart = IMG.getWidth()/8;
 
@@ -38,11 +38,11 @@ public class Ripples extends Algorithm {
         g.setColor(c1);
         g.fillRect(0,0,IMG.getWidth(),IMG.getHeight());
 
-        Integer[] c;
+        int[] c;
         if(circles.size() < MAX_CIRCLES){
             Random r = new Random();
             if(r.nextDouble() > 0.995){
-                c =  new Integer[3];
+                c =  new int[3];
                 c[0] = r.nextInt(IMG.getWidth());
                 c[1] = r.nextInt(IMG.getHeight());
                 c[2] = 0;
@@ -68,7 +68,7 @@ public class Ripples extends Algorithm {
             }else{
                 g.setColor(c2);
             }
-            g.drawOval(c[0]-c[2],c[1]-c[2],c[2]+c[2],c[2]+c[2]);
+            g.drawOval(c[0]-c[2],c[1]-c[2],c[2]*2,c[2]*2);
         }
     }
 
