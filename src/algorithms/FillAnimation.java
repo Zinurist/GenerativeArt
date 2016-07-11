@@ -9,7 +9,8 @@ public class FillAnimation extends Algorithm{
 
     private static int[][] NEXT = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}};
 
-    private LinkedList<int[]> points;
+    private ArrayList<int[]> points, npoints;
+    private boolean[][] checked;
     private JColorChooser color;
     private int startRGB;
 
@@ -34,33 +35,51 @@ public class FillAnimation extends Algorithm{
             y = r.nextInt(IMG.getHeight());
 
             startRGB = IMG.getRGB(x,y);
-            points.add(new int[]{x,y});
+            if(startRGB != color.getColor().getRGB()) {
+                points.add(new int[]{x, y});
+            }
         }
 
         g.setColor(color.getColor());
 
-        LinkedList<int[]> newp = new LinkedList<>();
+        npoints.ensureCapacity(points.size());
 
-        for(int[] p : points){
+        int num = points.size();
+        System.out.println(points.size() + " " + npoints.size());
+        for(int i=0; i<num; i++){
+            int[] p = points.get(i);
             g.drawLine(p[0],p[1],p[0],p[1]);
 
             for(int[] off : NEXT){
                 x = p[0] + off[0];
                 y = p[1] + off[1];
-                if(inBounds(x, y, IMG.getWidth(), IMG.getHeight()) && IMG.getRGB(x,y) == startRGB)
-                    newp.add(new int[]{x,y});
+                if(inBounds(x, y, IMG.getWidth(), IMG.getHeight()) && IMG.getRGB(x,y) == startRGB && !checked[x][y]) {
+                    npoints.add(new int[]{x, y});
+                    checked[x][y] = true;
+                }
             }
         }
 
-        points = newp;
+        ArrayList<int[]> tmp = points;
+        points = npoints;
+        npoints = tmp;
+
+        npoints.clear();
+
         if(points.isEmpty()){
+            reset();
             stop();
         }
     }
 
     @Override
     public void reset() {
-        points = new LinkedList<>();
+        points = new ArrayList<>(1);
+        npoints = new ArrayList<>(4);
+        checked = new boolean[IMG.getWidth()][IMG.getHeight()];
+        for(int x=0; x<checked.length; x++)
+            for(int y=0; y<checked[x].length; y++)
+                checked[x][y] = false;
     }
 
     @Override
