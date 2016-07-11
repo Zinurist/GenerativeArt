@@ -21,15 +21,17 @@ public class MainFrame implements Runnable{
     private boolean paused = true;
     private boolean running = false;
     private int waitTime= 25;//in ms
+    private int recordCounter = 0;
 
     //GUI elements
     private JFrame frame;
     private OptionsFrame options;
 
     private JButton btnStart, btnStop, btnStep, btnOptions, btnSave, btnResize, btnReset;
+    private JToggleButton btnRecord;
     private JComboBox<Algorithm> algorithms;
     private JSlider speedSlider;
-    private JLabel speedLabel;
+    private JLabel speedLabel, statusLabel;
     private JPanel contentPane, controlPanel;
     private DrawPanel drawPanel;
 
@@ -59,15 +61,11 @@ public class MainFrame implements Runnable{
 
         btnSave = new JButton("Save");
         btnSave.addActionListener(e -> {
-            String path = "tmp.png";
             //TODO get path
-            try {
-                ImageIO.write(Algorithm.IMG, "png", new File(path));
-            } catch (IOException e1) {
-                //TODO print error
-                e1.printStackTrace();
-            }
+            saveImage("tmp.png");
         });
+
+        btnRecord = new JToggleButton("Record");
 
         btnResize = new JButton("Resize");
         btnResize.addActionListener(e -> {
@@ -91,6 +89,7 @@ public class MainFrame implements Runnable{
             speedLabel.setText("Speed: " + waitTime + " ms");
         });
 
+        statusLabel = new JLabel("");
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
 
@@ -100,13 +99,16 @@ public class MainFrame implements Runnable{
 
         controlPanel = new JPanel(new GridLayout(2,0,5,5));
         controlPanel.add(algorithms);
+        //TODO divide algorithms into types?
         controlPanel.add(btnReset);
         controlPanel.add(btnStep);
         controlPanel.add(btnStart);
         controlPanel.add(btnStop);
         controlPanel.add(btnOptions);
         controlPanel.add(btnSave);
+        controlPanel.add(btnRecord);
         controlPanel.add(btnResize);
+        controlPanel.add(statusLabel);
         controlPanel.add(speedLabel);
         controlPanel.add(speedSlider);
         controlPanel.setPreferredSize(new Dimension(500, 50));
@@ -177,6 +179,18 @@ public class MainFrame implements Runnable{
         setButtonsEnabled();
     }
 
+    private void saveImage(String path){
+        try {
+            File f =  new File(path);
+            if(!f.exists()){
+                f.mkdirs();
+            }
+            ImageIO.write(Algorithm.IMG, "png", f);
+        } catch (Exception e1) {
+            statusLabel.setText("Error: "+e1.getMessage());
+        }
+    }
+
     private Algorithm getSelectedAlgorithm(){
         return (Algorithm) algorithms.getSelectedItem();
     }
@@ -197,6 +211,12 @@ public class MainFrame implements Runnable{
 
             getSelectedAlgorithm().step();
             drawPanel.repaint();
+
+            if(btnRecord.isSelected()){
+                //TODO convert to mp4 or whatever
+                saveImage("recordings/img"+recordCounter+".png");
+                recordCounter++;
+            }
 
             try {
                 if(waitTime > 0)
