@@ -1,0 +1,38 @@
+package algorithms.randomizer;
+
+import java.awt.*;
+
+public class RandomPositions extends Randomizer{
+
+    //like Random pixels, but "animated"
+
+    private int tick;
+
+    @Override
+    public void step(Graphics g, int width, int height) {
+        if(color){
+            g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+        }
+
+        int x = r.nextInt(width);
+        int y = r.nextInt(height);
+        g.drawLine(x,y,x,y);
+
+        tick++;
+        if(tick > width*height/2){
+            stop();
+            tick = 0;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Random point";
+    }
+
+    @Override
+    public void reset() {
+        tick = 0;
+    }
+
+}
