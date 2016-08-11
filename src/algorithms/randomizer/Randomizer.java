@@ -13,7 +13,7 @@ import java.util.Random;
 
 public abstract class Randomizer extends Algorithm {
 
-    protected static boolean[][] bools;
+    protected static boolean[][] bools = new boolean[IMG.getHeight()][IMG.getWidth()];
     private static boolean changed = true;
     public static boolean color = false;
     private static boolean empty = false;

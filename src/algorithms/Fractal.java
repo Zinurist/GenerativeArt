@@ -8,6 +8,10 @@ public class Fractal extends Algorithm{
     private LinkedList<int[]> points;
     private int r;
 
+    public Fractal(){
+        super();
+        reset();
+    }
 
     @Override
     public String toString() {
@@ -55,7 +59,6 @@ public class Fractal extends Algorithm{
 
     @Override
     public void reset() {
-        emptyIMG();
         points = new LinkedList<>();
         points.add(new int[]{IMG.getWidth()/2, IMG.getHeight()/2});
         r = IMG.getWidth()/4;

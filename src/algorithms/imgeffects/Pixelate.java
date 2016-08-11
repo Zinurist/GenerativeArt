@@ -7,6 +7,11 @@ public class Pixelate extends ImageEffect {
     private int factor;
     private boolean up;
 
+    public Pixelate(){
+        factor = 1;
+        up = true;
+    }
+
     @Override
     public String toString() {
         return "Pixelate image";

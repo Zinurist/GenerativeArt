@@ -10,8 +10,8 @@ public class ImageTransition extends ImageEffect {
 
     public ImageTransition(){
         super();
-
         type = new JComboBox<>(new String[]{"linear", "cubic"});
+        offset = 0;
     }
 
 

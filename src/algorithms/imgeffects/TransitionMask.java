@@ -23,6 +23,9 @@ public class TransitionMask extends ImageEffect {
 
         boxReset = new JCheckBox("reset img");
         add = new JSpinner(new SpinnerNumberModel(1,1,255,1));
+
+        tick = 0;
+        reset = false;
     }
 
     @Override

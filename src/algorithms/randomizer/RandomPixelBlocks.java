@@ -4,7 +4,12 @@ import java.awt.*;
 
 public class RandomPixelBlocks extends Randomizer {
 
-    boolean[][] done;
+    private boolean[][] done;
+
+    public RandomPixelBlocks(){
+        super();
+        done = new boolean[IMG.getHeight()][IMG.getWidth()];
+    }
 
     @Override
     public void step(Graphics g, int width, int height) {

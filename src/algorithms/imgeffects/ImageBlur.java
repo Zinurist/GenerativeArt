@@ -9,6 +9,11 @@ public class ImageBlur extends ImageEffect {
 
     private BufferedImage tmp;
 
+    public ImageBlur(){
+        super();
+        tmp = original;
+    }
+
     @Override
     public String toString() {
         return "Image blur";

@@ -21,7 +21,7 @@ public abstract class Algorithm {
     private static ImageEffect[] imgAlg;
     private static Algorithm[] alg;
     private static void initAlgorithms(){
-        int R=17;
+        int R=18;
         randAlg = new Randomizer[R];
         randAlg[0] = new RandomPixels();
         randAlg[1] = new RandomPixelFog();
@@ -40,6 +40,7 @@ public abstract class Algorithm {
         randAlg[14] = new RandomHVLines(true, true);
         randAlg[15] = new RandomPath();
         randAlg[16] = new RandomPositions();
+        randAlg[17] = new Voronoi();
         int I = 13;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
@@ -91,10 +92,6 @@ public abstract class Algorithm {
     public static Randomizer[] getRandomizersList(){
         if(randAlg==null) initAlgorithms();
         return randAlg;
-    }
-
-    protected Algorithm(){
-        init();
     }
 
     public abstract String toString();

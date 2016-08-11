@@ -17,6 +17,8 @@ public class RandomSplitSquaresBugged extends Algorithm{
         r=new Random();
         typeBox = new JCheckBox("First type");
         typeBox.setSelected(true);
+
+        reset();
     }
 
     @Override
@@ -75,13 +77,9 @@ public class RandomSplitSquaresBugged extends Algorithm{
 
     @Override
     public void reset(){
-        Graphics g = IMG.createGraphics();
-        g.setColor(new Color(0, 0, 0));
-        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
-
-        squares=new LinkedList<S>();
+        squares = new LinkedList<S>();
         squares.add(new S(0,0,IMG.getWidth()-1, IMG.getHeight()-1));
-        r=new Random();
+        r = new Random();
     }
 
     private class S{

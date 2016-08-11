@@ -16,8 +16,8 @@ public class FillAnimation extends Algorithm{
 
     public FillAnimation(){
         super();
-
         color = new JColorChooser(Color.BLUE);
+        reset();
     }
 
     @Override

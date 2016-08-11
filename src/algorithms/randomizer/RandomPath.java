@@ -11,9 +11,9 @@ public class RandomPath extends Randomizer {
 
     public RandomPath(){
         super();
-
         spaceBox = new JCheckBox("spacing");
         spaceBox.setSelected(true);
+        reset();
     }
 
     private boolean enoughSpace(int xtmp, int ytmp, int width, int height){
@@ -92,7 +92,6 @@ public class RandomPath extends Randomizer {
 
     @Override
     public void reset() {
-        emptyIMG();
         x = r.nextInt(IMG.getWidth());
         y = r.nextInt(IMG.getHeight());
     }

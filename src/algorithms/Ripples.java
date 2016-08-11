@@ -25,7 +25,7 @@ public class Ripples extends Algorithm {
         c1 = Color.BLACK;
         c2 = Color.WHITE;
 
-        circles = new ArrayList<>(MAX_CIRCLES);
+        reset();
     }
 
     @Override

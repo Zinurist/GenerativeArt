@@ -25,6 +25,7 @@ public class Vectorfield extends Algorithm{
     private int counter;
 
     public Vectorfield(){
+        super();
         reset();
     }
 
