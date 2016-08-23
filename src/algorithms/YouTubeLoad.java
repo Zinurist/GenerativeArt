@@ -61,7 +61,7 @@ public class YouTubeLoad extends Algorithm{
         java.util.List<Component> list = new LinkedList<>();
 
         JLabel lblNum = new JLabel(numOfCircles + " circles");
-        JSlider sliderNum = new JSlider(2,100,numOfCircles);
+        JSlider sliderNum = new JSlider(2,300,numOfCircles);
         sliderNum.addChangeListener(l -> {
             numOfCircles = sliderNum.getValue();
             lblNum.setText(numOfCircles + " circles");
@@ -70,7 +70,7 @@ public class YouTubeLoad extends Algorithm{
         list.add(lblNum);
 
         JLabel lblRadius = new JLabel(circleRadius + " px radius");
-        JSlider sliderRadius = new JSlider(4,100,circleRadius);
+        JSlider sliderRadius = new JSlider(4,300,circleRadius);
         sliderRadius.addChangeListener(l -> {
             circleRadius = sliderRadius.getValue();
             lblRadius.setText(circleRadius + " px radius");
@@ -79,7 +79,7 @@ public class YouTubeLoad extends Algorithm{
         list.add(lblRadius);
 
         JLabel lblSize = new JLabel((int)r + " px size");
-        JSlider sliderSize = new JSlider(10,200,(int)r);
+        JSlider sliderSize = new JSlider(10,1000,(int)r);
         sliderSize.addChangeListener(l -> {
             r = sliderSize.getValue();
             lblSize.setText((int)r + " px size");
