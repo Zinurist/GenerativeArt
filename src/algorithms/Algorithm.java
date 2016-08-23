@@ -56,7 +56,7 @@ public abstract class Algorithm {
         imgAlg[10] = new RandomColor();
         imgAlg[11] = new TransitionMask();
         imgAlg[12] = new ImageTransition();
-        int N=R+I+17;
+        int N=R+I+18;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
@@ -77,6 +77,7 @@ public abstract class Algorithm {
         alg[R+13] = new Fractal();
         alg[R+14] = new FillAnimation();
         alg[R+15] = new YouTubeLoad();
+        alg[R+16] = new BallAndWind();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**
