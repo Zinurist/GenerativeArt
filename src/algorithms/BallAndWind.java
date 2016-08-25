@@ -12,9 +12,9 @@ public class BallAndWind extends Algorithm{
     //as options:
     private int sections = 20;
     private int ballSize = 20;
-    private double maxAccel = 2.0;//max absolute value of accelerations
-    private double gravity = 1.0;
-    private double startVY = 2.0; //settings this to 0 with 0 gravity would be silly
+    private double maxAccel = 1.0;//max absolute value of accelerations
+    private double gravity = 0;
+    private double startVY = 5.0; //settings this to 0 with 0 gravity would be silly
     private double timePerTick = 0.2;
 
     //ball info:
@@ -50,7 +50,7 @@ public class BallAndWind extends Algorithm{
         if(lowY < 0) lowY = 0;
         else lowY  /= sizePerSection;
 
-        if(highY > IMG.getHeight() - 100) highY = accels.length - 1; // choose last section
+        if(highY >= IMG.getHeight() - 100) highY = accels.length - 1; // choose last section
         else if(highY < 0) highY = -1; //before first section -> ignore
         else highY /= sizePerSection;
 
@@ -68,7 +68,7 @@ public class BallAndWind extends Algorithm{
         //values for coordinates
         int x = (int) (ballX + 0.5) - ballSize/2;
         int y = (int) (ballY + 0.5) - ballSize/2;
-        if( x < 0) x += IMG.getWidth();
+        while( x < 0) x += IMG.getWidth();
         x %= IMG.getWidth();
 
         //--- drawing ---
