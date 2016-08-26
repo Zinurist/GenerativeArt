@@ -6,7 +6,8 @@ import java.util.*;
 
 public class BallAndWind extends Algorithm{
 
-    private int tick, sizePerSection;
+    private int tick;
+    private double sizePerSection;
     private double[] accels;
 
     //as options:
@@ -48,11 +49,11 @@ public class BallAndWind extends Algorithm{
         int highY = lowY + ballSize;
 
         if(lowY < 0) lowY = 0;
-        else lowY  /= sizePerSection;
+        else lowY = (int)(lowY / sizePerSection + 0.5);
 
         if(highY >= IMG.getHeight() - 100) highY = accels.length - 1; // choose last section
         else if(highY < 0) highY = -1; //before first section -> ignore
-        else highY /= sizePerSection;
+        else highY = (int)(highY / sizePerSection + 0.5);
 
         double ax = 0.0;
         for(int i=lowY; i<=highY; i++)
@@ -77,7 +78,8 @@ public class BallAndWind extends Algorithm{
         //drawing accels
         //int offsetY = 50 + lowY*sizePerSection;
         //for(int i=lowY; i<=highY; i++){
-        int offsetY = 50;
+        double offsetY = 50;
+        double offsetEnd = offsetY + sizePerSection;
         for(int i=0; i<accels.length; i++){
             //blue for positive acceleration (right), red for negative (left)
             //accels[i]/maxAccel brings it into the rang [0,1]
@@ -87,8 +89,9 @@ public class BallAndWind extends Algorithm{
             if(accels[i] > 0) g.setColor(new Color(1.0F - (float)(accels[i]/maxAccel * 0.5 +0.25),1.0F - (float)(accels[i]/maxAccel * 0.5 +0.25),1.0F));
             else g.setColor(new Color(1.0F, 1.0F + (float)(accels[i]/maxAccel * 0.5 -0.25),1.0F + (float)(accels[i]/maxAccel * 0.5 -0.25)));
 
-            g.fillRect(0,offsetY,IMG.getWidth(),sizePerSection);
-            offsetY += sizePerSection;
+            g.fillRect(0,(int)(offsetY+0.5),IMG.getWidth(),(int)(offsetEnd+0.5) - (int)(offsetY+0.5));
+            offsetY = offsetEnd;
+            offsetEnd += sizePerSection;
         }
 
         //drawing ball
@@ -111,7 +114,7 @@ public class BallAndWind extends Algorithm{
     public void reset() {
         tick = 0;
         int areaOfEffect = IMG.getHeight() - 100;//50+50px at the top/bottom
-        sizePerSection = areaOfEffect / sections;
+        sizePerSection = areaOfEffect / (double)sections;
 
         if(accels.length != sections) accels = new double[sections];
 
