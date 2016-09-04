@@ -8,8 +8,8 @@ public class YouTubeLoad extends Algorithm{
 
     private int tick, middleX, middleY;
     //as options:
-    private int numOfCircles = 6;
-    private int circleRadius = 14;
+    private int numOfCircles = 8;
+    private int circleRadius = 12;
     private double r = 20.0;
     private boolean loadAnimation = true;
 
