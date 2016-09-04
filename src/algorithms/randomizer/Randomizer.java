@@ -59,14 +59,14 @@ public abstract class Randomizer extends Algorithm {
         return list;
     }
 
-    protected void resetBools() {
+    protected static void resetBools() {
         if(changed) {
             bools = new boolean[IMG.getHeight()][IMG.getWidth()];
             changed = false;
         }
     }
 
-    protected Color randomColor(){
+    protected static Color randomColor(){
         return new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
     }
 }
