@@ -65,4 +65,8 @@ public abstract class Randomizer extends Algorithm {
             changed = false;
         }
     }
+
+    protected Color randomColor(){
+        return new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
+    }
 }
