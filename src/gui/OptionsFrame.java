@@ -23,11 +23,19 @@ public class OptionsFrame extends JFrame {
         setMinimumSize(new Dimension(300,100));
     }
 
+    /**
+     * Needs to be called before opening the options frame. This sets the content of the options frame according to the given algorithm.
+     * @param algo
+     */
     public void setAlgorithm(Algorithm algo){
         initContentPane(algo.getOptionList());
         setSize(new Dimension(300, 50 * rows));
     }
 
+    /**
+     * Sets the content of the options frame to the given components.
+     * @param optionList a list of components as options
+     */
     private void initContentPane(List<Component> optionList){
         contentPane = new JPanel(new GridLayout(0,2,5,5));
         contentPane.setBackground(new Color(16643811));

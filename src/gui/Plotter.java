@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.function.Function;
 
+/**
+ * This class provides functions to plot a given function into a image.
+ */
 public class Plotter {
 
     //equidistant

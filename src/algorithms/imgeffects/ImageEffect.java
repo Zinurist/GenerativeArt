@@ -10,21 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
+/**
+ * This class provides a framework for algorithms which operate on images given by the user. These algorithms mainly consist of image processing algorithms.
+ */
 public abstract class ImageEffect extends Algorithm {
 
-    //2 images, original should always be loaded, mask might be an empty image
-    protected static BufferedImage original, mask;
-    //minimum width/height of original and IMG, can be used to safely access pixels of both IMG and original
-    protected static int width, height;
-
-    private TextField locationOrg, locationMask;
-    private JButton btnLoadOrg, btnLoadMask;
-    private JLabel lbl;
-    private JCheckBox box;
-
-    public ImageEffect(){
-        original = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
-        mask = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
+    /**
+     * This functions initializes all option-elements for image effects. It also loads the original image.
+     */
+    public static void initImageEffect(){
         Graphics g = mask.getGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
@@ -49,11 +43,36 @@ public abstract class ImageEffect extends Algorithm {
         });
 
         loadImage(0);
-        //don't load mask per default
+        //currently only loading original image, not mask
         //loadImage(1);
     }
 
-    protected void loadImage(int type){
+    /**
+     * The original image to work on. Most image effects don't change this image. This image isn't drawn in the GUI, IMG of the Algorithm class is still used for that.
+     * Per default the image "test.jpg" is loaded. (might be changed)
+     */
+    protected static BufferedImage original = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
+    /**
+     * A mask that can be used by image effects. This mask might not be loaded from a file.
+     * At the start, this image is empty. It needs to be loaded by the user first.
+     */
+    protected static BufferedImage mask = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
+    /**
+     * Minimum width/height of original and IMG. Can be used to safely access pixels of both the IMG and original without going out of bounds.
+     */
+    protected static int width, height;
+
+    //GUI elements for the options frame
+    private static TextField locationOrg, locationMask;
+    private static JButton btnLoadOrg, btnLoadMask;
+    private static JLabel lbl;
+    private static JCheckBox box;
+
+    /**
+     * Loads an image from the path given in the location text fields. Type 0 means loading original, any other type means loading the mask.
+     * @param type if 0 the original is loaded, else the mask
+     */
+    protected static void loadImage(int type){
         try {
             if(type == 0){
                 original = ImageIO.read(new File(locationOrg.getText()));

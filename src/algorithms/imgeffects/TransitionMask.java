@@ -29,24 +29,6 @@ public class TransitionMask extends ImageEffect {
     }
 
     @Override
-    protected void loadImage(int type){
-        super.loadImage(type);
-        if(type == 1){
-            for(int i=0; i<pixels.length; i++){
-                pixels[i] = new LinkedList<>();
-            }
-
-            Color c;
-            for(int y=0; y<mask.getHeight(); y++) {
-                for (int x = 0; x < mask.getWidth(); x++) {
-                    c = new Color(mask.getRGB(x, y));
-                    pixels[c.getBlue()].add(new int[]{x,y});
-                }
-            }
-        }
-    }
-
-    @Override
     public String toString() {
         return "Transition mask";
     }
@@ -95,6 +77,18 @@ public class TransitionMask extends ImageEffect {
         super.reset();
         tick = 0;
         reset = false;
+
+        for(int i=0; i<pixels.length; i++){
+            pixels[i] = new LinkedList<>();
+        }
+
+        Color c;
+        for(int y=0; y<mask.getHeight(); y++) {
+            for (int x = 0; x < mask.getWidth(); x++) {
+                c = new Color(mask.getRGB(x, y));
+                pixels[c.getBlue()].add(new int[]{x,y});
+            }
+        }
     }
 
     @Override

@@ -16,11 +16,26 @@ import java.io.IOException;
  */
 public class MainFrame implements Runnable{
 
+    /**
+     * This is to give access to the main frame to other classes.
+     */
     public static MainFrame MF;
 
+    /**
+     * Pauses the animation.
+     */
     private boolean paused = true;
+    /**
+     * Stops the main threads.
+     */
     private boolean running = false;
-    private int waitTime= 25;//in ms
+    /**
+     * The time (in ms) to wait between steps in an animation.
+     */
+    private int waitTime= 25;
+    /**
+     * If recording, this counts the frame number. For now, this is used to save the single frames in the right order.
+     */
     private int recordCounter = 0;
 
     //GUI elements
@@ -132,9 +147,14 @@ public class MainFrame implements Runnable{
 
     }
 
+    /**
+     * This can be used by algorithms to get the mouse location.
+     * @return the point of the mouse location within the draw panel
+     */
     public Point getMouseLocation(){
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point s = drawPanel.getLocationOnScreen();
+        //TODO apply offset and zoom of drawPanel so that this point represents the point in the image, and not in the draw panel
         p.translate(-s.x,-s.y);
         return p;
     }
@@ -169,16 +189,26 @@ public class MainFrame implements Runnable{
         btnReset.setEnabled(paused);
     }
 
+    /**
+     * Starts the animation and deactivates certain GUI elements.
+     */
     public void startAnimation(){
         paused = false;
         setButtonsEnabled();
     }
 
+    /**
+     * Stops the animation and reactivates all GUI elements.
+     */
     public void stopAnimation(){
         paused = true;
         setButtonsEnabled();
     }
 
+    /**
+     * Saves the image to the given path.
+     * @param path path of the image file
+     */
     private void saveImage(String path){
         try {
             File f =  new File(path);
@@ -191,6 +221,10 @@ public class MainFrame implements Runnable{
         }
     }
 
+    /**
+     * Returns the algorithm selected by the user in the JComboBox.
+     * @return
+     */
     private Algorithm getSelectedAlgorithm(){
         return (Algorithm) algorithms.getSelectedItem();
     }
