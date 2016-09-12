@@ -1,1 +1,1 @@
-Java library for creating Generative Art!
+Java framework for creating Generative Art!
