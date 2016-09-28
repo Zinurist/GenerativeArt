@@ -34,7 +34,11 @@ public abstract class Algorithm {
     private static void initAlgorithms(){
         initImageEffect();
 
-        int R=18;
+        //Adding a new algorithm: When adding a randomizer (/image effect/normal algorithm), increase R (/I/N) by 1,
+        //create a new object of the algorithm and add it at the end of randAlg (/imgAlg/alg).
+        //randAlg and imgAlg are both copied into alg (see for-loops below), changes to these arrays need to be done before that
+
+        int R = 18;
         randAlg = new Randomizer[R];
         randAlg[0] = new RandomPixels();
         randAlg[1] = new RandomPixelFog();
@@ -54,7 +58,7 @@ public abstract class Algorithm {
         randAlg[15] = new RandomPath();
         randAlg[16] = new RandomPositions();
         randAlg[17] = new Voronoi();
-        int I = 13;
+        int I = 14;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
         imgAlg[1] = new ImageBlur();
@@ -69,11 +73,12 @@ public abstract class Algorithm {
         imgAlg[10] = new RandomColor();
         imgAlg[11] = new TransitionMask();
         imgAlg[12] = new ImageTransition();
-        int N=R+I+19;
+        imgAlg[13] = new SineWiggle();
+        int N = R+I+19;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
-        R+=I;
+        R += I;
         alg[R] = new ChaosAlgorithm();
         alg[R+1] = new AntsAlgorithm();
         alg[R+2] = new Squares();

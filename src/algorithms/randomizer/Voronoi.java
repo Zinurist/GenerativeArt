@@ -1,16 +1,17 @@
 package algorithms.randomizer;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Voronoi extends Randomizer{
 
     //TODO make options out of these
     private boolean euclid = true;
     private boolean showPoints = false;
-    private int num = 50;//has to be at least 1!!!
+    private int num = 25;//has to be at least 1!!!
 
     //list of all points, first half is x-coordinate, second half is y-coordinate, so point 2 is at ( points.get(1), points.get(points.size()/2 + 1) )
     private ArrayList<Integer> points;
@@ -123,6 +124,12 @@ public class Voronoi extends Randomizer{
         });
         list.add(cbShowPoints);
         cbShowPoints.setSelected(showPoints);
+
+        JLabel lblNum = new JLabel("num of points: ");
+        JSpinner spNum = new JSpinner(new SpinnerNumberModel(25, 1, 1000, 5));
+        spNum.addChangeListener(l->{ num = (int)spNum.getValue(); });
+        list.add(lblNum);
+        list.add(spNum);
 
         return list;
     }

@@ -21,7 +21,6 @@ public class SineEffect extends ImageEffect {
     public void step(Graphics g) {
         Color c;
 
-        //blur using averaging algorithm
         if(cosine.isSelected()){
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
