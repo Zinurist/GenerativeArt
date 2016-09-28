@@ -8,10 +8,14 @@ import java.awt.*;
 public class SineWiggle extends ImageEffect {
 
     private int a,b; //a*sin(b*x)
+    private int t;//percent
+    private boolean loop;
 
     public SineWiggle(){
         super();
         reset();
+        a = 0;
+        b = 10;
     }
 
     @Override
@@ -26,24 +30,32 @@ public class SineWiggle extends ImageEffect {
         Color c;
         double ad = a/10.0;
         double bd = b/(double)IMG.getHeight();
+        double progress = Math.PI*2*(t/100.0);
         int offset;
         for(int y=0; y<height; y++){
             for(int x=0; x<width; x++){
                 c = new Color(original.getRGB(x, y));
                 g.setColor(c);
 
-                offset = (int)(ad*Math.sin(y*bd)+0.5);
+                offset = (int)(ad*Math.sin(y*bd + progress)+0.5);
 
                 g.drawLine(x+offset, y, x+offset, y);
             }
+        }
+
+        t++;
+        if(t>99){
+            if(loop){
+                stop();
+            }
+            t = 0;
         }
     }
 
     @Override
     public void reset(){
         super.reset();
-        a = 0;
-        b = 10;
+        t = 0;
     }
 
     @Override
@@ -65,14 +77,24 @@ public class SineWiggle extends ImageEffect {
             @Override
             public void stateChanged(ChangeEvent e) {
                 b = sb.getValue();
-                lblB.setText("Factor b: "+b);
+                lblB.setText("Factor b: " + b);
             }
         });
+
+        JCheckBox cbLoop = new JCheckBox("loop perfectly",loop);
+        cbLoop.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                loop = cbLoop.isSelected();
+            }
+        });
+
         list.add(lblA);
         list.add(sa);
         list.add(lblB);
         list.add(sb);
         list.add(new JLabel("a/10 * sin( x * b/height)"));
+        list.add(cbLoop);
         return list;
     }
 
