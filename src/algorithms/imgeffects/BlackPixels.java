@@ -28,4 +28,9 @@ public class BlackPixels extends ImageEffect {
         even = !even;
     }
 
+    @Override
+    public void reset() {
+        even = false;
+    }
+
 }

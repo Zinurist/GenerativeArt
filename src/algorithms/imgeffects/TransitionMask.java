@@ -74,7 +74,6 @@ public class TransitionMask extends ImageEffect {
 
     @Override
     public void reset() {
-        super.reset();
         tick = 0;
         reset = false;
 

@@ -23,4 +23,9 @@ public class ColorSwap extends ImageEffect {
         }
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 }

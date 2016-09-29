@@ -69,7 +69,6 @@ public class ImageTransition extends ImageEffect {
 
     @Override
     public void reset() {
-        super.reset();
         offset = 0;
     }
 

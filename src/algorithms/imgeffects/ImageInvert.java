@@ -22,5 +22,10 @@ public class ImageInvert extends ImageEffect {
         }
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 
 }

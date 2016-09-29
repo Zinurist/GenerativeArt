@@ -108,7 +108,7 @@ public class MainFrame implements Runnable{
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
         //if new algorithm is selected, then update the options frame and reset the algorithm
-        algorithms.addActionListener(l -> {options.setAlgorithm(getSelectedAlgorithm()); getSelectedAlgorithm().reset();});
+        algorithms.addActionListener(l -> {options.setAlgorithm(getSelectedAlgorithm()); getSelectedAlgorithm().reset(); drawPanel.repaint();});
 
         drawPanel = new DrawPanel();
         //drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));

@@ -55,7 +55,6 @@ public class ImageBlur extends ImageEffect {
 
     @Override
     public void reset(){
-        super.reset();
         tmp = original;
     }
 

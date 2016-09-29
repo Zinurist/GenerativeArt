@@ -73,4 +73,9 @@ public class Rectify extends ImageEffect {
 
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 }

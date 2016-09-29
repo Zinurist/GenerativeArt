@@ -57,7 +57,6 @@ public class Pixelate extends ImageEffect {
 
     @Override
     public void reset() {
-        super.reset();
         factor = 1;
         up = true;
     }

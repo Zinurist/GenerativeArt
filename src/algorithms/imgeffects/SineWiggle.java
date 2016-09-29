@@ -54,7 +54,6 @@ public class SineWiggle extends ImageEffect {
 
     @Override
     public void reset(){
-        super.reset();
         t = 0;
     }
 

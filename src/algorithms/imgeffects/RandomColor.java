@@ -51,6 +51,11 @@ public class RandomColor extends ImageEffect {
     }
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public java.util.List<Component> getOptionList(){
         java.util.List<Component> list = super.getOptionList();
         list.add(box);

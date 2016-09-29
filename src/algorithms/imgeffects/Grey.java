@@ -28,4 +28,9 @@ public class Grey extends ImageEffect {
 
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 }

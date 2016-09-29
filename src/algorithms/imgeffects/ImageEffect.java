@@ -100,9 +100,11 @@ public abstract class ImageEffect extends Algorithm {
     }
 
     @Override
-    public void reset() {
+    public void init(){
+        emptyIMG();
         Graphics g = IMG.getGraphics();
         g.drawImage(original, 0, 0, null);
+        reset();
     }
 
     @Override

@@ -22,5 +22,10 @@ public class ExponentialEffect extends ImageEffect {
         }
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 
 }
