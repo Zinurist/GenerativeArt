@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import static algorithms.imgeffects.ImageEffect.initImageEffect;
+//import static algorithms.imgeffects.ImageEffect.initImageEffect;
 
 /**
  * The base structure for algorithms.
@@ -27,12 +27,10 @@ public abstract class Algorithm {
     private static ImageEffect[] imgAlg;
     private static Algorithm[] alg;
 
-    /**
-     * Creates all algorithms. In the future this might get changed, algorithms should be created dynamically.
-     * This method functions as a register of all algorithms. New algorithms need to be registered here, or else they won't be displayed in the GUI.
-     */
-    private static void initAlgorithms(){
-        initImageEffect();
+
+    //Register of all algorithms
+    static {
+        //initImageEffect();
 
         //Adding a new algorithm: When adding a randomizer (/image effect/normal algorithm), increase R (/I/N) by 1,
         //create a new object of the algorithm and add it at the end of randAlg (/imgAlg/alg).
@@ -104,7 +102,6 @@ public abstract class Algorithm {
      * Returns the array of all algorithms.
      */
     public static Algorithm[] getAlgorithmsList(){
-        if(alg==null) initAlgorithms();
         return alg;
     }
 
@@ -112,7 +109,6 @@ public abstract class Algorithm {
      * Returns the array of all randomizers.
      */
     public static Randomizer[] getRandomizersList(){
-        if(randAlg==null) initAlgorithms();
         return randAlg;
     }
 

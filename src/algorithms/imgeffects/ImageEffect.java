@@ -15,37 +15,7 @@ import java.util.LinkedList;
  */
 public abstract class ImageEffect extends Algorithm {
 
-    /**
-     * This functions initializes all option-elements for image effects. It also loads the original image.
-     */
-    public static void initImageEffect(){
-        Graphics g = mask.getGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
 
-        locationOrg = new TextField("test.jpg");
-        btnLoadOrg = new JButton("Load image");
-        btnLoadOrg.addActionListener(e -> loadImage(0));
-        locationMask = new TextField("mask.jpg");
-        btnLoadMask = new JButton("Load mask");
-        btnLoadMask.addActionListener(e -> loadImage(1));
-
-        lbl = new JLabel("");
-        box = new JCheckBox("Ignore img size");
-        box.addActionListener(e -> {
-            if (box.isSelected()) {
-                width = IMG.getWidth();
-                height = IMG.getHeight();
-            } else {
-                width = Math.min(IMG.getWidth(), original.getWidth());
-                height = Math.min(IMG.getHeight(), original.getHeight());
-            }
-        });
-
-        loadImage(0);
-        //currently only loading original image, not mask
-        //loadImage(1);
-    }
 
     /**
      * The original image to work on. Most image effects don't change this image. This image isn't drawn in the GUI, IMG of the Algorithm class is still used for that.
@@ -92,6 +62,36 @@ public abstract class ImageEffect extends Algorithm {
             width = IMG.getWidth();
             height = IMG.getHeight();
         }
+    }
+
+    //This part initializes all option-elements for image effects. It also loads the original image.
+    static {
+        Graphics g = mask.getGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+
+        locationOrg = new TextField("test.jpg");
+        btnLoadOrg = new JButton("Load image");
+        btnLoadOrg.addActionListener(e -> loadImage(0));
+        locationMask = new TextField("mask.jpg");
+        btnLoadMask = new JButton("Load mask");
+        btnLoadMask.addActionListener(e -> loadImage(1));
+
+        lbl = new JLabel("");
+        box = new JCheckBox("Ignore img size");
+        box.addActionListener(e -> {
+            if (box.isSelected()) {
+                width = IMG.getWidth();
+                height = IMG.getHeight();
+            } else {
+                width = Math.min(IMG.getWidth(), original.getWidth());
+                height = Math.min(IMG.getHeight(), original.getHeight());
+            }
+        });
+
+        loadImage(0);
+        //currently only loading original image, not mask
+        //loadImage(1);
     }
 
     @Override
