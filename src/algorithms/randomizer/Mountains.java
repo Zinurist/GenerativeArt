@@ -17,6 +17,7 @@ public class Mountains extends Randomizer{
     private boolean slopes;
     private boolean loop;
     private boolean resetAtLoop;
+    private boolean instant;
 
     private boolean reset;
     private boolean up;
@@ -28,6 +29,7 @@ public class Mountains extends Randomizer{
         slopes = false;
         loop = false;
         resetAtLoop = false;
+        instant = false;
         reset();
     }
 
@@ -35,27 +37,31 @@ public class Mountains extends Randomizer{
     public void step(Graphics g, int width, int height) {
         if(reset) init();
 
-        int xOld = curX;
-        int yOld = curY;
+        int xOld, yOld;
+        double d;
 
-        double d = r.nextDouble();
-        for(int i=0; i<prob.length; i++){
-            if(d < prob[i]){
-                curY += stepY * (up ? (3-i) : (i-3) );
-                curX += stepX;
-                up = (up && curY>=yOld) || (!up && curY>yOld);
-                break;
+        do {
+            xOld = curX;
+            yOld = curY;
+            d = r.nextDouble();
+            for (int i = 0; i < prob.length; i++) {
+                if (d < prob[i]) {
+                    curY += stepY * (up ? (3 - i) : (i - 3));
+                    curX += stepX;
+                    up = (up && curY >= yOld) || (!up && curY > yOld);
+                    break;
+                }
             }
-        }
 
-        g.setColor(Color.BLACK);
+            g.setColor(Color.BLACK);
 
-        if(slopes){
-            g.drawLine(xOld,yOld,curX,curY);
-        }else{
-            g.drawLine(xOld,yOld,curX,yOld);
-            g.drawLine(curX,yOld,curX,curY);
-        }
+            if (slopes) {
+                g.drawLine(xOld, yOld, curX, curY);
+            } else {
+                g.drawLine(xOld, yOld, curX, yOld);
+                g.drawLine(curX, yOld, curX, curY);
+            }
+        }while(instant && curX<width);
 
 
         if(curX >= width){
@@ -93,6 +99,9 @@ public class Mountains extends Randomizer{
         JCheckBox cbReset = new JCheckBox("reset at loop",resetAtLoop);
         cbReset.addChangeListener(l->{resetAtLoop = cbReset.isSelected();});
 
+        JCheckBox cbInstant = new JCheckBox("instant",instant);
+        cbInstant.addChangeListener(l->{instant = cbInstant.isSelected();});
+
         JLabel lblX = new JLabel("step x: "+stepX);
         JSlider slX = new JSlider(1,100,stepX);
         slX.addChangeListener(l->{stepX = slX.getValue(); lblX.setText("step x: "+stepX);});
@@ -108,6 +117,7 @@ public class Mountains extends Randomizer{
         list.add(slX);
         list.add(lblY);
         list.add(slY);
+        list.add(cbInstant);
         return list;
     }
 
