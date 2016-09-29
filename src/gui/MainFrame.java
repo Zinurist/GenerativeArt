@@ -85,8 +85,8 @@ public class MainFrame implements Runnable{
         btnResize = new JButton("Resize");
         btnResize.addActionListener(e -> {
             //TODO get width/height
-            int width = 1920;
-            int height = 1080;
+            int width = 300;
+            int height = 300;
             resetImage(width, height);
         });
 
@@ -107,8 +107,8 @@ public class MainFrame implements Runnable{
         statusLabel = new JLabel("");
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
-        //if new algorithm is selected, then update the options frame
-        algorithms.addActionListener(l -> {options.setAlgorithm(getSelectedAlgorithm());});
+        //if new algorithm is selected, then update the options frame and reset the algorithm
+        algorithms.addActionListener(l -> {options.setAlgorithm(getSelectedAlgorithm()); getSelectedAlgorithm().reset();});
 
         drawPanel = new DrawPanel();
         //drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
