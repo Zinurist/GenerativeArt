@@ -29,16 +29,16 @@ public class ChaosAlgorithm extends Algorithm {
         for(Actor a:w.actors){
             switch(a.type){
                 case 0:
-                    g.setColor(new Color(255,0,0,a.ttl));
+                    g.setColor(new Color(255,0,0,a.ttl+100));
                     break;
                 case 1:
-                    g.setColor(new Color(0,255,0,a.ttl));
+                    g.setColor(new Color(0,255,0,a.ttl+100));
                     break;
                 case 2:
-                    g.setColor(new Color(0,0,255,a.ttl));
+                    g.setColor(new Color(0,0,255,a.ttl+100));
                     break;
                 case 3:
-                    g.setColor(new Color(0,0,0,a.ttl));
+                    g.setColor(new Color(0,0,0,a.ttl+100));
                     break;
             }
             g.fillRect(((int)a.x&0xFF)*XZ, ((int)a.y&0xFF)*YZ, XZ,YZ);
@@ -141,8 +141,10 @@ public class ChaosAlgorithm extends Algorithm {
                 }
             }else{
                 ttl--;
-                x += vx;
-                y += vy;
+                if(ttl%5==0){
+                    x += vx;
+                    y += vy;
+                }
             }
         }
 
