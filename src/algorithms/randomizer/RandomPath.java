@@ -8,6 +8,8 @@ public class RandomPath extends Randomizer {
 
     private int x, y, tries;
     private JCheckBox spaceBox;
+    private Color col;
+
 
     public RandomPath(){
         super(false);
@@ -21,7 +23,7 @@ public class RandomPath extends Randomizer {
             for(int xi=xtmp-1; xi<=xtmp+1; xi++){
 
                 if(yi!=y && xi!=x && inBounds(xi,yi,width,height) ){
-                    if(IMG.getRGB(xi, yi) == Color.BLACK.getRGB())
+                    if(IMG.getRGB(xi, yi) != Color.WHITE.getRGB())
                         return false;
                 }
             }
@@ -32,7 +34,7 @@ public class RandomPath extends Randomizer {
 
     @Override
     public void step(Graphics g, int width, int height) {
-        g.setColor(Color.BLACK);
+        g.setColor(col);
 
         tries = 0;
 
@@ -58,7 +60,7 @@ public class RandomPath extends Randomizer {
                     break;
             }
 
-            if(!inBounds(xtmp,ytmp,width,height) || IMG.getRGB(xtmp,ytmp) == Color.BLACK.getRGB() || (spaceBox.isSelected() && !enoughSpace(xtmp, ytmp, width, height)) ){
+            if(!inBounds(xtmp,ytmp,width,height) || IMG.getRGB(xtmp,ytmp) != Color.WHITE.getRGB() || (spaceBox.isSelected() && !enoughSpace(xtmp, ytmp, width, height)) ){
                 dir++;
                 if(dir > 3) dir = 0;
             }else{
@@ -71,14 +73,13 @@ public class RandomPath extends Randomizer {
             //all directions tested
             if(dirFirst == dir){
                 do {
-                    x = r.nextInt(width);
-                    y = r.nextInt(height);
+                    reset();
                     tries++;
                     if(tries > 15){
                         stop();
                         return;
                     }
-                }while(IMG.getRGB(x,y) == Color.BLACK.getRGB());
+                }while(IMG.getRGB(x,y) != Color.WHITE.getRGB());
                 return;
             }
         }
@@ -94,6 +95,13 @@ public class RandomPath extends Randomizer {
     public void reset() {
         x = r.nextInt(IMG.getWidth());
         y = r.nextInt(IMG.getHeight());
+        if(color){
+            do{
+                col = randomColor();
+            }while(col.getRGB() == Color.WHITE.getRGB());
+        }else{
+            col = Color.BLACK;
+        }
     }
 
     @Override
