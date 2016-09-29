@@ -21,7 +21,6 @@ public class Mountains extends Randomizer{
 
     private boolean reset;
     private boolean up;
-    private int t;
     private int curY, curX;
 
     public Mountains(){
@@ -82,7 +81,6 @@ public class Mountains extends Randomizer{
     public void reset() {
         reset = false;
         up = true;
-        t = 0;
         curY = IMG.getHeight()/2;
         curX = 0;
     }
