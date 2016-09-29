@@ -10,7 +10,7 @@ public class RandomPath extends Randomizer {
     private JCheckBox spaceBox;
 
     public RandomPath(){
-        super();
+        super(false);
         spaceBox = new JCheckBox("spacing");
         spaceBox.setSelected(true);
         reset();

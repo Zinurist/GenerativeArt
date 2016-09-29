@@ -107,6 +107,8 @@ public class MainFrame implements Runnable{
         statusLabel = new JLabel("");
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
+        //if new algorithm is selected, then update the options frame
+        algorithms.addActionListener(l -> {options.setAlgorithm(getSelectedAlgorithm());});
 
         drawPanel = new DrawPanel();
         //drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));

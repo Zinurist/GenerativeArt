@@ -39,13 +39,34 @@ public abstract class Randomizer extends Algorithm {
     public static Random r = new Random();
 
     /**
+     * If set to true, then the options list won't contain the empty option and the value of empty will be ignored.
+     * Useful for certain algorithms like RandomPath.
+     */
+    private final boolean emptiable;
+
+    /**
+     * Default constructor for en emptiable randomizer.
+     */
+    protected Randomizer(){
+        emptiable = true;
+    }
+
+    /**
+     * Constructor that allows to set emptiable
+     * @param emptiable true, if the randomizer should be able to by emptied
+     */
+    protected Randomizer(boolean emptiable){
+        this.emptiable = emptiable;
+    }
+
+    /**
      * The step function now empties the image, if the option for this is selected.
      * @param g the graphics object of the image in which to draw
      */
     @Override
     public void step(Graphics g){
         changed = true;
-        if(empty) {
+        if(emptiable && empty) {
             init();
         }
 
@@ -67,6 +88,7 @@ public abstract class Randomizer extends Algorithm {
      */
     @Override
     public List<Component> getOptionList(){
+        List<Component> list = new LinkedList<Component>();
         JCheckBox colorBox = new JCheckBox("Color mode");
         colorBox.setSelected(color);
         colorBox.addChangeListener(new ChangeListener() {
@@ -75,20 +97,20 @@ public abstract class Randomizer extends Algorithm {
                 color = colorBox.isSelected();
             }
         });
-
-
-        JCheckBox emptyBox = new JCheckBox("Empty");
-        emptyBox.setSelected(empty);
-        emptyBox.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                empty = emptyBox.isSelected();
-            }
-        });
-
-        List<Component> list = new LinkedList<Component>();
         list.add(colorBox);
-        list.add(emptyBox);
+
+        if(emptiable) {
+            JCheckBox emptyBox = new JCheckBox("Empty");
+            emptyBox.setSelected(empty);
+            emptyBox.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    empty = emptyBox.isSelected();
+                }
+            });
+            list.add(emptyBox);
+        }
+
         return list;
     }
 

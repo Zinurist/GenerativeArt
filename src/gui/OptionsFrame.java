@@ -25,7 +25,7 @@ public class OptionsFrame extends JFrame {
 
     /**
      * Needs to be called before opening the options frame. This sets the content of the options frame according to the given algorithm.
-     * @param algo
+     * @param algo the current algorithm
      */
     public void setAlgorithm(Algorithm algo){
         initContentPane(algo.getOptionList());
