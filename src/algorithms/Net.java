@@ -15,6 +15,7 @@ public class Net extends Algorithm{
     private int distance;
     private double restingDistance;
     private double hWind, vWind;
+    private int linkUpdates;
 
     //points[y][x][0/1/2/3/4] = x/y/xOld/yOld
     private double[][][] points;
@@ -27,6 +28,7 @@ public class Net extends Algorithm{
         restingDistance = distance;
         hWind = 1.;
         vWind = 1.;
+        linkUpdates = 5;
 
         points = new double[height][width][4];
         fixed = new boolean[height][width];
@@ -86,10 +88,10 @@ public class Net extends Algorithm{
                 points[y1][x1][1] += diffY * 0.5;
                 points[y2][x2][0] -= diffX * 0.5;
                 points[y2][x2][1] -= diffY * 0.5;
-            } else if (fixed[y1][x1]) {
+            } else if (fixed[y1][x1] && !fixed[y2][x2]) {
                 points[y2][x2][0] -= diffX;
                 points[y2][x2][1] -= diffY;
-            } else if (fixed[y2][x2]) {
+            } else if (fixed[y2][x2] && !fixed[y1][x1]) {
                 points[y1][x1][0] += diffX;
                 points[y1][x1][1] += diffY;
             }//else nothing to do
@@ -100,7 +102,7 @@ public class Net extends Algorithm{
     private void physics(){
         updatePositions();
 
-        for(int times = 0; times < 5; times++) {
+        for(int times = 0; times < linkUpdates; times++) {
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     if (x + 1 < width) applyLinkConstraints(x, y, x + 1, y);
@@ -162,6 +164,7 @@ public class Net extends Algorithm{
         JLabel lblHWind = new JLabel("H Wind: "+hWind);
         JLabel lblVWind = new JLabel("V Wind: "+vWind);
         JLabel lblResDis = new JLabel("Resting dis: "+restingDistance);
+        JLabel lblUpdates = new JLabel("Link updates: " + linkUpdates);
 
         JSlider slHWind = new JSlider(-1000, 1000, (int)(hWind*100 + 0.5));
         slHWind.addChangeListener(l-> {
@@ -178,6 +181,11 @@ public class Net extends Algorithm{
             restingDistance = slResDis.getValue() / 10.0;
             lblResDis.setText("Resting dis: " + restingDistance);
         });
+        JSlider slUpdates = new JSlider(1, 100, linkUpdates);
+        slUpdates.addChangeListener(l-> {
+            linkUpdates = slUpdates.getValue();
+            lblUpdates.setText("Link updates: " + linkUpdates);
+        });
 
         JLabel lblWidth = new JLabel("Width: ");
         JLabel lblHeight = new JLabel("Height: ");
@@ -189,6 +197,8 @@ public class Net extends Algorithm{
         list.add(slVWind);
         list.add(lblResDis);
         list.add(slResDis);
+        list.add(lblUpdates);
+        list.add(slUpdates);
         list.add(btnTL);
         list.add(btnTR);
         list.add(btnBL);
