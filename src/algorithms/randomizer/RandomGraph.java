@@ -11,7 +11,6 @@ public class RandomGraph extends Randomizer {
     private static int MIN_NODES = 1;
     private static int MAX_NODES = 5;//inclusive
     private static double MIN_DIS = 5.;//inclusive
-    private static double MAX_DIS = 500.;//inclusive
     private static double CONE = Math.PI;//180 degrees
 
     private boolean shrink = false;
@@ -28,11 +27,15 @@ public class RandomGraph extends Randomizer {
 
     @Override
     public void step(Graphics g, int width, int height) {
-        if(points.isEmpty()) return;
+        if(points.isEmpty()){
+            stop();
+            return;
+        }
 
 
         int newNodes,x,y;
         double angle, distance, vecAngle;
+        int maxDis = (IMG.getWidth()+IMG.getHeight())/2;
 
         g.setColor(Color.BLACK);
         for(int[] p : points){
@@ -50,7 +53,7 @@ public class RandomGraph extends Randomizer {
                     //(distance+MIN_DIS/2) upper limit it previous distant -> graph shrinks
                     distance = r.nextDouble() * (distance+MIN_DIS/2);
                 }else{
-                    distance = r.nextDouble()*(MAX_DIS-MIN_DIS)+MIN_DIS;
+                    distance = r.nextDouble()*(maxDis-MIN_DIS)+MIN_DIS;
                 }
                 angle = r.nextDouble()*CONE;
                 //transform angle to current vector
