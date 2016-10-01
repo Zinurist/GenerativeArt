@@ -11,9 +11,9 @@ public class RandomGraph extends Randomizer {
     private static int MIN_NODES = 1;
     private static int MAX_NODES = 5;//inclusive
     private static double MIN_DIS = 5.;//inclusive
-    private static double CONE = Math.PI;//180 degrees
+    private static double CONE = Math.PI/1.5;//between 180° and 90°
 
-    private boolean shrink = false;
+    private boolean shrink;
 
     //vectors from old point to new point
     private LinkedList<int[]> points, temp;
@@ -22,6 +22,7 @@ public class RandomGraph extends Randomizer {
         super(false);
         points = new LinkedList();
         temp = new LinkedList();
+        shrink = true;
         reset();
     }
 
@@ -64,14 +65,13 @@ public class RandomGraph extends Randomizer {
                 //example: vector points up (down on the drawing panel because y is flipped) -> 90° -> 0° is at 0°
 
                 //in our case: 0° is right bound for the angle if the angle is in a 180° cone
-                //else if the cone is smaller: not 0°, but cone/2 - 90°
-                //so: angle = angle + (alpha - 90°) + (cone/2 - 90°)
+                //else if the cone is smaller/bigger: not 0°, but 90° - cone/2
+                //so: angle = angle + (alpha - 90°) + (90° - cone/2) = angle + alpha - cone/2
 
                 vecAngle = Math.atan2(p[3],p[2]);
-                if(p[3] < 0) vecAngle = 2*Math.PI - vecAngle;
 
-                //angle += vecAngle - Math.PI/2 + (CONE/2 - Math.PI/2);
-                angle += vecAngle - Math.PI + CONE/2;
+                //angle += vecAngle - Math.PI/2 + (Math.PI/2 - CONE/2);
+                angle += vecAngle - CONE/2;
 
                 x = (int)(p[0] + distance * Math.cos(angle) + 0.5);
                 y = (int)(p[1] + distance * Math.sin(angle) + 0.5);
