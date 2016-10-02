@@ -208,6 +208,14 @@ public class MainFrame implements Runnable{
     }
 
     /**
+     * Returns true if the animation is currently running (and not paused).
+     * @return value of paused negated
+     */
+    public boolean isRunning(){
+        return !paused;
+    }
+
+    /**
      * Saves the image to the given path.
      * @param path path of the image file
      */

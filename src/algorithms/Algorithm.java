@@ -171,6 +171,14 @@ public abstract class Algorithm {
     }
 
     /**
+     * Returns true if the animation is currently running (and not paused).
+     * @return true if animation is running
+     */
+    protected boolean isRunning(){
+        return MainFrame.MF.isRunning();
+    }
+
+    /**
      * Can be used by algorithms to check whether the given points is within the given range.
      * @param x x-coordinate
      * @param y y-coordinate
