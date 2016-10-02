@@ -45,8 +45,8 @@ public class Circles extends Algorithm{
         //->radY*sin(60°) * 2 is the change in y between both middle points
         //radY*sin(60°)*2 = radY*sqrt(3)/2*2 = radY*sqrt(3)
 
-        for(int y = 0; y<IMG.getHeight(); y+=deltaY){
-            for(int x = shifted ? radX : width; x<IMG.getWidth(); x+=width){
+        for(int y = 0; y<IMG.getHeight()+deltaY; y+=deltaY){
+            for(int x = shifted ? 0 : radX; x<IMG.getWidth()+width; x+=width){
                 g.drawOval(x - radX, y - radY, width, height);
             }
             shifted = !shifted;
