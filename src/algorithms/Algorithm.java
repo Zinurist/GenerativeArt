@@ -36,7 +36,7 @@ public abstract class Algorithm {
         //create a new object of the algorithm and add it at the end of randAlg (/imgAlg/alg).
         //randAlg and imgAlg are both copied into alg (see for-loops below), changes to these arrays need to be done before that
 
-        int R = 20;
+        int R = 21;
         randAlg = new Randomizer[R];
         randAlg[0] = new RandomPixels();
         randAlg[1] = new RandomPixelFog();
@@ -58,6 +58,7 @@ public abstract class Algorithm {
         randAlg[17] = new Voronoi();
         randAlg[18] = new Mountains();
         randAlg[19] = new RandomGraph();
+        randAlg[20] = new RandomBigCircles();
         int I = 14;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
