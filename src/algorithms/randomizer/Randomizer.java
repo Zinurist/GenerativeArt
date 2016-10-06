@@ -128,7 +128,7 @@ public abstract class Randomizer extends Algorithm {
      * Creates a random color. If the color-option is set to false, a random grey color is created.
      * @return a random color
      */
-    protected static Color randomColor(){
+    public static Color randomColor(){
         if(color) {
             return new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
         }else{

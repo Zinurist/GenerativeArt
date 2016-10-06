@@ -162,6 +162,14 @@ public class MainFrame implements Runnable{
     }
 
     /**
+     * This can be used by algorithms to get the location of the drawing panel on the screen.
+     * @return the point of the drawPanel location on the screen
+     */
+    public Point getPanelLocation(){
+        return drawPanel.getLocationOnScreen();
+    }
+
+    /**
      * Resizes drawPanel and image. Image will be emptied and the *current* algorithm will be reset.
      * @param width new width
      * @param height new height
