@@ -59,8 +59,8 @@ public class Net extends Algorithm{
         for(int y = 0; y<height; y++){
             for(int x = 0; x<width; x++){
                 if(!fixed[y][x]) {
-                    vx = points[y][x][2] - points[y][x][0];
-                    vy = points[y][x][3] - points[y][x][1];
+                    vx = points[y][x][0] - points[y][x][2];
+                    vy = points[y][x][1] - points[y][x][3];
 
                     vx = points[y][x][0] + vx + hWind;
                     vy = points[y][x][1] + vy + vWind;
