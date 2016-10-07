@@ -10,8 +10,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-//import static algorithms.imgeffects.ImageEffect.initImageEffect;
-
 /**
  * The base structure for algorithms.
  */

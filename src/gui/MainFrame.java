@@ -59,7 +59,7 @@ public class MainFrame implements Runnable{
         btnStep = new JButton("Step");
         btnStep.addActionListener(e -> {
             getSelectedAlgorithm().step();
-            drawPanel.repaint();
+            drawPanel.render();
         });
 
         btnStart = new JButton("Start");
@@ -182,7 +182,7 @@ public class MainFrame implements Runnable{
         }
         getSelectedAlgorithm().init();
 
-        drawPanel.repaint();
+        drawPanel.render();
     }
 
     /**
@@ -262,7 +262,7 @@ public class MainFrame implements Runnable{
             }
 
             getSelectedAlgorithm().step();
-            drawPanel.repaint();
+            drawPanel.render();
 
             if(btnRecord.isSelected()){
                 //TODO convert to mp4 or whatever

@@ -115,6 +115,11 @@ public class DrawPanel extends JPanel {
         changed = true;
     }
 
+    public void render(){
+        Graphics g = getGraphics();
+        paintComponent(g);
+    }
+
     @Override
     public void paintComponent(Graphics g){
         if(changed){
