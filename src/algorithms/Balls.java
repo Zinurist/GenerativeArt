@@ -86,11 +86,6 @@ public class Balls extends Algorithm{
 
 
     @Override
-    protected void start(){
-        super.start();
-    }
-
-    @Override
     public void step(Graphics g) {
 
         Point w;
@@ -173,10 +168,6 @@ public class Balls extends Algorithm{
     @Override
     public java.util.List<Component> getOptionList(){
         java.util.List<Component> list = new java.util.LinkedList<>();
-        //add components here
-        //JCheckBox cbBool = new JCheckBox("bool", bool);
-        //cbBool.addChangeListener(l->{ bool = cbBool.isSelected(); });
-        //list.add(cbBool);
         return list;
     }
 }

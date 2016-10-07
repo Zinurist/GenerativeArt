@@ -76,7 +76,7 @@ public abstract class Algorithm {
         imgAlg[12] = new ImageTransition();
         imgAlg[13] = new SineWiggle();
         imgAlg[14] = new SemiInvert();
-        int N = R+I+24;
+        int N = R+I+25;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
         for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
@@ -104,6 +104,7 @@ public abstract class Algorithm {
         alg[R+20] = new Eyes();
         alg[R+21] = new Stars();
         alg[R+22] = new Balls();
+        alg[R+23] = new Search();
         alg[N-1] = new EmptyAlgorithm();
     }
     /**
