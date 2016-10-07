@@ -32,7 +32,7 @@ public class Circles extends Algorithm{
         boolean shifted = false;
         int width = radX*2;
         int height = radY*2;
-        int deltaY  = (int)(Math.sqrt(3) * radX + 0.5);
+        int deltaY  = (int)(Math.sqrt(3) * radY + 0.5);
         //first approach for circles:
         //sqrt(rad*rad + deltaY*deltaY) = 2*rad
         //rad*rad + deltaY*deltaY = 4*rad*rad
