@@ -35,33 +35,6 @@ public class Balls extends Algorithm{
             if(y < r) y = r;
             else if(y+r > IMG.getHeight()) y = IMG.getHeight() - r;
         }
-
-        boolean inBoundsX(){
-            return inBoundsX(x);
-        }
-
-        boolean inBoundsY(){
-            return inBoundsY(y);
-        }
-
-        boolean inBoundsX(double x){
-            return (x-r)>=0 && (x+r)<=IMG.getWidth();
-        }
-
-        boolean inBoundsY(double y){
-            return (y-r)>=0 && (y+r)<=IMG.getHeight();
-        }
-
-        int inBounds(){
-            return inBounds(x,y);
-        }
-        int inBounds(double x, double y){
-            if((x-r)<0) return 1;
-            else if((x+r)>IMG.getWidth()) return 2;
-            else if((y-r)<0) return 3;
-            else if((y+r)>IMG.getHeight()) return 4;
-            else return 0;
-        }
     }
 
     private int wx, wy, wvy, wvx;

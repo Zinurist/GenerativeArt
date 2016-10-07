@@ -200,8 +200,15 @@ public abstract class Algorithm {
      * Empties the image in the sense that it becomes a blank white image.
      */
     public void emptyIMG(){
+        emptyIMG(new Color(255, 255, 255));
+    }
+
+    /**
+     * Empties the image and fills it with the given color.
+     */
+    public void emptyIMG(Color c){
         Graphics g = IMG.createGraphics();
-        g.setColor(new Color(255, 255, 255));
+        g.setColor(c);
         g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
     }
 
