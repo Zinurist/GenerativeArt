@@ -129,6 +129,15 @@ public abstract class Randomizer extends Algorithm {
      * @return a random color
      */
     public static Color randomColor(){
+        return randomColor(color);
+    }
+
+    /**
+     * Creates a random color. If the color is false, then a random grey color is created.
+     * @param color if false a random grey color is returned
+     * @return a random color
+     */
+    public static Color randomColor(boolean color){
         if(color) {
             return new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
         }else{

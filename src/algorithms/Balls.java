@@ -146,7 +146,7 @@ public class Balls extends Algorithm{
         for(int i = 0; i<num; i++){
             balls[i] = new Ball();
 
-            balls[i].c = Randomizer.randomColor();
+            balls[i].c = Randomizer.randomColor(true);
             radTemp = r.nextInt(150) + 10;
             balls[i].r = radTemp;
             balls[i].x = r.nextInt(IMG.getWidth() - 2*radTemp) + radTemp;
