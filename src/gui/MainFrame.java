@@ -182,7 +182,7 @@ public class MainFrame implements Runnable{
         }
         getSelectedAlgorithm().init();
 
-        drawPanel.render();
+        drawPanel.repaint();
     }
 
     /**
