@@ -25,11 +25,11 @@ public class ImageFilter extends ImageEffect {
 
     protected int[][] filter;
     protected int factor;
+    protected int filterNum;
 
     public ImageFilter(){
         super();
-        setFilter(0);
-        reset();
+        filterNum = 0;
     }
 
     protected static void copyImg(){
@@ -90,6 +90,7 @@ public class ImageFilter extends ImageEffect {
     @Override
     public void step(Graphics g) {
         copyImg();
+        setFilter(filterNum);
 
         int avgr, avgb, avgg;
         Color c;
@@ -133,7 +134,8 @@ public class ImageFilter extends ImageEffect {
 
         String[] filters = new String[]{"gauss","gauss blur","sharp","laplace","laplace 2","sobel x","sobel y","relief","islands","stars","vertical/hor.","custom"};
         JComboBox<String> cbFilter = new JComboBox<>(filters);
-        cbFilter.addActionListener(l -> setFilter(cbFilter.getSelectedIndex()));
+        cbFilter.setSelectedIndex(filterNum);
+        cbFilter.addActionListener(l -> filterNum = cbFilter.getSelectedIndex());
         list.add(new JLabel("Filter:"));
         list.add(cbFilter);
 

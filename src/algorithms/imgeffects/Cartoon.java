@@ -9,7 +9,8 @@ public class Cartoon extends ImageFilter{
     private int limit, rad;
 
     public Cartoon(){
-        setFilter(4);
+        super();
+        filterNum = 4;
         limit = 15;
         rad = 1;
     }
@@ -22,6 +23,7 @@ public class Cartoon extends ImageFilter{
     @Override
     public void step(Graphics g) {
         copyImg();
+        setFilter(filterNum);
 
         int avgr, avgb, avgg;
         Color c;
@@ -68,7 +70,7 @@ public class Cartoon extends ImageFilter{
     @Override
     public java.util.List<Component> getOptionList() {
         java.util.List<Component> list = super.getOptionList();
-        ((JComboBox)list.get(list.size()-1)).setSelectedIndex(4);
+        ((JComboBox)list.get(list.size()-1)).setSelectedIndex(filterNum);
 
         JLabel lblLimit = new JLabel("limit: "+limit);
         JLabel lblRad = new JLabel("radius: "+rad);
