@@ -14,7 +14,11 @@ public class ImageFilter extends ImageEffect {
     private static int[][] SOBEL_X = {{-1,-2,-1},{0,0,0},{1,2,1}};
     private static int[][] SOBEL_Y = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private static int[][] RELIEF = {{-2,-1,0},{-1,1,1},{0,1,2}};
-
+    private static int[][] ISLANDS = {{-1,1,-1,1,-1},{-1,1,-1,1,-1},{-1,1,1,1,-1},{-1,1,-1,1,-1},{-1,1,-1,1,-1}};
+    private static int[][] STARS = {{-1,-1,-1,-1,-1},{-1,1,1,1,-1},{-1,1,1,1,-1},{-1,1,1,1,-1},{-1,-1,-1,-1,-1}};
+    private static int[][] VERTHOR = {{-1,0,-1,0,-1},{0,1,1,1,0},{-1,1,1,1,-1},{0,1,1,1,0},{-1,0,-1,0,-1}};
+    //TODO make filter customizable
+    private static int[][] CUSTOM = {{-1,0,-1,0,-1},{0,1,1,1,0},{-1,1,1,1,-1},{0,1,1,1,0},{-1,0,-1,0,-1}};
 
     private BufferedImage tmp;
     private int[][] filter;
@@ -60,6 +64,18 @@ public class ImageFilter extends ImageEffect {
                 break;
             case 7://relief
                 filter = RELIEF;
+                break;
+            case 8://islands
+                filter = ISLANDS;
+                break;
+            case 9://stars
+                filter = STARS;
+                break;
+            case 10://vertical/horizontal thingy
+                filter = VERTHOR;
+                break;
+            default://custom
+                filter = CUSTOM;
                 break;
         }
     }
@@ -114,7 +130,7 @@ public class ImageFilter extends ImageEffect {
     public java.util.List<Component> getOptionList() {
         java.util.List<Component> list = super.getOptionList();
 
-        String[] filters = new String[]{"gauss","gauss blur","sharp","laplace","laplace 2","sobel x","sobel y","relief"};
+        String[] filters = new String[]{"gauss","gauss blur","sharp","laplace","laplace 2","sobel x","sobel y","relief","islands","stars","vertical/hor.","custom"};
         JComboBox<String> cbFilter = new JComboBox<>(filters);
         cbFilter.addActionListener(l -> setFilter(cbFilter.getSelectedIndex()));
         list.add(cbFilter);
