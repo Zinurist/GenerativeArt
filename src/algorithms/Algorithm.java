@@ -60,7 +60,7 @@ public abstract class Algorithm {
         int I = 15;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
-        imgAlg[1] = new ImageBlur();
+        imgAlg[1] = new ImageFilter();
         imgAlg[2] = new ImageInvert();
         imgAlg[3] = new ColorSwap();
         imgAlg[4] = new SineEffect();
