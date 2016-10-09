@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class MainFrame implements Runnable{
 
-    public static final boolean SOLCOLOR = true;
+    public static final boolean SOLCOLOR = false;
 
 
     /**

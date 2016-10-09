@@ -57,7 +57,7 @@ public abstract class Algorithm {
         randAlg[18] = new Mountains();
         randAlg[19] = new RandomGraph();
         randAlg[20] = new RandomBigCircles();
-        int I = 15;
+        int I = 16;
         imgAlg = new ImageEffect[I];
         imgAlg[0] = new Pixelate();
         imgAlg[1] = new ImageFilter();
@@ -74,6 +74,7 @@ public abstract class Algorithm {
         imgAlg[12] = new ImageTransition();
         imgAlg[13] = new SineWiggle();
         imgAlg[14] = new SemiInvert();
+        imgAlg[15] = new Cartoon();
         int N = R+I+25;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];

@@ -6,23 +6,25 @@ import java.awt.image.BufferedImage;
 
 public class ImageFilter extends ImageEffect {
 
-    private static int[][] GAUSS = {{1,2,1},{2,4,2},{1,2,1}};
-    private static int[][] GAUSS_BLUR = {{1,1,1},{1,1,1},{1,1,1}};
-    private static int[][] SHARP = {{0,-1,0},{-1,5,-1},{0,-1,0}};
-    private static int[][] LAPLACE = {{0,1,0},{1,-4,1},{0,1,0}};
-    private static int[][] EDGES_45 = {{1,1,1},{1,-8,1},{1,1,1}};
-    private static int[][] SOBEL_X = {{-1,-2,-1},{0,0,0},{1,2,1}};
-    private static int[][] SOBEL_Y = {{-1,0,1},{-2,0,2},{-1,0,1}};
-    private static int[][] RELIEF = {{-2,-1,0},{-1,1,1},{0,1,2}};
-    private static int[][] ISLANDS = {{-1,1,-1,1,-1},{-1,1,-1,1,-1},{-1,1,1,1,-1},{-1,1,-1,1,-1},{-1,1,-1,1,-1}};
-    private static int[][] STARS = {{-1,-1,-1,-1,-1},{-1,1,1,1,-1},{-1,1,1,1,-1},{-1,1,1,1,-1},{-1,-1,-1,-1,-1}};
-    private static int[][] VERTHOR = {{-1,0,-1,0,-1},{0,1,1,1,0},{-1,1,1,1,-1},{0,1,1,1,0},{-1,0,-1,0,-1}};
+    protected static int[][] GAUSS = {{1,2,1},{2,4,2},{1,2,1}};
+    protected static int[][] GAUSS_BLUR = {{1,1,1},{1,1,1},{1,1,1}};
+    protected static int[][] SHARP = {{0,-1,0},{-1,5,-1},{0,-1,0}};
+    protected static int[][] LAPLACE = {{0,1,0},{1,-4,1},{0,1,0}};
+    protected static int[][] EDGES_45 = {{1,1,1},{1,-8,1},{1,1,1}};
+    protected static int[][] SOBEL_X = {{-1,-2,-1},{0,0,0},{1,2,1}};
+    protected static int[][] SOBEL_Y = {{-1,0,1},{-2,0,2},{-1,0,1}};
+    protected static int[][] RELIEF = {{-2,-1,0},{-1,1,1},{0,1,2}};
+    protected static int[][] ISLANDS = {{-1,1,-1,1,-1},{-1,1,-1,1,-1},{-1,1,1,1,-1},{-1,1,-1,1,-1},{-1,1,-1,1,-1}};
+    protected static int[][] STARS = {{-1,-1,-1,-1,-1},{-1,1,1,1,-1},{-1,1,1,1,-1},{-1,1,1,1,-1},{-1,-1,-1,-1,-1}};
+    protected static int[][] VERTHOR = {{-1,0,-1,0,-1},{0,1,1,1,0},{-1,1,1,1,-1},{0,1,1,1,0},{-1,0,-1,0,-1}};
     //TODO make filter customizable
-    private static int[][] CUSTOM = {{-1,0,-1,0,-1},{0,1,1,1,0},{-1,1,1,1,-1},{0,1,1,1,0},{-1,0,-1,0,-1}};
+    protected static int[][] CUSTOM = {{-1,-1,-1,-1,-1},{-1,2,2,2,-1},{-1,2,-1,2,-1},{-1,2,2,2,-1},{-1,-1,-1,-1,-1}};
 
-    private BufferedImage tmp;
-    private int[][] filter;
-    private int factor;
+    protected static BufferedImage TMP;
+
+
+    protected int[][] filter;
+    protected int factor;
 
     public ImageFilter(){
         super();
@@ -30,13 +32,13 @@ public class ImageFilter extends ImageEffect {
         reset();
     }
 
-    private void copyImg(){
-        Graphics g = tmp.getGraphics();
+    protected static void copyImg(){
+        Graphics g = TMP.getGraphics();
         g.drawImage(IMG,0,0,null);
         g.dispose();
     }
 
-    private void setFilter(int id){
+    protected void setFilter(int id){
         factor = 1;
         switch(id){
             case 0://gauss filter
@@ -87,6 +89,8 @@ public class ImageFilter extends ImageEffect {
 
     @Override
     public void step(Graphics g) {
+        copyImg();
+
         int avgr, avgb, avgg;
         Color c;
 
@@ -95,7 +99,7 @@ public class ImageFilter extends ImageEffect {
                 avgr = 0; avgg = 0; avgb = 0;
                 for(int i = 0; i < filter.length; i++){
                     for (int j = 0; j < filter.length; j++) {
-                        c = new Color(tmp.getRGB(x + j, y + i));
+                        c = new Color(TMP.getRGB(x + j, y + i));
                         avgr += c.getRed() * filter[i][j];
                         avgg += c.getGreen() * filter[i][j];
                         avgb += c.getBlue() * filter[i][j];
@@ -116,14 +120,11 @@ public class ImageFilter extends ImageEffect {
                 g.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
             }
         }
-
-        copyImg();
     }
 
     @Override
     public void reset(){
-        tmp = new BufferedImage(IMG.getWidth(), IMG.getHeight(), IMG.getType());
-        copyImg();
+        TMP = new BufferedImage(IMG.getWidth(), IMG.getHeight(), IMG.getType());
     }
 
     @Override
@@ -133,6 +134,7 @@ public class ImageFilter extends ImageEffect {
         String[] filters = new String[]{"gauss","gauss blur","sharp","laplace","laplace 2","sobel x","sobel y","relief","islands","stars","vertical/hor.","custom"};
         JComboBox<String> cbFilter = new JComboBox<>(filters);
         cbFilter.addActionListener(l -> setFilter(cbFilter.getSelectedIndex()));
+        list.add(new JLabel("Filter:"));
         list.add(cbFilter);
 
         return list;
