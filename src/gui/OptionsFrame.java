@@ -38,10 +38,11 @@ public class OptionsFrame extends JFrame {
      */
     private void initContentPane(List<Component> optionList){
         contentPane = new JPanel(new GridLayout(0,2,5,5));
-        contentPane.setBackground(new Color(16643811));
+        if(MainFrame.SOLCOLOR) contentPane.setBackground(new Color(16643811));
 
         rows = 0;
         for(Component c : optionList){
+            if(MainFrame.SOLCOLOR) c.setBackground(new Color(16643811));
             contentPane.add(c);
             rows++;
         }

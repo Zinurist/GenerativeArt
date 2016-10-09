@@ -16,6 +16,9 @@ import java.io.IOException;
  */
 public class MainFrame implements Runnable{
 
+    public static final boolean SOLCOLOR = true;
+
+
     /**
      * This is to give access to the main frame to other classes.
      */
@@ -44,9 +47,10 @@ public class MainFrame implements Runnable{
 
     private JButton btnStart, btnStop, btnStep, btnOptions, btnSave, btnResize, btnReset;
     private JToggleButton btnRecord;
+    private JCheckBox cbFast;
     private JComboBox<Algorithm> algorithms;
     private JSlider speedSlider;
-    private JLabel speedLabel, statusLabel;
+    private JLabel speedLabel;
     private JPanel contentPane, controlPanel;
     private DrawPanel drawPanel;
 
@@ -96,6 +100,9 @@ public class MainFrame implements Runnable{
             drawPanel.reset();
         } );
 
+        cbFast = new JCheckBox("fast step");
+        if(SOLCOLOR) cbFast.setBackground(new Color(16643811));
+
         speedLabel = new JLabel("Speed: "+waitTime+" ms");
 
         speedSlider = new JSlider(0, 1000, waitTime);
@@ -103,8 +110,7 @@ public class MainFrame implements Runnable{
             waitTime = speedSlider.getValue();
             speedLabel.setText("Speed: " + waitTime + " ms");
         });
-
-        statusLabel = new JLabel("");
+        if(SOLCOLOR) speedSlider.setBackground(new Color(16643811));
 
         algorithms = new JComboBox<>(Algorithm.getAlgorithmsList());
         //if new algorithm is selected, then update the options frame and reset the algorithm
@@ -125,7 +131,7 @@ public class MainFrame implements Runnable{
         controlPanel.add(btnSave);
         controlPanel.add(btnRecord);
         controlPanel.add(btnResize);
-        controlPanel.add(statusLabel);
+        controlPanel.add(cbFast);
         controlPanel.add(speedLabel);
         controlPanel.add(speedSlider);
         controlPanel.setPreferredSize(new Dimension(500, 50));
@@ -136,8 +142,8 @@ public class MainFrame implements Runnable{
         contentPane.add(controlPanel, BorderLayout.NORTH);
 
 
-        controlPanel.setBackground(new Color(16643811));
-        contentPane.setBackground(new Color(16643811));
+        if(SOLCOLOR) controlPanel.setBackground(new Color(16643811));
+        if(SOLCOLOR) contentPane.setBackground(new Color(16643811));
 
         setButtonsEnabled();
 
@@ -235,7 +241,7 @@ public class MainFrame implements Runnable{
             }
             ImageIO.write(Algorithm.IMG, "png", f);
         } catch (Exception e1) {
-            statusLabel.setText("Error: "+e1.getMessage());
+            JOptionPane.showConfirmDialog(frame, e1.getMessage(), "Error", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -262,11 +268,15 @@ public class MainFrame implements Runnable{
             }
 
             getSelectedAlgorithm().step();
-            drawPanel.render();
+            if(cbFast.isSelected()) {
+                drawPanel.repaint();
+            }else{
+                drawPanel.render();
+            }
 
             if(btnRecord.isSelected()){
                 //TODO convert to mp4 or whatever
-                saveImage("recordings/img"+String.format("%08d", recordCounter)+".png");
+                saveImage("recordings/img" + String.format("%08d", recordCounter) + ".png");
                 recordCounter++;
             }
 
