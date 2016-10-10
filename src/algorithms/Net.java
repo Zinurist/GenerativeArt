@@ -16,6 +16,7 @@ public class Net extends Algorithm{
     private double restingDistance;
     private double hWind, vWind;
     private int linkUpdates;
+    private boolean drawPoints, drawLinks;
 
     //points[y][x][0/1/2/3/4] = x/y/xOld/yOld
     private double[][][] points;
@@ -29,6 +30,8 @@ public class Net extends Algorithm{
         hWind = 1.;
         vWind = 1.;
         linkUpdates = 5;
+        drawPoints = true;
+        drawLinks = true;
 
         points = new double[height][width][4];
         fixed = new boolean[height][width];
@@ -119,9 +122,23 @@ public class Net extends Algorithm{
         //draw net
         emptyIMG();
         g.setColor(Color.BLACK);
-        for(int y = 0; y<height; y++){
-            for(int x = 0; x<width; x++){
-                g.fillRect((int) (points[y][x][0] + .5 - 2.), (int) (points[y][x][1] + .5 - 2.), 4, 4);
+        if(drawPoints) {
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    g.fillRect((int) (points[y][x][0] + .5 - 2.), (int) (points[y][x][1] + .5 - 2.), 4, 4);
+                }
+            }
+        }
+
+        if(drawLinks){
+            int px, py;
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    px = (int)(points[y][x][0] + 0.5);
+                    py = (int)(points[y][x][1] + 0.5);
+                    if (x + 1 < width) g.drawLine(px, py, (int)(points[y][x+1][0] + 0.5), (int)(points[y][x+1][1] + 0.5));
+                    if (y + 1 < height) g.drawLine(px, py, (int)(points[y+1][x][0] + 0.5), (int)(points[y+1][x][1] + 0.5));
+                }
             }
         }
     }
@@ -191,6 +208,12 @@ public class Net extends Algorithm{
         JLabel lblHeight = new JLabel("Height: ");
         JLabel lblDis = new JLabel("Distance: ");
 
+
+        JCheckBox cbPoints = new JCheckBox("draw points", drawPoints);
+        cbPoints.addActionListener(l->drawPoints = cbPoints.isSelected());
+        JCheckBox cbLinks = new JCheckBox("draw links", drawLinks);
+        cbLinks.addActionListener(l->drawLinks = cbLinks.isSelected());
+
         list.add(lblHWind);
         list.add(slHWind);
         list.add(lblVWind);
@@ -211,6 +234,8 @@ public class Net extends Algorithm{
         list.add(spHeight);
         list.add(lblDis);
         list.add(spDis);
+        list.add(cbPoints);
+        list.add(cbLinks);
         return list;
     }
 }
