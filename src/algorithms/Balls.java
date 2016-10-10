@@ -29,11 +29,21 @@ public class Balls extends Algorithm{
         }
 
         void readjust(){
-            if(x < r) x = r;
-            else if(x+r > IMG.getWidth()) x = IMG.getWidth() - r;
+            if(x < r){
+                xOld = x;
+                x = r;
+            }else if(x+r > IMG.getWidth()){
+                xOld = x;
+                x = IMG.getWidth() - r;
+            }
 
-            if(y < r) y = r;
-            else if(y+r > IMG.getHeight()) y = IMG.getHeight() - r;
+            if(y < r){
+                yOld = y;
+                y = r;
+            }else if(y+r > IMG.getHeight()){
+                yOld = y;
+                y = IMG.getHeight() - r;
+            }
         }
     }
 
@@ -70,8 +80,8 @@ public class Balls extends Algorithm{
                     balls[b2].x =  1 * dis * deltaX + balls[b2].x;
                     balls[b2].y =  1 * dis * deltaY + balls[b2].y;
 
-                    balls[b1].readjust();
-                    balls[b2].readjust();
+                    //balls[b1].readjust();
+                    //balls[b2].readjust();
                 }
             }
         }
@@ -124,10 +134,12 @@ public class Balls extends Algorithm{
             b.y = vy;
 
 
-            b.readjust();
+            //b.readjust();
         }
 
         for(int i=0; i<10 && adjustBalls(); i++){}
+        for(int i=0; i<num; i++){balls[i].readjust();}
+
 
         emptyIMG();
         for (int i = 0; i < num; i++) {
