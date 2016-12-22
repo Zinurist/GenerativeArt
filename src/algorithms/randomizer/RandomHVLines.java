@@ -6,21 +6,18 @@ import image.Color;
 
 public class RandomHVLines extends Randomizer {
 
-
-    private JCheckBox verticalBox,horizontalBox;
+    private boolean vertical, horizontal;
 
 
     public RandomHVLines(boolean vertical, boolean horizontal){
         super();
-        verticalBox = new JCheckBox("vertical lines");
-        verticalBox.setSelected(vertical);
-        horizontalBox = new JCheckBox("horizontal lines");
-        horizontalBox.setSelected(horizontal);
+        this.vertical = vertical;
+        this.horizontal = horizontal;
     }
 
     @Override
     public void step(int width, int height) {
-        if(horizontalBox.isSelected()) {
+        if(horizontal) {
             for (int row = 0; row < height; row++) {
                 if (color) {
                     IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
@@ -31,7 +28,7 @@ public class RandomHVLines extends Randomizer {
             }
         }
 
-        if(verticalBox.isSelected()) {
+        if(vertical) {
             for (int column = 0; column < width; column++) {
                 if (color) {
                     IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
@@ -52,6 +49,14 @@ public class RandomHVLines extends Randomizer {
     @Override
     public java.util.List<Component> getOptionList(){
         java.util.List<Component> list = super.getOptionList();
+
+        JCheckBox verticalBox = new JCheckBox("vertical lines");
+        verticalBox.setSelected(vertical);
+        verticalBox.addItemListener(l->vertical = verticalBox.isSelected());
+        JCheckBox horizontalBox = new JCheckBox("horizontal lines");
+        horizontalBox.setSelected(horizontal);
+        horizontalBox.addItemListener(l->horizontal = horizontalBox.isSelected());
+
         list.add(verticalBox);
         list.add(horizontalBox);
         return list;

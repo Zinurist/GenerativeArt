@@ -6,13 +6,13 @@ import image.Color;
 
 public class RandomCircles extends Randomizer{
 
-    JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 1000, 10));
+    private int num = 10;
 
     @Override
     public void step(int width, int height) {
-        int numTmp = (Integer) num.getValue();
+        int numTemp = num;
         int num1, num2, num3;
-        for(int i=0; i<numTmp; i++){
+        for(int i=0; i<numTemp; i++){
             num1=r.nextInt(50)+50;
             num2=r.nextInt(width)-(num1/2);
             num3=r.nextInt(height)-(num1/2);
@@ -28,7 +28,9 @@ public class RandomCircles extends Randomizer{
     @Override
     public java.util.List<Component> getOptionList(){
         java.util.List<Component> list = super.getOptionList();
-        list.add(num);
+        JSpinner numSpinner = new JSpinner(new SpinnerNumberModel(num, 0, 1000, 10));
+        numSpinner.addChangeListener(l->this.num = (int)numSpinner.getValue());
+        list.add(numSpinner);
         return list;
     }
 

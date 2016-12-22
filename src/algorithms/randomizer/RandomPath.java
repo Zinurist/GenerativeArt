@@ -8,14 +8,13 @@ import image.Color;
 public class RandomPath extends Randomizer {
 
     private int x, y, tries;
-    private JCheckBox spaceBox;
+    private boolean space;
     private Color col;
 
 
     public RandomPath(){
         super(false);
-        spaceBox = new JCheckBox("spacing");
-        spaceBox.setSelected(true);
+        space = true;
         reset();
     }
 
@@ -61,7 +60,7 @@ public class RandomPath extends Randomizer {
                     break;
             }
 
-            if(!inBounds(xtmp,ytmp,width,height) || IMG.getRGB(xtmp,ytmp) != Color.WHITE.getRGB() || (spaceBox.isSelected() && !enoughSpace(xtmp, ytmp, width, height)) ){
+            if(!inBounds(xtmp,ytmp,width,height) || IMG.getRGB(xtmp,ytmp) != Color.WHITE.getRGB() || (space && !enoughSpace(xtmp, ytmp, width, height)) ){
                 dir++;
                 if(dir > 3) dir = 0;
             }else{
@@ -108,6 +107,9 @@ public class RandomPath extends Randomizer {
     @Override
     public java.util.List<Component> getOptionList(){
         List<Component> list = super.getOptionList();
+        JCheckBox spaceBox = new JCheckBox("spacing");
+        spaceBox.setSelected(space);
+        spaceBox.addItemListener(l->this.space = spaceBox.isSelected());
         list.add(spaceBox);
         return list;
     }

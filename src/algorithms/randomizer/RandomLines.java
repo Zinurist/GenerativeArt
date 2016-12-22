@@ -8,11 +8,11 @@ import image.Color;
 
 public class RandomLines extends Randomizer{
 
-    JSpinner lines = new JSpinner(new SpinnerNumberModel(100, 0, 1000, 10));
+    private int lines = 100;
 
     @Override
     public void step(int width, int height) {
-        for(int i=0; i<(Integer)lines.getValue(); i++){
+        for(int i=0; i<lines; i++){
             if(color){
                 IMG.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
             }
@@ -23,7 +23,9 @@ public class RandomLines extends Randomizer{
     @Override
     public List<Component> getOptionList(){
         List<Component> list = super.getOptionList();
-        list.add(lines);
+        JSpinner linesSpinner = new JSpinner(new SpinnerNumberModel(lines, 0, 1000, 10));
+        linesSpinner.addChangeListener(l->lines = (int)linesSpinner.getValue());
+        list.add(linesSpinner);
         return list;
     }
 

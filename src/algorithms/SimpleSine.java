@@ -13,24 +13,10 @@ import image.Color;
 public class SimpleSine extends Algorithm{
 
     private boolean plotted;
-    private JSlider a, b;
+    private int a,b;
 
     public SimpleSine(){
         plotted = false;
-        a = new JSlider(0,IMG.getHeight()*2, IMG.getHeight()/8);
-        b = new JSlider(0,200,5);
-        a.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                plotted = false;
-            }
-        });
-        b.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                plotted = false;
-            }
-        });
     }
 
     @Override
@@ -45,7 +31,7 @@ public class SimpleSine extends Algorithm{
             Plotter.plot(IMG, new Function<Double, Double>() {
                 @Override
                 public Double apply(Double x) {
-                    return a.getValue() * Math.sin((b.getValue()/100.0) * x);
+                    return (a/10.0) * Math.sin((b/1000.0) * x);
                 }
             }, IMG.getWidth() / 2, IMG.getHeight() / 2);
             plotted = true;
@@ -60,9 +46,25 @@ public class SimpleSine extends Algorithm{
     @Override
     public java.util.List<Component> getOptionList(){
         java.util.List<Component> list = new LinkedList<Component>();
-        list.add(a);
-        list.add(b);
-        list.add(new JLabel("a*sin(x*b/100)"));
+
+        JLabel funcLbl = new JLabel((a/10.0)+"*sin(x*"+(b/1000.0)+")");
+
+        JSlider aSlider = new JSlider(0,IMG.getHeight()*4, IMG.getHeight()/8);
+        JSlider bSlider = new JSlider(0,2000,10);
+        aSlider.addChangeListener(l->{
+            this.a = aSlider.getValue();
+            plotted = false;
+            funcLbl.setText((a/10.0)+"*sin(x*"+(b/1000.0)+")");
+        });
+        bSlider.addChangeListener(l -> {
+            this.b = bSlider.getValue();
+            plotted = false;
+            funcLbl.setText((a/10.0)+"*sin(x*"+(b/1000.0)+")");
+        });
+
+        list.add(aSlider);
+        list.add(bSlider);
+        list.add(funcLbl);
         return list;
     }
 }

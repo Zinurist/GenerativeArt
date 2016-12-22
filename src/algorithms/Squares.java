@@ -8,12 +8,10 @@ import image.Color;
 
 public class Squares extends Algorithm {
 
-
-    JCheckBox circles;
+    private boolean circles;
 
     public Squares(){
-        circles = new JCheckBox("circles");
-        circles.setSelected(false);
+        circles = false;
     }
 
     @Override
@@ -24,7 +22,10 @@ public class Squares extends Algorithm {
     @Override
     public java.util.List<Component> getOptionList(){
         List<Component> list = new LinkedList<>();
-        list.add(circles);
+        JCheckBox circlesBox = new JCheckBox("circles");
+        circlesBox.setSelected(circles);
+        circlesBox.addItemListener(l->this.circles = circlesBox.isSelected());
+        list.add(circlesBox);
         return list;
     }
 
@@ -36,7 +37,7 @@ public class Squares extends Algorithm {
         int yStart = IMG.getHeight()/2;
         IMG.setColor(Color.BLACK);
         while(drawn<IMG.getWidth()){
-            if(circles.isSelected()) {
+            if(circles) {
                 for (int i = 0; i < width && drawn < IMG.getWidth(); i++) {
                     IMG.drawOval(xStart - drawn, yStart - drawn, drawn * 2, drawn * 2);
                     drawn++;
