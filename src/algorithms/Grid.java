@@ -17,8 +17,8 @@ public class Grid extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
-        s.step(g);
+    public void step() {
+        s.step();
     }
 
 

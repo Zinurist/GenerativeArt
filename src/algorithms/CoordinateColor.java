@@ -1,6 +1,6 @@
 package algorithms;
 
-import java.awt.*;
+import image.Color;
 
 public class CoordinateColor extends Algorithm{
 
@@ -17,7 +17,7 @@ public class CoordinateColor extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         Color c;
         float height = IMG.getHeight();
         float width = IMG.getWidth();
@@ -30,8 +30,8 @@ public class CoordinateColor extends Algorithm{
                     default: c = new Color(0,0,0);
                 }
 
-                g.setColor(c);
-                g.drawLine(x,y,x,y);
+                IMG.setColor(c);
+                IMG.drawLine(x,y,x,y);
             }
         }
 

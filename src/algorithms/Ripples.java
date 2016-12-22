@@ -1,8 +1,5 @@
 package algorithms;
 
-
-import algorithms.Algorithm;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -11,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import image.Color;
 
 public class Ripples extends Algorithm {
 
@@ -34,9 +32,9 @@ public class Ripples extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
-        g.setColor(c1);
-        g.fillRect(0,0,IMG.getWidth(),IMG.getHeight());
+    public void step() {
+        IMG.setColor(c1);
+        IMG.fillRect(0,0,IMG.getWidth(),IMG.getHeight());
 
         int[] c;
         if(circles.size() < MAX_CIRCLES){
@@ -64,11 +62,11 @@ public class Ripples extends Algorithm {
                 double diff = thresholdEnd-thresholdStart;
                 vec = (int) (vec*(progress/diff));
                 vec = original+vec;
-                g.setColor(new Color(vec,vec,vec));
+                IMG.setColor(new Color(vec,vec,vec));
             }else{
-                g.setColor(c2);
+                IMG.setColor(c2);
             }
-            g.drawOval(c[0]-c[2],c[1]-c[2],c[2]*2,c[2]*2);
+            IMG.drawOval(c[0]-c[2],c[1]-c[2],c[2]*2,c[2]*2);
         }
     }
 

@@ -2,6 +2,7 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class Mountains extends Randomizer{
 
@@ -33,7 +34,7 @@ public class Mountains extends Randomizer{
     }
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         if(reset) init();
 
         int xOld, yOld;
@@ -52,13 +53,13 @@ public class Mountains extends Randomizer{
                 }
             }
 
-            g.setColor(Color.BLACK);
+            IMG.setColor(Color.BLACK);
 
             if (slopes) {
-                g.drawLine(xOld, yOld, curX, curY);
+                IMG.drawLine(xOld, yOld, curX, curY);
             } else {
-                g.drawLine(xOld, yOld, curX, yOld);
-                g.drawLine(curX, yOld, curX, curY);
+                IMG.drawLine(xOld, yOld, curX, yOld);
+                IMG.drawLine(curX, yOld, curX, curY);
             }
         }while(instant && curX<width);
 

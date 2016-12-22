@@ -1,6 +1,7 @@
 package algorithms.randomizer;
 
 import java.awt.*;
+import image.Color;
 
 public class RandomPositions extends Randomizer{
 
@@ -9,14 +10,14 @@ public class RandomPositions extends Randomizer{
     private int tick;
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         if(color){
-            g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+            IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
         }
 
         int x = r.nextInt(width);
         int y = r.nextInt(height);
-        g.drawLine(x,y,x,y);
+        IMG.drawLine(x,y,x,y);
 
         tick++;
         if(tick > width*height/2){

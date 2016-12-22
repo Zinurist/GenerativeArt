@@ -2,13 +2,12 @@ package algorithms.imgeffects;
 
 import algorithms.Algorithm;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import image.Image;
+import image.Color;
 
 /**
  * This class provides a framework for algorithms which operate on images given by the user. These algorithms mainly consist of image processing algorithms.
@@ -21,12 +20,12 @@ public abstract class ImageEffect extends Algorithm {
      * The original image to work on. Most image effects don't change this image. This image isn't drawn in the GUI, IMG of the Algorithm class is still used for that.
      * Per default the image "test.jpg" is loaded. (might be changed)
      */
-    protected static BufferedImage original = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
+    protected static Image original = new Image(IMG.getWidth(),IMG.getHeight());
     /**
      * A mask that can be used by image effects. This mask might not be loaded from a file.
      * At the start, this image is empty. It needs to be loaded by the user first.
      */
-    protected static BufferedImage mask = new BufferedImage(IMG.getWidth(),IMG.getHeight(),BufferedImage.TYPE_INT_ARGB);
+    protected static Image mask = new Image(IMG.getWidth(),IMG.getHeight());
     /**
      * Minimum width/height of original and IMG. Can be used to safely access pixels of both the IMG and original without going out of bounds.
      */
@@ -45,12 +44,12 @@ public abstract class ImageEffect extends Algorithm {
     protected static void loadImage(int type){
         try {
             if(type == 0){
-                original = ImageIO.read(new File(locationOrg.getText()));
+                original = new Image(locationOrg.getText());
                 lbl.setText("Loaded image!");
                 width = Math.min(IMG.getWidth(), original.getWidth());
                 height = Math.min(IMG.getHeight(), original.getHeight());
             }else{
-                mask = ImageIO.read(new File(locationMask.getText()));
+                mask = new Image(locationMask.getText());
                 if(mask.getWidth() != width || mask.getHeight() != height){
                     lbl.setText("Warning: Mask size wrong!");
                 }else{
@@ -66,9 +65,8 @@ public abstract class ImageEffect extends Algorithm {
 
     //This part initializes all option-elements for image effects. It also loads the original image.
     static {
-        Graphics g = mask.getGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+        IMG.setColor(Color.WHITE);
+        IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
 
         locationOrg = new TextField("test.jpg");
         btnLoadOrg = new JButton("Load image");
@@ -102,8 +100,7 @@ public abstract class ImageEffect extends Algorithm {
     @Override
     public void init(){
         emptyIMG();
-        Graphics g = IMG.getGraphics();
-        g.drawImage(original, 0, 0, null);
+        IMG.drawImage(original, 0, 0);
         reset();
     }
 

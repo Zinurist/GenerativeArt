@@ -2,6 +2,7 @@ package algorithms;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class Net extends Algorithm{
 
@@ -116,16 +117,16 @@ public class Net extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         physics();
 
         //draw net
         emptyIMG();
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         if(drawPoints) {
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    g.fillRect((int) (points[y][x][0] + .5 - 2.), (int) (points[y][x][1] + .5 - 2.), 4, 4);
+                    IMG.fillRect((int) (points[y][x][0] + .5 - 2.), (int) (points[y][x][1] + .5 - 2.), 4, 4);
                 }
             }
         }
@@ -136,8 +137,8 @@ public class Net extends Algorithm{
                 for (int x = 0; x < width; x++) {
                     px = (int)(points[y][x][0] + 0.5);
                     py = (int)(points[y][x][1] + 0.5);
-                    if (x + 1 < width) g.drawLine(px, py, (int)(points[y][x+1][0] + 0.5), (int)(points[y][x+1][1] + 0.5));
-                    if (y + 1 < height) g.drawLine(px, py, (int)(points[y+1][x][0] + 0.5), (int)(points[y+1][x][1] + 0.5));
+                    if (x + 1 < width) IMG.drawLine(px, py, (int)(points[y][x+1][0] + 0.5), (int)(points[y][x+1][1] + 0.5));
+                    if (y + 1 < height) IMG.drawLine(px, py, (int)(points[y+1][x][0] + 0.5), (int)(points[y+1][x][1] + 0.5));
                 }
             }
         }

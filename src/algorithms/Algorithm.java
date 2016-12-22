@@ -3,11 +3,10 @@ package algorithms;
 import algorithms.imgeffects.*;
 import algorithms.randomizer.*;
 import gui.MainFrame;
+import java.awt.Component;
+import image.*;
 
 import java.util.List;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 /**
@@ -18,7 +17,7 @@ public abstract class Algorithm {
     /**
      * The image in which algorithms should draw.
      */
-    public static BufferedImage IMG = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
+    public static Image IMG = new Image(1000, 1000);
 
     //these array are used to make the creation of the algorithms easier
     private static Randomizer[] randAlg;
@@ -129,9 +128,8 @@ public abstract class Algorithm {
 
     /**
      * Called in every animation frame.
-     * @param g the graphics object of the image in which to draw
      */
-    public abstract void step(Graphics g);
+    public abstract void step();
 
     /**
      * Called when the users presses reset (amongst others, see init). This should reset the current progress in the algorithm/animation.
@@ -158,9 +156,10 @@ public abstract class Algorithm {
     /**
      * Called by the main loop to initiate steps.
      */
-    public void step(){
-        Graphics g = IMG.getGraphics();
-        step(g);
+    public void animate(){
+        IMG.setColor(Color.BLACK);
+        step();
+        IMG.untranslate();
     }
 
     /**
@@ -208,9 +207,8 @@ public abstract class Algorithm {
      * Empties the image and fills it with the given color.
      */
     public void emptyIMG(Color c){
-        Graphics g = IMG.createGraphics();
-        g.setColor(c);
-        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+        IMG.setColor(c);
+        IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
     }
 
 }

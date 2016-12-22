@@ -3,6 +3,7 @@ package algorithms;
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
+import image.Color;
 
 public class Polar extends Algorithm{
 
@@ -22,23 +23,23 @@ public class Polar extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         emptyIMG();
 
         int r_step = r_step_slider.getValue();
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
 
         int x0 = IMG.getWidth()/2;
         int y0 = IMG.getHeight()/2;
 
-        g.drawLine(0, y0, IMG.getWidth(), y0);
-        g.drawLine(x0, 0, x0, IMG.getHeight());
+        IMG.drawLine(0, y0, IMG.getWidth(), y0);
+        IMG.drawLine(x0, 0, x0, IMG.getHeight());
 
         for(int r=r_step; r<max_r; r+=r_step){
-            g.setColor(Color.BLACK);
-            g.drawOval(x0 - r, y0 - r, 2*r, 2*r);
-            g.setColor(Color.BLUE);
-            g.fillOval(x0+(int)Math.round(r*Math.cos(t * r /2000.0)) - POINT_SIZE/2,y0+(int)Math.round(r*Math.sin(t * r /2000.0)) - POINT_SIZE/2,POINT_SIZE,POINT_SIZE);
+            IMG.setColor(Color.BLACK);
+            IMG.drawOval(x0 - r, y0 - r, 2*r, 2*r);
+            IMG.setColor(Color.BLUE);
+            IMG.fillOval(x0+(int)Math.round(r*Math.cos(t * r /2000.0)) - POINT_SIZE/2,y0+(int)Math.round(r*Math.sin(t * r /2000.0)) - POINT_SIZE/2,POINT_SIZE,POINT_SIZE);
         }
 
         t++;

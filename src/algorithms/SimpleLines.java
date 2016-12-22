@@ -3,6 +3,7 @@ package algorithms;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import image.Color;
 
 public class SimpleLines extends Algorithm {
 
@@ -26,17 +27,17 @@ public class SimpleLines extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
-        g.setColor(Color.BLACK);
+    public void step() {
+        IMG.setColor(Color.BLACK);
         if(verticalBox.isSelected()){
             for(int i=0; i<IMG.getWidth();){
-                g.fillRect(i,0,5,IMG.getHeight());
+                IMG.fillRect(i,0,5,IMG.getHeight());
                 i+=10;
             }
         }
         if(horizontalBox.isSelected()){
             for(int i=0; i<IMG.getHeight();){
-                g.fillRect(0,i,IMG.getWidth(),5);
+                IMG.fillRect(0,i,IMG.getWidth(),5);
                 i+=10;
             }
         }

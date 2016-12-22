@@ -5,6 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.ArrayList;
+import image.Color;
 
 public class Voronoi extends Randomizer{
 
@@ -26,7 +27,7 @@ public class Voronoi extends Randomizer{
     }
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
 
         int off = points.size()/2;
 
@@ -49,8 +50,8 @@ public class Voronoi extends Randomizer{
                         }
                     }
 
-                    g.setColor(colors.get(minInd));
-                    g.drawLine(x,y,x,y);
+                    IMG.setColor(colors.get(minInd));
+                    IMG.drawLine(x,y,x,y);
                 }
             }
         }else{
@@ -72,8 +73,8 @@ public class Voronoi extends Randomizer{
                         }
                     }
 
-                    g.setColor(colors.get(minInd));
-                    g.drawLine(x,y,x,y);
+                    IMG.setColor(colors.get(minInd));
+                    IMG.drawLine(x,y,x,y);
                 }
             }
         }
@@ -81,9 +82,9 @@ public class Voronoi extends Randomizer{
 
         //draw points
         if(showPoints){
-            g.setColor(Color.BLACK);
+            IMG.setColor(Color.BLACK);
             for(int i = 0; i < off; i++){
-                g.fillOval(points.get(i) - 4, points.get(off + i) - 4, 8, 7);//7 instead of 8, because it looks like shit otherwise
+                IMG.fillOval(points.get(i) - 4, points.get(off + i) - 4, 8, 7);//7 instead of 8, because it looks like shit otherwise
             }
         }
 

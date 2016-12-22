@@ -2,6 +2,7 @@ package algorithms.imgeffects;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class ImageTransition extends ImageEffect {
 
@@ -22,7 +23,7 @@ public class ImageTransition extends ImageEffect {
 
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         if(offset > 1.0){
             reset();
             return;
@@ -42,8 +43,8 @@ public class ImageTransition extends ImageEffect {
                     //linear, 2 conditions: f(0) = x0 = color original, f(1) = x1 = color mask
                     //x0 + (x1-x0)*x = f(x)
                     //co.getBlue() + (int)((cm.getBlue() - co.getBlue())*offset + 0.5)
-                    g.setColor(new Color(co.getRed() + (int) ((cm.getRed() - co.getRed()) * offset + 0.5), co.getGreen() + (int) ((cm.getGreen() - co.getGreen()) * offset + 0.5), co.getBlue() + (int) ((cm.getBlue() - co.getBlue()) * offset + 0.5)));
-                    g.drawLine(x, y, x, y);
+                    IMG.setColor(new Color(co.getRed() + (int) ((cm.getRed() - co.getRed()) * offset + 0.5), co.getGreen() + (int) ((cm.getGreen() - co.getGreen()) * offset + 0.5), co.getBlue() + (int) ((cm.getBlue() - co.getBlue()) * offset + 0.5)));
+                    IMG.drawLine(x, y, x, y);
                 }else if(type.getSelectedIndex() == 1){
                     //cubic, 2 extra conditions: f'(0) = f'(1) = 0
                     //f(x) = ax^3 + bx^2 + cx + d, f'(x) = 3ax^2 + 2bx + c
@@ -55,8 +56,8 @@ public class ImageTransition extends ImageEffect {
 
                     //with colors:
                     //co.getBlue() + (int)( (cm.getBlue()-co.getBlue()) * offset2 +0.5)
-                    g.setColor(new Color( co.getRed() + (int)( (cm.getRed()-co.getRed()) * offset2 +0.5), co.getGreen() + (int)( (cm.getGreen()-co.getGreen()) * offset2 +0.5), co.getBlue() + (int)( (cm.getBlue()-co.getBlue()) * offset2 +0.5)  ));
-                    g.drawLine(x, y, x, y);
+                    IMG.setColor(new Color( co.getRed() + (int)( (cm.getRed()-co.getRed()) * offset2 +0.5), co.getGreen() + (int)( (cm.getGreen()-co.getGreen()) * offset2 +0.5), co.getBlue() + (int)( (cm.getBlue()-co.getBlue()) * offset2 +0.5)  ));
+                    IMG.drawLine(x, y, x, y);
                 }else{
                     System.out.println("Shouldn't happen!");
                 }

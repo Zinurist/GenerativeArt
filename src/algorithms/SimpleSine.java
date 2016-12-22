@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.*;
 import java.util.function.Function;
+import image.Color;
 
 public class SimpleSine extends Algorithm{
 
@@ -38,7 +39,7 @@ public class SimpleSine extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         if(!plotted) {
             init();
             Plotter.plot(IMG, new Function<Double, Double>() {

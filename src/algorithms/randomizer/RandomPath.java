@@ -3,6 +3,7 @@ package algorithms.randomizer;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import image.Color;
 
 public class RandomPath extends Randomizer {
 
@@ -33,8 +34,8 @@ public class RandomPath extends Randomizer {
     }
 
     @Override
-    public void step(Graphics g, int width, int height) {
-        g.setColor(col);
+    public void step(int width, int height) {
+        IMG.setColor(col);
 
         tries = 0;
 
@@ -66,7 +67,7 @@ public class RandomPath extends Randomizer {
             }else{
                 x = xtmp;
                 y = ytmp;
-                g.drawLine(x,y,x,y);
+                IMG.drawLine(x,y,x,y);
                 return;
             }
 

@@ -3,8 +3,8 @@ package algorithms;
 import gui.MainFrame;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Random;
+import image.Color;
 
 public class Search extends Algorithm{
 
@@ -35,12 +35,12 @@ public class Search extends Algorithm{
 
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         Point w = MainFrame.MF.getPanelLocation();
         emptyIMG(Color.BLACK);
-        g.setColor(Color.WHITE);
+        IMG.setColor(Color.WHITE);
         for (int i = 0; i < num; i++) {
-            g.fillOval(circles[i][0] - circles[i][2] - w.x, circles[i][1] - circles[i][2] - w.y, circles[i][2] * 2, circles[i][2] * 2);
+            IMG.fillOval(circles[i][0] - circles[i][2] - w.x, circles[i][1] - circles[i][2] - w.y, circles[i][2] * 2, circles[i][2] * 2);
         }
     }
 

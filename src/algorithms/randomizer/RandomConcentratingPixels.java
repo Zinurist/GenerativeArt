@@ -1,14 +1,15 @@
 package algorithms.randomizer;
 
 import java.awt.*;
+import image.Color;
 
 public class RandomConcentratingPixels extends Randomizer{
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         for(int row=0;row<height;row++){
             if(color){
-                g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+                IMG.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
             }
             for(int column=0;column<width;column++){
                 int rate=width;
@@ -17,7 +18,7 @@ public class RandomConcentratingPixels extends Randomizer{
                 }
                 bools[row][column]=r.nextInt(width*2)<rate;
                 if(bools[row][column]){
-                    g.drawLine(column, row, column, row);
+                    IMG.drawLine(column, row, column, row);
                 }
             }
         }

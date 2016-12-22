@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
+import image.Color;
 
 public class RandomGraph extends Randomizer {
 
@@ -27,7 +28,7 @@ public class RandomGraph extends Randomizer {
     }
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         if(points.isEmpty()){
             stop();
             return;
@@ -38,10 +39,10 @@ public class RandomGraph extends Randomizer {
         double angle, distance, vecAngle;
         int maxDis = (IMG.getWidth()+IMG.getHeight())/2;
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         for(int[] p : points){
-            g.drawLine(p[0], p[1], p[2], p[3]);
-            g.fillRect(p[0] - 2, p[1] - 2, 4, 4);
+            IMG.drawLine(p[0], p[1], p[2], p[3]);
+            IMG.fillRect(p[0] - 2, p[1] - 2, 4, 4);
 
             newNodes = r.nextInt(MAX_NODES-MIN_NODES+1)+MIN_NODES;
 

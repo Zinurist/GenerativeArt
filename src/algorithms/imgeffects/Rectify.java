@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import image.Color;
 
 public class Rectify extends ImageEffect {
 
@@ -13,7 +14,7 @@ public class Rectify extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         int w, h = 20;
         boolean dw, dh;
 
@@ -66,9 +67,9 @@ public class Rectify extends ImageEffect {
             npoints = npoints2;
         }
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         for(int[] re : rects){
-            g.drawRect(re[0],re[1],re[2],re[3]);
+            IMG.drawRect(re[0],re[1],re[2],re[3]);
         }
 
     }

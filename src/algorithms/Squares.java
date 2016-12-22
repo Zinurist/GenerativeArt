@@ -1,9 +1,10 @@
 package algorithms;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.awt.*;
+import image.Color;
 
 public class Squares extends Algorithm {
 
@@ -28,21 +29,21 @@ public class Squares extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         int width=1;
         int drawn=0;
         int xStart = IMG.getWidth()/2;
         int yStart = IMG.getHeight()/2;
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         while(drawn<IMG.getWidth()){
             if(circles.isSelected()) {
                 for (int i = 0; i < width && drawn < IMG.getWidth(); i++) {
-                    g.drawOval(xStart - drawn, yStart - drawn, drawn * 2, drawn * 2);
+                    IMG.drawOval(xStart - drawn, yStart - drawn, drawn * 2, drawn * 2);
                     drawn++;
                 }
             }else{
                 for (int i = 0; i < width && drawn < IMG.getWidth(); i++) {
-                    g.drawRect(xStart - drawn, yStart - drawn, drawn * 2, drawn * 2);
+                    IMG.drawRect(xStart - drawn, yStart - drawn, drawn * 2, drawn * 2);
                     drawn++;
                 }
             }

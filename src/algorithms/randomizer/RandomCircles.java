@@ -2,13 +2,14 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class RandomCircles extends Randomizer{
 
     JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 1000, 10));
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         int numTmp = (Integer) num.getValue();
         int num1, num2, num3;
         for(int i=0; i<numTmp; i++){
@@ -16,11 +17,11 @@ public class RandomCircles extends Randomizer{
             num2=r.nextInt(width)-(num1/2);
             num3=r.nextInt(height)-(num1/2);
             if(color){
-                g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
-                g.fillOval(num2,num3, num1, num1);
-                g.setColor(Color.BLACK);
+                IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+                IMG.fillOval(num2,num3, num1, num1);
+                IMG.setColor(Color.BLACK);
             }
-            g.drawOval(num2, num3, num1, num1);
+            IMG.drawOval(num2, num3, num1, num1);
         }
     }
 

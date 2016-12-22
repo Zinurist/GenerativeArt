@@ -1,7 +1,8 @@
 package algorithms;
 
 
-import java.awt.*;
+import java.awt.Component;
+import image.Color;
 
 /**
  * Empty algorithm that does nothing. Serves as placeholder and template.
@@ -21,10 +22,10 @@ public class EmptyAlgorithm extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         init();
-        //g.setColor(Color.BLACK);
-        //g.drawLine(0,0,x,y);
+        //IMG.setColor(Color.BLACK);
+        //IMG.drawLine(0,0,x,y);
     }
 
     @Override

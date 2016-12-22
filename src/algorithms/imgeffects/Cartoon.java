@@ -2,6 +2,7 @@ package algorithms.imgeffects;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class Cartoon extends ImageFilter{
 
@@ -21,7 +22,7 @@ public class Cartoon extends ImageFilter{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         copyImg();
         setFilter(filterNum);
 
@@ -51,15 +52,15 @@ public class Cartoon extends ImageFilter{
                 else if(avgb > 255) avgb = 255;
 
                 if(avgr >= limit || avgg >= limit || avgb >= limit) {
-                    g.setColor(Color.BLACK);
+                    IMG.setColor(Color.BLACK);
                     if(rad<=1) {
-                        g.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
+                        IMG.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
                     }else{
-                        g.fillOval(x + filter.length / 2 - rad, y + filter.length / 2 - rad, rad*2, rad*2);
+                        IMG.fillOval(x + filter.length / 2 - rad, y + filter.length / 2 - rad, rad*2, rad*2);
                     }
                 }else{
-                    g.setColor(new Color(TMP.getRGB(x + filter.length / 2, y + filter.length / 2)));
-                    g.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
+                    IMG.setColor(new Color(TMP.getRGB(x + filter.length / 2, y + filter.length / 2)));
+                    IMG.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
                 }
             }
         }

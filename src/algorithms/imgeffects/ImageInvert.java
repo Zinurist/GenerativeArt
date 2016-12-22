@@ -1,6 +1,6 @@
 package algorithms.imgeffects;
 
-import java.awt.*;
+import image.Color;
 
 public class ImageInvert extends ImageEffect {
 
@@ -11,13 +11,13 @@ public class ImageInvert extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
 
         //blur using averaging algorithm
         for(int y=0; y<height; y++){
             for(int x=0; x<width; x++){
-                g.setColor(new Color(0x00FFFFFF - IMG.getRGB(x,y)));
-                g.drawLine(x, y, x, y);
+                IMG.setColor(new Color(0x00FFFFFF - IMG.getRGB(x,y)));
+                IMG.drawLine(x, y, x, y);
             }
         }
     }

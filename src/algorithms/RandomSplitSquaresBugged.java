@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
 import java.util.Random;
+import image.Color;
 
 public class RandomSplitSquaresBugged extends Algorithm{
 
@@ -22,7 +23,7 @@ public class RandomSplitSquaresBugged extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         //split
         LinkedList<S> newS = new LinkedList<S>();
         int width, height;
@@ -55,11 +56,11 @@ public class RandomSplitSquaresBugged extends Algorithm{
         squares.addAll(newS);
 
         //draw
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.WHITE);
+        IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+        IMG.setColor(Color.BLACK);
         for(S s : squares){
-            g.fillRect(s.x1,s.y1,s.x2-s.x1,s.y2-s.y1);
+            IMG.fillRect(s.x1,s.y1,s.x2-s.x1,s.y2-s.y1);
         }
     }
 

@@ -2,6 +2,7 @@ package algorithms;
 
 import java.awt.*;
 import java.util.LinkedList;
+import image.Color;
 
 public class Fractal extends Algorithm{
 
@@ -19,10 +20,10 @@ public class Fractal extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         if(r<1) return;
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
 
         LinkedList<int[]> newp = new LinkedList<>();
 
@@ -30,7 +31,7 @@ public class Fractal extends Algorithm{
             //drawing points
             //g.drawOval(p[0]-r,p[1]-r,r*2,r*2);
             //g.fillOval(p[0]-r,p[1]-r,r*2,r*2);
-            g.drawRect(p[0]-r,p[1]-r,r*2,r*2);
+            IMG.drawRect(p[0]-r,p[1]-r,r*2,r*2);
             //g.fillRect(p[0]-r,p[1]-r,r*2,r*2);
 
             //new points

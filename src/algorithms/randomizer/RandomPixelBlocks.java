@@ -1,6 +1,7 @@
 package algorithms.randomizer;
 
 import java.awt.*;
+import image.Color;
 
 public class RandomPixelBlocks extends Randomizer {
 
@@ -12,7 +13,7 @@ public class RandomPixelBlocks extends Randomizer {
     }
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         for(int row=0;row<height;row++){
             for(int column=0;column<width;column++){
                 if(!done[row][column]){
@@ -26,14 +27,14 @@ public class RandomPixelBlocks extends Randomizer {
                     }
                     boolean col=r.nextBoolean();
                     if(color){
-                        g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+                        IMG.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
                     }
                     for(int h=0; h<sizeH;h++){
                         for(int w=0; w<sizeW;w++){
                             if(!done[row+h][column+w]){
                                 if(col){
 
-                                    g.drawLine(column+w, row+h, column+w, row+h);
+                                    IMG.drawLine(column+w, row+h, column+w, row+h);
                                 }
                                 done[row+h][column+w]=true;
                             }

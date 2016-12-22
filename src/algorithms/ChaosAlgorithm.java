@@ -1,10 +1,10 @@
 package algorithms;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import image.Color;
 
 public class ChaosAlgorithm extends Algorithm {
 
@@ -21,27 +21,27 @@ public class ChaosAlgorithm extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         w.step();
 
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0,IMG.getWidth(), IMG.getHeight());
+        IMG.setColor(Color.WHITE);
+        IMG.fillRect(0,0,IMG.getWidth(), IMG.getHeight());
         for(Actor a:w.actors){
             switch(a.type){
                 case 0:
-                    g.setColor(new Color(255,0,0,a.ttl+100));
+                    IMG.setColor(new Color(255,0,0,a.ttl+100));
                     break;
                 case 1:
-                    g.setColor(new Color(0,255,0,a.ttl+100));
+                    IMG.setColor(new Color(0,255,0,a.ttl+100));
                     break;
                 case 2:
-                    g.setColor(new Color(0,0,255,a.ttl+100));
+                    IMG.setColor(new Color(0,0,255,a.ttl+100));
                     break;
                 case 3:
-                    g.setColor(new Color(0,0,0,a.ttl+100));
+                    IMG.setColor(new Color(0,0,0,a.ttl+100));
                     break;
             }
-            g.fillRect(((int)a.x&0xFF)*XZ, ((int)a.y&0xFF)*YZ, XZ,YZ);
+            IMG.fillRect(((int)a.x&0xFF)*XZ, ((int)a.y&0xFF)*YZ, XZ,YZ);
         }
     }
 

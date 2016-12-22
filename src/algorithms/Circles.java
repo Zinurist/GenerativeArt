@@ -3,6 +3,7 @@ package algorithms;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class Circles extends Algorithm{
 
@@ -22,12 +23,12 @@ public class Circles extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         if(isRunning()){
             emptyIMG();
         }
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
 
         boolean shifted = false;
         int width = radX*2;
@@ -47,7 +48,7 @@ public class Circles extends Algorithm{
 
         for(int y = 0; y<IMG.getHeight()+deltaY; y+=deltaY){
             for(int x = shifted ? 0 : radX; x<IMG.getWidth()+width; x+=width){
-                g.drawOval(x - radX, y - radY, width, height);
+                IMG.drawOval(x - radX, y - radY, width, height);
             }
             shifted = !shifted;
         }

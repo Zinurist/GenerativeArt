@@ -2,7 +2,8 @@ package algorithms.imgeffects;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import image.Color;
+import image.Image;
 
 public class ImageFilter extends ImageEffect {
 
@@ -20,7 +21,7 @@ public class ImageFilter extends ImageEffect {
     //TODO make filter customizable
     protected static int[][] CUSTOM = {{-1,-1,-1,-1,-1},{-1,2,2,2,-1},{-1,2,-1,2,-1},{-1,2,2,2,-1},{-1,-1,-1,-1,-1}};
 
-    protected static BufferedImage TMP;
+    protected static Image TMP;
 
 
     protected int[][] filter;
@@ -33,9 +34,7 @@ public class ImageFilter extends ImageEffect {
     }
 
     protected static void copyImg(){
-        Graphics g = TMP.getGraphics();
-        g.drawImage(IMG,0,0,null);
-        g.dispose();
+        TMP.drawImage(IMG, 0, 0);
     }
 
     protected void setFilter(int id){
@@ -88,7 +87,7 @@ public class ImageFilter extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         copyImg();
         setFilter(filterNum);
 
@@ -117,15 +116,15 @@ public class ImageFilter extends ImageEffect {
                 if(avgb < 0) avgb = 0;
                 else if(avgb > 255) avgb = 255;
 
-                g.setColor(new Color(avgr,avgg,avgb));
-                g.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
+                IMG.setColor(new Color(avgr,avgg,avgb));
+                IMG.drawLine(x + filter.length / 2, y + filter.length / 2, x + filter.length / 2, y + filter.length / 2);
             }
         }
     }
 
     @Override
     public void reset(){
-        TMP = new BufferedImage(IMG.getWidth(), IMG.getHeight(), IMG.getType());
+        TMP = new Image(IMG.getWidth(), IMG.getHeight());
     }
 
     @Override

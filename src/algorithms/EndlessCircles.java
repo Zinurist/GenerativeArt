@@ -3,6 +3,7 @@ package algorithms;
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
+import image.Color;
 
 public class EndlessCircles extends Algorithm{
 
@@ -20,23 +21,23 @@ public class EndlessCircles extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         emptyIMG();
 
         int r_step = r_step_slider.getValue();
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
 
         int x0 = IMG.getWidth()/2;
         int y0 = IMG.getHeight()/2;
 
-        g.drawLine(0, y0, IMG.getWidth(), y0);
-        g.drawLine(x0, 0, x0, IMG.getHeight());
+        IMG.drawLine(0, y0, IMG.getWidth(), y0);
+        IMG.drawLine(x0, 0, x0, IMG.getHeight());
 
         for(int r=r_step; r<IMG.getWidth(); r+=r_step){
-            g.drawOval(x0,y0,r,r);
-            g.drawOval(x0,y0-r,r,r);
-            g.drawOval(x0-r,y0,r,r);
-            g.drawOval(x0-r,y0-r,r,r);
+            IMG.drawOval(x0,y0,r,r);
+            IMG.drawOval(x0,y0-r,r,r);
+            IMG.drawOval(x0-r,y0,r,r);
+            IMG.drawOval(x0-r,y0-r,r,r);
         }
     }
 

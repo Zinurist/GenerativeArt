@@ -1,10 +1,11 @@
 package algorithms.randomizer;
 
 import java.awt.*;
+import image.Color;
 
 public class RandomStrings extends Randomizer {
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         int num1=r.nextInt(100)+50;
         int num2;
         for(int i=0; i<num1; i++){
@@ -16,9 +17,9 @@ public class RandomStrings extends Randomizer {
             }
 
             if(color){
-                g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+                IMG.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
             }
-            g.drawString(s, r.nextInt(width)-5, r.nextInt(height)-5);
+            IMG.drawString(s, r.nextInt(width)-5, r.nextInt(height)-5);
         }
     }
 

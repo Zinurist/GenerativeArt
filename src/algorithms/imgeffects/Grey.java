@@ -1,7 +1,6 @@
 package algorithms.imgeffects;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import image.Color;
 
 public class Grey extends ImageEffect {
 
@@ -11,7 +10,7 @@ public class Grey extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         int val;
         Color c;
 
@@ -21,8 +20,8 @@ public class Grey extends ImageEffect {
                 c = new Color(IMG.getRGB(x, y));
                 val = (c.getRed() + c.getBlue() + c.getGreen()) / 3;
 
-                g.setColor(new Color(val,val,val));
-                g.drawLine(x, y, x, y);
+                IMG.setColor(new Color(val,val,val));
+                IMG.drawLine(x, y, x, y);
             }
         }
 

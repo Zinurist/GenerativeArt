@@ -3,6 +3,7 @@ package algorithms;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import image.Color;
 
 public class YouTubeLoad extends Algorithm{
 
@@ -24,10 +25,10 @@ public class YouTubeLoad extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
-        g.setColor(Color.WHITE);
+    public void step() {
+        IMG.setColor(Color.BLACK);
+        IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+        IMG.setColor(Color.WHITE);
 
         double phi;
         double step = Math.PI*2/numOfCircles;
@@ -35,14 +36,14 @@ public class YouTubeLoad extends Algorithm{
         for(int i=0; i<numOfCircles; i++){
             if(loadAnimation){
                 ani = (i-tick + numOfCircles)%numOfCircles;
-                g.setColor(new Color(55 + (200*ani)/numOfCircles, 55 + (200*ani)/numOfCircles, 55 + (200*ani)/numOfCircles));
+                IMG.setColor(new Color(55 + (200*ani)/numOfCircles, 55 + (200*ani)/numOfCircles, 55 + (200*ani)/numOfCircles));
             }
 
             phi = step * i;
             x = (int)Math.round(r*Math.cos(phi)) + middleX;
             y = (int)Math.round(r*Math.sin(phi)) + middleY;
 
-            g.fillOval(x - circleRadius/2, y - circleRadius/2, circleRadius, circleRadius);
+            IMG.fillOval(x - circleRadius/2, y - circleRadius/2, circleRadius, circleRadius);
         }
 
         tick++;

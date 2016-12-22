@@ -1,7 +1,8 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
+import image.Color;
+
+import java.awt.Component;
 import java.util.*;
 
 public class BallAndWind extends Algorithm{
@@ -41,7 +42,7 @@ public class BallAndWind extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         //--- simulation ---
         //lowY and highY are the lower and upper index of the acceleration area in which the ball currently is
         int lowY = (int)(ballY+0.5) - ballSize/2;
@@ -86,21 +87,21 @@ public class BallAndWind extends Algorithm{
             //*0.5 brings it to [0,0.5], +0.25 to [0.25,0.75]
             //the other 2 colors are set by this value -> controls the brightness of the color blue (/red)
             //lower acceleration should be brighter -> 1.0 - (accel value)
-            if(accels[i] > 0) g.setColor(new Color(1.0F - (float)(accels[i]/maxAccel * 0.5 +0.25),1.0F - (float)(accels[i]/maxAccel * 0.5 +0.25),1.0F));
-            else g.setColor(new Color(1.0F, 1.0F + (float)(accels[i]/maxAccel * 0.5 -0.25),1.0F + (float)(accels[i]/maxAccel * 0.5 -0.25)));
+            if(accels[i] > 0) IMG.setColor(new Color(1.0F - (float)(accels[i]/maxAccel * 0.5 +0.25),1.0F - (float)(accels[i]/maxAccel * 0.5 +0.25),1.0F));
+            else IMG.setColor(new Color(1.0F, 1.0F + (float)(accels[i]/maxAccel * 0.5 -0.25),1.0F + (float)(accels[i]/maxAccel * 0.5 -0.25)));
 
-            g.fillRect(0,(int)(offsetY+0.5),IMG.getWidth(),(int)(offsetEnd+0.5) - (int)(offsetY+0.5));
+            IMG.fillRect(0, (int) (offsetY + 0.5), IMG.getWidth(), (int) (offsetEnd + 0.5) - (int) (offsetY + 0.5));
             offsetY = offsetEnd;
             offsetEnd += sizePerSection;
         }
 
         //drawing ball
-        g.setColor(Color.BLACK);
-        g.fillOval(x, y, ballSize, ballSize);
+        IMG.setColor(Color.BLACK);
+        IMG.fillOval(x, y, ballSize, ballSize);
         int[] pNew = new int[]{x + ballSize/2, y + ballSize/2};
         int[] pOld = pNew;
         for(int[] p : history){
-            g.drawLine(p[0], p[1], pOld[0], pOld[1]);
+            IMG.drawLine(p[0], p[1], pOld[0], pOld[1]);
             pOld = p;
         }
         history.addFirst(pNew);

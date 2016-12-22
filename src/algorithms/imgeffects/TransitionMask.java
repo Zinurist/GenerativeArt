@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
+import image.Color;
 
 public class TransitionMask extends ImageEffect {
 
@@ -34,7 +35,7 @@ public class TransitionMask extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         if(tick > 255){
             if(boxReset.isSelected() || reset) reset();
             else{
@@ -60,11 +61,11 @@ public class TransitionMask extends ImageEffect {
         }
         */
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         int upper = Math.min(tick+(int)add.getValue(), 255);
         for(int k=tick; k<upper; k++) {
             for (int[] p : pixels[k]) {
-                g.drawLine(p[0], p[1], p[0], p[1]);
+                IMG.drawLine(p[0], p[1], p[0], p[1]);
             }
         }
 

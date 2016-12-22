@@ -2,13 +2,14 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class RandomQuadrables extends Randomizer{
 
     JSpinner num = new JSpinner(new SpinnerNumberModel(5, 0, 100, 5));
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         int[] xPoints=new int[4];
         int[] yPoints=new int[4];
         for(int i=0; i<(Integer)num.getValue(); i++){
@@ -25,11 +26,11 @@ public class RandomQuadrables extends Randomizer{
                 }
             }
             if(color){
-                g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
-                g.fillPolygon(xPoints, yPoints, 4);
-                g.setColor(Color.BLACK);
+                IMG.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+                IMG.fillPolygon(xPoints, yPoints, 4);
+                IMG.setColor(Color.BLACK);
             }
-            g.drawPolygon(xPoints, yPoints, 4);
+            IMG.drawPolygon(xPoints, yPoints, 4);
         }
     }
 

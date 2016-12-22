@@ -4,6 +4,7 @@ import gui.MainFrame;
 
 import java.awt.*;
 import java.util.Random;
+import image.Color;
 
 public class Vectorfield extends Algorithm{
 
@@ -135,22 +136,22 @@ public class Vectorfield extends Algorithm{
         }
     }
 
-    private void draw(Graphics g){
+    private void draw(){
         emptyIMG();
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         if(DRAW_FIELD) {
             for (int y = 0; y < field.length; y++) {
                 for (int x = 0; x < field[y].length; x++) {
-                    g.drawLine(VEC_DISTANCE * x, VEC_DISTANCE * y, VEC_DISTANCE * x + (int) field[y][x][0], VEC_DISTANCE * y + (int) field[y][x][1]);
+                    IMG.drawLine(VEC_DISTANCE * x, VEC_DISTANCE * y, VEC_DISTANCE * x + (int) field[y][x][0], VEC_DISTANCE * y + (int) field[y][x][1]);
                 }
             }
         }
 
-        g.setColor(Color.RED);
+        IMG.setColor(Color.RED);
         for(int i = 0; i<NUM_FLYERS; i++){
             //g.drawLine((int)Math.round(flyers[i][0]),(int)Math.round(flyers[i][1]),(int)Math.round(flyers[i][0]-flyers[i][2]),(int)Math.round(flyers[i][1]-flyers[i][3]));
-            g.fillOval((int)Math.round(flyers[i][0]-POINT_SIZE/2.0),(int)Math.round(flyers[i][1]-POINT_SIZE/2.0),POINT_SIZE,POINT_SIZE);
+            IMG.fillOval((int)Math.round(flyers[i][0]-POINT_SIZE/2.0),(int)Math.round(flyers[i][1]-POINT_SIZE/2.0),POINT_SIZE,POINT_SIZE);
         }
     }
 
@@ -160,7 +161,7 @@ public class Vectorfield extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         if(MOUSE_INTERACTION){
             if(counter>=MOUSE_RATE) {
                 updateMouse();
@@ -171,7 +172,7 @@ public class Vectorfield extends Algorithm{
             }
         }
         calc();
-        draw(g);
+        draw();
     }
 
     @Override

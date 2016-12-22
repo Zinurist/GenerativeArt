@@ -2,15 +2,16 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class RandomBigCircles extends Randomizer{
 
     private int num = 10;
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
 
-        g.setXORMode(Color.WHITE);
+        IMG.setXORMode(true);
 
         int x, y, rad;
         int avg = width+height/2;
@@ -20,10 +21,12 @@ public class RandomBigCircles extends Randomizer{
             x = r.nextInt(width) - rad;
             y = r.nextInt(height) - rad;
             if(color){
-                g.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+                IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
             }
-            g.fillOval(x, y, rad*2, rad*2);
+            IMG.fillOval(x, y, rad*2, rad*2);
         }
+
+        IMG.setXORMode(false);
     }
 
     @Override

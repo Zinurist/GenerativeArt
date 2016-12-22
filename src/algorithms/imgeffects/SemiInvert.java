@@ -1,6 +1,6 @@
 package algorithms.imgeffects;
 
-import java.awt.*;
+import image.Color;
 
 public class SemiInvert extends ImageEffect {
 
@@ -11,7 +11,7 @@ public class SemiInvert extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         Color c;
         int red, green, blue;
         //blur using averaging algorithm
@@ -29,8 +29,8 @@ public class SemiInvert extends ImageEffect {
                 blue = blue >= 128 ? 255 - blue : blue ;
                 blue = blue*2;
 
-                g.setColor(new Color(red, green, blue));
-                g.drawLine(x, y, x, y);
+                IMG.setColor(new Color(red, green, blue));
+                IMG.drawLine(x, y, x, y);
             }
         }
     }

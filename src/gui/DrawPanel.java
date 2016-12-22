@@ -129,9 +129,9 @@ public class DrawPanel extends JPanel {
 
         g.translate(xOffset, yOffset);
         if(zoom == 1) {
-            g.drawImage(Algorithm.IMG, 0, 0, null);
+            g.drawImage(Algorithm.IMG.getData(), 0, 0, null);
         }else{
-            g.drawImage(Algorithm.IMG, 0, 0, Algorithm.IMG.getWidth()*zoom, Algorithm.IMG.getHeight()*zoom, null);
+            g.drawImage(Algorithm.IMG.getData(), 0, 0, Algorithm.IMG.getWidth()*zoom, Algorithm.IMG.getHeight()*zoom, null);
         }
     }
 

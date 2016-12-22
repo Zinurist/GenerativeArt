@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import image.Color;
 
 public class SineWiggle extends ImageEffect {
 
@@ -24,7 +25,7 @@ public class SineWiggle extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         emptyIMG();
 
         Color c;
@@ -35,11 +36,11 @@ public class SineWiggle extends ImageEffect {
         for(int y=0; y<height; y++){
             for(int x=0; x<width; x++){
                 c = new Color(original.getRGB(x, y));
-                g.setColor(c);
+                IMG.setColor(c);
 
                 offset = (int)(ad*Math.sin(y*bd + progress)+0.5);
 
-                g.drawLine(x+offset, y, x+offset, y);
+                IMG.drawLine(x+offset, y, x+offset, y);
             }
         }
 

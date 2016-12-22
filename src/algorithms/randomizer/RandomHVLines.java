@@ -2,6 +2,7 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class RandomHVLines extends Randomizer {
 
@@ -18,14 +19,14 @@ public class RandomHVLines extends Randomizer {
     }
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         if(horizontalBox.isSelected()) {
             for (int row = 0; row < height; row++) {
                 if (color) {
-                    g.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+                    IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
                 }
                 if (r.nextDouble() > 0.7) {
-                    g.drawLine(0, row, width, row);
+                    IMG.drawLine(0, row, width, row);
                 }
             }
         }
@@ -33,10 +34,10 @@ public class RandomHVLines extends Randomizer {
         if(verticalBox.isSelected()) {
             for (int column = 0; column < width; column++) {
                 if (color) {
-                    g.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
+                    IMG.setColor(new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256)));
                 }
                 if (r.nextDouble() > 0.7) {
-                    g.drawLine(column, 0, column, height);
+                    IMG.drawLine(column, 0, column, height);
                 }
             }
         }

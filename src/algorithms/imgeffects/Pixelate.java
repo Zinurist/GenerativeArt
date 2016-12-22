@@ -1,6 +1,7 @@
 package algorithms.imgeffects;
 
 import java.awt.*;
+import image.Color;
 
 public class Pixelate extends ImageEffect {
 
@@ -18,7 +19,7 @@ public class Pixelate extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         int avgr, avgb, avgg, count;
         Color c;
 
@@ -41,8 +42,8 @@ public class Pixelate extends ImageEffect {
                 avgb /= count;
 
 
-                g.setColor(new Color(avgr,avgg,avgb));
-                g.fillRect(x, y, factor, factor);
+                IMG.setColor(new Color(avgr,avgg,avgb));
+                IMG.fillRect(x, y, factor, factor);
             }
         }
 

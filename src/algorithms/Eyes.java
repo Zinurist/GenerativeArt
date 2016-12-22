@@ -5,6 +5,7 @@ import gui.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class Eyes extends Algorithm{
 
@@ -25,16 +26,16 @@ public class Eyes extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         emptyIMG();
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
 
         int x1 = IMG.getWidth()/2 - distanceEyes - radEye;
         int y1 = IMG.getHeight()/2;
         int x2 = IMG.getWidth()/2 + distanceEyes + radEye;
         int y2 = IMG.getHeight()/2;
-        g.drawOval(x1 - radEye - radPupil, y1 - radEye - radPupil, (radEye + radPupil)*2, (radEye + radPupil)*2);
-        g.drawOval(x2 - radEye - radPupil, y2 - radEye - radPupil, (radEye + radPupil)*2, (radEye + radPupil)*2);
+        IMG.drawOval(x1 - radEye - radPupil, y1 - radEye - radPupil, (radEye + radPupil)*2, (radEye + radPupil)*2);
+        IMG.drawOval(x2 - radEye - radPupil, y2 - radEye - radPupil, (radEye + radPupil)*2, (radEye + radPupil)*2);
 
         Point m = MainFrame.MF.getMouseLocation();
 
@@ -61,8 +62,8 @@ public class Eyes extends Algorithm{
         y2 += (int)(vy2 * vLength2 + 0.5);
 
         //draw pupils
-        g.fillOval(x1 - radPupil, y1 - radPupil, radPupil*2, radPupil*2);
-        g.fillOval(x2 - radPupil, y2 - radPupil, radPupil*2, radPupil*2);
+        IMG.fillOval(x1 - radPupil, y1 - radPupil, radPupil*2, radPupil*2);
+        IMG.fillOval(x2 - radPupil, y2 - radPupil, radPupil*2, radPupil*2);
 
 
     }

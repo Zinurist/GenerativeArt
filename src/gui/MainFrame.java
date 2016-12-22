@@ -5,11 +5,8 @@ import algorithms.Algorithm;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import image.Image;
 
 /**
  * Main frame of the application.
@@ -62,7 +59,7 @@ public class MainFrame implements Runnable{
 
         btnStep = new JButton("Step");
         btnStep.addActionListener(e -> {
-            getSelectedAlgorithm().step();
+            getSelectedAlgorithm().animate();
             drawPanel.render();
         });
 
@@ -184,7 +181,7 @@ public class MainFrame implements Runnable{
         if(width>0 && height>0) {
             drawPanel.setPreferredSize(new Dimension(width, height));
 
-            Algorithm.IMG = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            Algorithm.IMG = new Image(width, height);
         }
         getSelectedAlgorithm().init();
 
@@ -239,7 +236,7 @@ public class MainFrame implements Runnable{
             if(!f.exists()){
                 f.mkdirs();
             }
-            ImageIO.write(Algorithm.IMG, "png", f);
+            ImageIO.write(Algorithm.IMG.getData(), "png", f);
         } catch (Exception e1) {
             JOptionPane.showConfirmDialog(frame, e1.getMessage(), "Error", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
@@ -267,7 +264,7 @@ public class MainFrame implements Runnable{
                 }
             }
 
-            getSelectedAlgorithm().step();
+            getSelectedAlgorithm().animate();
             if(cbFast.isSelected()) {
                 drawPanel.repaint();
             }else{

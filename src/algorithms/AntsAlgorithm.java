@@ -9,7 +9,7 @@ public class AntsAlgorithm extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
 
     }
 

@@ -2,14 +2,16 @@ package algorithms.randomizer;
 
 import algorithms.*;
 
-import java.util.List;
 
-import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import javax.swing.JCheckBox;
+import java.awt.Component;
+
+import java.util.List;
 import java.util.LinkedList;
 import java.util.Random;
+import image.Color;
 
 /**
  * An abstraction for algorithms which are mainly based on drawing randomly in the image.
@@ -61,26 +63,24 @@ public abstract class Randomizer extends Algorithm {
 
     /**
      * The step function now empties the image, if the option for this is selected.
-     * @param g the graphics object of the image in which to draw
      */
     @Override
-    public void step(Graphics g){
+    public void step(){
         changed = true;
         if(emptiable && empty) {
             init();
         }
 
-        g.setColor(Color.BLACK);
-        step(g, IMG.getWidth(), IMG.getHeight());
+        IMG.setColor(Color.BLACK);
+        step(IMG.getWidth(), IMG.getHeight());
     }
 
     /**
      * The step function to be implemented by randomizer algorithms. Width and height are here given, since many randomizers need these and the code therefore gets more readable.
-     * @param g the graphics object of the image in which to draw
      * @param width width of the image
      * @param height height of the image
      */
-    public abstract void step(Graphics g, int width, int height);
+    public abstract void step(int width, int height);
 
     /**
      * The option list of randomizers already have default options. Subclasses should call this function and extend the list by own/new options, instead of creating a new list.

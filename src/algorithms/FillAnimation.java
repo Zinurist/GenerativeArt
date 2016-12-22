@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import image.Color;
 
 public class FillAnimation extends Algorithm{
 
@@ -16,7 +17,7 @@ public class FillAnimation extends Algorithm{
 
     public FillAnimation(){
         super();
-        color = new JColorChooser(Color.BLUE);
+        color = new JColorChooser(java.awt.Color.BLUE);
         reset();
     }
 
@@ -26,7 +27,7 @@ public class FillAnimation extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         int x,y;
         if(points.isEmpty()){
             //TODO get points somehow
@@ -40,7 +41,7 @@ public class FillAnimation extends Algorithm{
             }
         }
 
-        g.setColor(color.getColor());
+        IMG.setColor(new Color(color.getColor().getRGB()));
 
         npoints.ensureCapacity(points.size());
 
@@ -48,7 +49,7 @@ public class FillAnimation extends Algorithm{
 
         for(int i=0; i<num; i++){
             int[] p = points.get(i);
-            g.drawLine(p[0],p[1],p[0],p[1]);
+            IMG.drawLine(p[0],p[1],p[0],p[1]);
 
             for(int[] off : NEXT){
                 x = p[0] + off[0];

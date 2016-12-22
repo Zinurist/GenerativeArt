@@ -6,6 +6,7 @@ import gui.MainFrame;
 
 import java.awt.*;
 import java.util.Random;
+import image.Color;
 
 public class Balls extends Algorithm{
 
@@ -96,7 +97,7 @@ public class Balls extends Algorithm{
 
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
 
         Point w;
         if(!started){
@@ -144,8 +145,8 @@ public class Balls extends Algorithm{
         emptyIMG();
         for (int i = 0; i < num; i++) {
             b = balls[i];
-            g.setColor(b.c);
-            g.fillOval(b.x(), b.y(), b.width(), b.width());
+            IMG.setColor(b.c);
+            IMG.fillOval(b.x(), b.y(), b.width(), b.width());
         }
     }
 

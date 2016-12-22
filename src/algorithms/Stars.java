@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
+import image.Color;
 
 public class Stars extends Algorithm {
 
@@ -28,16 +29,16 @@ public class Stars extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         emptyIMG();
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         Point m = MainFrame.MF.getMouseLocation();
 
         int vx, vy;
         double r;
         for(int[] p : points){
-            g.fillOval(p[0]-5,p[1]-5,10,10);
+            IMG.fillOval(p[0]-5,p[1]-5,10,10);
 
             vx = m.x - p[0];
             vy = m.y - p[1];
@@ -47,10 +48,10 @@ public class Stars extends Algorithm {
             vx = (int)(vx*r + 0.5);
             vy = (int)(vy*r + 0.5);
 
-            g.fillOval(m.x - vx - 5, m.y - vy - 5, 10, 10);
+            IMG.fillOval(m.x - vx - 5, m.y - vy - 5, 10, 10);
 
             if(connect){
-                g.drawLine(m.x - vx, m.y - vy, p[0], p[1]);
+                IMG.drawLine(m.x - vx, m.y - vy, p[0], p[1]);
             }
         }
 

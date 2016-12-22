@@ -1,6 +1,6 @@
 package algorithms.imgeffects;
 
-import java.awt.*;
+import image.Color;
 
 public class BlackPixels extends ImageEffect {
 
@@ -12,16 +12,16 @@ public class BlackPixels extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         reset();
 
         int n = even?0:1;
 
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
         //blur using averaging algorithm
         for(int y=0; y<height; y++){
             for(int x=(y%2==n? 0:1); x<width; x+=2){
-                g.drawLine(x, y, x, y);
+                IMG.drawLine(x, y, x, y);
             }
         }
 

@@ -2,13 +2,14 @@ package algorithms.randomizer;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class RandomPolygon extends Randomizer {
 
     JSpinner num = new JSpinner(new SpinnerNumberModel(30, 0, 100, 10));
 
     @Override
-    public void step(Graphics g, int width, int height) {
+    public void step(int width, int height) {
         int num1 = (Integer) num.getValue();
         num1 = num1==0? r.nextInt(40)+10 : num1;
         int[] xPoints = new int[num1];
@@ -18,11 +19,11 @@ public class RandomPolygon extends Randomizer {
             yPoints[i]=r.nextInt(height);
         }
         if(color){
-            g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
-            g.fillPolygon(xPoints, yPoints, num1);
-            g.setColor(Color.BLACK);
+            IMG.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+            IMG.fillPolygon(xPoints, yPoints, num1);
+            IMG.setColor(Color.BLACK);
         }
-        g.drawPolygon(xPoints, yPoints, num1);
+        IMG.drawPolygon(xPoints, yPoints, num1);
     }
 
     @Override

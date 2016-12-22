@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.Random;
+import image.Color;
 
 public class Shadow extends Algorithm {
 
@@ -67,24 +68,24 @@ public class Shadow extends Algorithm {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         init();
 
-        g.setColor(Color.BLACK);
-        g.translate((Integer)xOffset.getValue(), (Integer)yOffset.getValue());
+        IMG.setColor(Color.BLACK);
+        IMG.translate((Integer)xOffset.getValue(), (Integer)yOffset.getValue());
 
         Randomizer.color = true;
 
         long seed = System.currentTimeMillis();
         Randomizer.r = new Random(seed);
-        shadow.step(g,IMG.getWidth(),IMG.getHeight());
+        shadow.step(IMG.getWidth(),IMG.getHeight());
 
         divider.step();
 
-        g = IMG.createGraphics();
+        IMG.untranslate();
 
         Randomizer.r = new Random(seed);
-        algo.step(g, IMG.getWidth(), IMG.getHeight());
+        algo.step(IMG.getWidth(), IMG.getHeight());
     }
 
     @Override

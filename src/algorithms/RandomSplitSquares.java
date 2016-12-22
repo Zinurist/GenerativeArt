@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
 import java.util.Random;
+import image.Color;
 
 public class RandomSplitSquares extends Algorithm{
 
@@ -24,15 +25,15 @@ public class RandomSplitSquares extends Algorithm{
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
 
-        g.setColor(Color.WHITE);
+        IMG.setColor(Color.WHITE);
         if(!topLeftBox.isSelected()) {
-            g.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
+            IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
         }else{
-            g.fillRect(0, 0, squares.get(0).x2-squares.get(0).x1, squares.get(0).y2-squares.get(0).y1);
+            IMG.fillRect(0, 0, squares.get(0).x2-squares.get(0).x1, squares.get(0).y2-squares.get(0).y1);
         }
-        g.setColor(Color.BLACK);
+        IMG.setColor(Color.BLACK);
 
 
         LinkedList<S> newS = new LinkedList<S>();
@@ -71,11 +72,11 @@ public class RandomSplitSquares extends Algorithm{
                     newS.add(s2);
                     newS.add(s3);
                 }
-                g.fillRect(s1.x1,s1.y1,s1.x2-s1.x1,s1.y2-s1.y1);
-                g.fillRect(s2.x1,s2.y1,s2.x2-s2.x1,s2.y2-s2.y1);
-                g.fillRect(s3.x1,s3.y1,s3.x2-s3.x1,s3.y2-s3.y1);
+                IMG.fillRect(s1.x1,s1.y1,s1.x2-s1.x1,s1.y2-s1.y1);
+                IMG.fillRect(s2.x1,s2.y1,s2.x2-s2.x1,s2.y2-s2.y1);
+                IMG.fillRect(s3.x1,s3.y1,s3.x2-s3.x1,s3.y2-s3.y1);
             }
-            g.fillRect(s.x1, s.y1, s.x2 - s.x1, s.y2 - s.y1);
+            IMG.fillRect(s.x1, s.y1, s.x2 - s.x1, s.y2 - s.y1);
         }
         if(!topLeftBox.isSelected()) {
             squares.addAll(newS);

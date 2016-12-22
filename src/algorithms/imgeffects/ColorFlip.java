@@ -2,6 +2,7 @@ package algorithms.imgeffects;
 
 import javax.swing.*;
 import java.awt.*;
+import image.Color;
 
 public class ColorFlip extends ImageEffect {
 
@@ -13,7 +14,7 @@ public class ColorFlip extends ImageEffect {
     }
 
     @Override
-    public void step(Graphics g) {
+    public void step() {
         Color c1,c2;
 
         //blur using averaging algorithm
@@ -24,22 +25,22 @@ public class ColorFlip extends ImageEffect {
                 c2 = new Color(IMG.getRGB(y, x));
                 if(type == 0){
 
-                    g.setColor(new Color(c2.getRed(),c1.getGreen(),c1.getBlue()));
-                    g.drawLine(x, y, x, y);
-                    g.setColor(new Color(c1.getRed(),c2.getGreen(),c2.getBlue()));
-                    g.drawLine(y, x, y, x);
+                    IMG.setColor(new Color(c2.getRed(),c1.getGreen(),c1.getBlue()));
+                    IMG.drawLine(x, y, x, y);
+                    IMG.setColor(new Color(c1.getRed(),c2.getGreen(),c2.getBlue()));
+                    IMG.drawLine(y, x, y, x);
                 }else if(type == 1){
 
-                    g.setColor(new Color(c1.getRed(),c2.getGreen(),c1.getBlue()));
-                    g.drawLine(x, y, x, y);
-                    g.setColor(new Color(c2.getRed(),c1.getGreen(),c2.getBlue()));
-                    g.drawLine(y, x, y, x);
+                    IMG.setColor(new Color(c1.getRed(),c2.getGreen(),c1.getBlue()));
+                    IMG.drawLine(x, y, x, y);
+                    IMG.setColor(new Color(c2.getRed(),c1.getGreen(),c2.getBlue()));
+                    IMG.drawLine(y, x, y, x);
                 }else{
 
-                    g.setColor(new Color(c1.getRed(),c1.getGreen(),c2.getBlue()));
-                    g.drawLine(x, y, x, y);
-                    g.setColor(new Color(c2.getRed(),c2.getGreen(),c1.getBlue()));
-                    g.drawLine(y, x, y, x);
+                    IMG.setColor(new Color(c1.getRed(),c1.getGreen(),c2.getBlue()));
+                    IMG.drawLine(x, y, x, y);
+                    IMG.setColor(new Color(c2.getRed(),c2.getGreen(),c1.getBlue()));
+                    IMG.drawLine(y, x, y, x);
                 }
 
             }
