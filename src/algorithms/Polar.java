@@ -48,7 +48,7 @@ public class Polar extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("r step", r_step, 2, 100, val -> r_step = val);
         return list;
     }

@@ -58,7 +58,7 @@ public class Shadow extends Algorithm {
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
 
         String[] salgs = new String[algs.length];
         String[] srands = new String[rands.length];

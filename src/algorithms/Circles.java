@@ -64,7 +64,7 @@ public class Circles extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
 
         list.addOption("Radius x", radX, 2, 500, val -> radX = val);
         list.addOption("Radius y", radY, 2, 500, val -> radY = val);

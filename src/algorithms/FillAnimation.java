@@ -83,7 +83,7 @@ public class FillAnimation extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption(color, val -> color = val);
         return list;
     }

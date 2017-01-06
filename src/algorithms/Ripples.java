@@ -74,7 +74,7 @@ public class Ripples extends Algorithm {
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("negative", negative, val -> {
             negative = val;
             if(negative){

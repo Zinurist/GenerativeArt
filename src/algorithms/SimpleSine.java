@@ -42,7 +42,7 @@ public class SimpleSine extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("a", a, 0., IMG.getHeight()*4/10., 1., val -> {a = val; plotted = false;});
         list.addOption("b", b, 0., 1., 0.001, val -> {b = val; plotted = false;});
         list.addInfo("a * sin(b * x)");

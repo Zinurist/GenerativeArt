@@ -132,7 +132,7 @@ public class BallAndWind extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         return list;
     }
 

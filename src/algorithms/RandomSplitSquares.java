@@ -86,7 +86,7 @@ public class RandomSplitSquares extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("random", random, val -> random = val);
         list.addOption("only top left", topLeft, val -> topLeft = val);
         return list;

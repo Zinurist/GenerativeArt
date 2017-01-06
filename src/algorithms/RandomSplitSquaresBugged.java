@@ -65,7 +65,7 @@ public class RandomSplitSquaresBugged extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("First type", type, val -> type = val);
         return list;
     }

@@ -42,7 +42,7 @@ public class SimpleLines extends Algorithm {
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("vertical lines", vertical, val -> vertical = val);
         list.addOption("horizontal lines", horizontal, val -> horizontal = val);
         return list;

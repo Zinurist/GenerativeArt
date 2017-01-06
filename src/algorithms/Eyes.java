@@ -74,7 +74,7 @@ public class Eyes extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("rad eye", radEye, 4, 300, val -> radEye = val);
         list.addOption("rad pupil", radPupil, 4, 300, val -> radPupil = val);
         list.addOption("mouse z", mouseZ, 4, 3000, val -> mouseZ = val);

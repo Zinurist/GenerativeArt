@@ -33,7 +33,7 @@ public class EmptyAlgorithm extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         //add options here
         return list;
     }

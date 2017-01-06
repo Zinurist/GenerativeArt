@@ -169,7 +169,7 @@ public class Net extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
 
         list.addOption("H Wind", hWind, -10.0, 10.0, 1.0, val -> hWind = val);
         list.addOption("V Wind", vWind, -10.0, 10.0, 1.0, val -> vWind = val);

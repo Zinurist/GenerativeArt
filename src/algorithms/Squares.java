@@ -18,7 +18,7 @@ public class Squares extends Algorithm {
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
         list.addOption("circles", circles, val -> circles = val);
         return list;
     }

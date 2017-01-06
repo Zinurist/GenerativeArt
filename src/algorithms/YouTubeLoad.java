@@ -60,7 +60,7 @@ public class YouTubeLoad extends Algorithm{
 
     @Override
     public OptionList getOptionList(){
-        OptionList list = new OptionList();
+        OptionList list = super.getOptionList();
 
         list.addOption("#circles", numOfCircles, 2, 300, val -> numOfCircles = val);
         list.addOption("radius (in px)", circleRadius, 4, 300, val -> circleRadius = val);
