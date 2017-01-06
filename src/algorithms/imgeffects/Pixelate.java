@@ -1,6 +1,5 @@
 package algorithms.imgeffects;
 
-import java.awt.*;
 import image.Color;
 
 public class Pixelate extends ImageEffect {

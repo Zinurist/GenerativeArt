@@ -1,13 +1,10 @@
 package algorithms.imgeffects;
 
 import algorithms.Algorithm;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
-import java.util.LinkedList;
 import image.Image;
 import image.Color;
+import option.OptionList;
 
 /**
  * This class provides a framework for algorithms which operate on images given by the user. These algorithms mainly consist of image processing algorithms.
@@ -31,11 +28,8 @@ public abstract class ImageEffect extends Algorithm {
      */
     protected static int width, height;
 
-    //GUI elements for the options frame
-    private static TextField locationOrg, locationMask;
-    private static JButton btnLoadOrg, btnLoadMask;
-    private static JLabel lbl;
-    private static JCheckBox box;
+    private static String locationOrg, locationMask;
+    private static boolean ignoreImageSize;
 
     /**
      * Loads an image from the path given in the location text fields. Type 0 means loading original, any other type means loading the mask.
@@ -44,20 +38,20 @@ public abstract class ImageEffect extends Algorithm {
     protected static void loadImage(int type){
         try {
             if(type == 0){
-                original = new Image(locationOrg.getText());
-                lbl.setText("Loaded image!");
+                original = new Image(locationOrg);
+                //OptionList.log("Loaded image!");
                 width = Math.min(IMG.getWidth(), original.getWidth());
                 height = Math.min(IMG.getHeight(), original.getHeight());
             }else{
-                mask = new Image(locationMask.getText());
+                mask = new Image(locationMask);
                 if(mask.getWidth() != width || mask.getHeight() != height){
-                    lbl.setText("Warning: Mask size wrong!");
+                    //OptionList.log("Warning: Mask size wrong!");
                 }else{
-                    lbl.setText("Loaded mask!");
+                    //OptionList.log("Loaded mask!");
                 }
             }
         } catch (IOException e) {
-            lbl.setText("Error: "+e.getMessage());
+            OptionList.displayError(e.getMessage());
             width = IMG.getWidth();
             height = IMG.getHeight();
         }
@@ -68,24 +62,8 @@ public abstract class ImageEffect extends Algorithm {
         IMG.setColor(Color.WHITE);
         IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
 
-        locationOrg = new TextField("test.jpg");
-        btnLoadOrg = new JButton("Load image");
-        btnLoadOrg.addActionListener(e -> loadImage(0));
-        locationMask = new TextField("mask.jpg");
-        btnLoadMask = new JButton("Load mask");
-        btnLoadMask.addActionListener(e -> loadImage(1));
-
-        lbl = new JLabel("");
-        box = new JCheckBox("Ignore img size");
-        box.addActionListener(e -> {
-            if (box.isSelected()) {
-                width = IMG.getWidth();
-                height = IMG.getHeight();
-            } else {
-                width = Math.min(IMG.getWidth(), original.getWidth());
-                height = Math.min(IMG.getHeight(), original.getHeight());
-            }
-        });
+        locationOrg = "test.jpg";
+        locationMask = "mask.jpg";
 
         loadImage(0);
         //currently only loading original image, not mask
@@ -105,14 +83,23 @@ public abstract class ImageEffect extends Algorithm {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<Component>();
-        list.add(locationOrg);
-        list.add(btnLoadOrg);
-        list.add(locationMask);
-        list.add(btnLoadMask);
-        list.add(lbl);
-        list.add(box);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("Load image", locationOrg, val -> {locationOrg = val; loadImage(0);});
+        list.addOption("Load mask", locationMask, val -> {
+            locationMask = val;
+            loadImage(1);
+        });
+        list.addOption("Ignore img size", ignoreImageSize, val -> {
+            ignoreImageSize = val;
+            if(ignoreImageSize) {
+                width = IMG.getWidth();
+                height = IMG.getHeight();
+            } else {
+                width = Math.min(IMG.getWidth(), original.getWidth());
+                height = Math.min(IMG.getHeight(), original.getHeight());
+            }
+        });
         return list;
     }
 }

@@ -1,14 +1,11 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class SineWiggle extends ImageEffect {
 
-    private int a,b; //a*sin(b*x)
+    private double a,b;
     private int t;//percent
     private boolean loop;
 
@@ -59,42 +56,12 @@ public class SineWiggle extends ImageEffect {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-
-        JLabel lblA = new JLabel("Amplitude a: "+a);
-        JLabel lblB = new JLabel("Factor b: "+b);
-        JSlider sa = new JSlider(0,IMG.getWidth()*2, a);
-        JSlider sb = new JSlider(0,200,b);
-        sa.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                a = sa.getValue();
-                lblA.setText("Amplitude a: "+a);
-            }
-        });
-        sb.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                b = sb.getValue();
-                lblB.setText("Factor b: " + b);
-            }
-        });
-
-        JCheckBox cbLoop = new JCheckBox("loop perfectly",loop);
-        cbLoop.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                loop = cbLoop.isSelected();
-            }
-        });
-
-        list.add(lblA);
-        list.add(sa);
-        list.add(lblB);
-        list.add(sb);
-        list.add(new JLabel("a/10 * sin( x * b/height)"));
-        list.add(cbLoop);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("Amplitude a", a, 0, IMG.getWidth()*2./10., 0.1, val -> a = val);
+        list.addOption("Factor b", b, 0, 200, 1., val -> b = val);
+        list.addOption("loop perfectly", loop, val -> loop = val);
+        list.addInfo("a * sin(x * b/height)");
         return list;
     }
 

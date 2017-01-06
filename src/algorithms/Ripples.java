@@ -1,18 +1,15 @@
 package algorithms;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class Ripples extends Algorithm {
 
     private Color c1, c2;
+    private boolean negative;
     private List<int[]> circles;
     private int thresholdEnd = IMG.getWidth()/4;
     private int thresholdStart = IMG.getWidth()/8;
@@ -22,7 +19,7 @@ public class Ripples extends Algorithm {
     public Ripples(){
         c1 = Color.BLACK;
         c2 = Color.WHITE;
-
+        negative = false;
         reset();
     }
 
@@ -76,25 +73,18 @@ public class Ripples extends Algorithm {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-
-        JCheckBox color = new JCheckBox("negative");
-        color.setSelected(false);
-        color.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if(color.isSelected()){
-                    c1 = Color.WHITE;
-                    c2 = Color.BLACK;
-                }else{
-                    c1 = Color.BLACK;
-                    c2 = Color.WHITE;
-                }
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("negative", negative, val -> {
+            negative = val;
+            if(negative){
+                c1 = Color.WHITE;
+                c2 = Color.BLACK;
+            }else{
+                c1 = Color.BLACK;
+                c2 = Color.WHITE;
             }
         });
-
-        java.util.List<Component> list = new LinkedList<Component>();
-        list.add(color);
         return list;
     }
 }

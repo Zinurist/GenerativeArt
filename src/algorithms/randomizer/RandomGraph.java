@@ -1,10 +1,8 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.LinkedList;
-import java.util.List;
 import image.Color;
+import option.OptionList;
 
 public class RandomGraph extends Randomizer {
 
@@ -12,7 +10,7 @@ public class RandomGraph extends Randomizer {
     private static int MIN_NODES = 1;
     private static int MAX_NODES = 5;//inclusive
     private static double MIN_DIS = 5.;//inclusive
-    private static double CONE = Math.PI/1.5;//between 180° and 90°
+    private static double CONE = Math.PI/1.5;//between 180ï¿½ and 90ï¿½
 
     private boolean shrink;
 
@@ -59,15 +57,15 @@ public class RandomGraph extends Randomizer {
                 }
                 angle = r.nextDouble()*CONE;
                 //transform angle to current vector
-                //angle 0° is perpendicular to current vector (p[2],p[3])
+                //angle 0ï¿½ is perpendicular to current vector (p[2],p[3])
                 //-> vector to angle "alpha"
-                //0° is then at alpha - 90° (90° = PI/2)
-                //example: vector points left -> 180° -> 0° is at 90° (pointing up)
-                //example: vector points up (down on the drawing panel because y is flipped) -> 90° -> 0° is at 0°
+                //0ï¿½ is then at alpha - 90ï¿½ (90ï¿½ = PI/2)
+                //example: vector points left -> 180ï¿½ -> 0ï¿½ is at 90ï¿½ (pointing up)
+                //example: vector points up (down on the drawing panel because y is flipped) -> 90ï¿½ -> 0ï¿½ is at 0ï¿½
 
-                //in our case: 0° is right bound for the angle if the angle is in a 180° cone
-                //else if the cone is smaller/bigger: not 0°, but 90° - cone/2
-                //so: angle = angle + (alpha - 90°) + (90° - cone/2) = angle + alpha - cone/2
+                //in our case: 0ï¿½ is right bound for the angle if the angle is in a 180ï¿½ cone
+                //else if the cone is smaller/bigger: not 0ï¿½, but 90ï¿½ - cone/2
+                //so: angle = angle + (alpha - 90ï¿½) + (90ï¿½ - cone/2) = angle + alpha - cone/2
 
                 vecAngle = Math.atan2(p[3],p[2]);
 
@@ -110,13 +108,9 @@ public class RandomGraph extends Randomizer {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        List<Component> list = super.getOptionList();
-
-        JCheckBox cbShrink = new JCheckBox("shrink", shrink);
-        cbShrink.addActionListener(l -> shrink = cbShrink.isSelected());
-        list.add(cbShrink);
-
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("shrink", shrink, val -> shrink = val);
         return list;
     }
 

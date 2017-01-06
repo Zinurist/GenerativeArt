@@ -1,6 +1,5 @@
 package algorithms;
 
-import java.awt.*;
 import java.util.LinkedList;
 import image.Color;
 

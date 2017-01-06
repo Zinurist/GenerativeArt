@@ -1,6 +1,6 @@
 package algorithms;
 
-import java.awt.*;
+import option.OptionList;
 
 public class Grid extends Algorithm {
 
@@ -23,7 +23,7 @@ public class Grid extends Algorithm {
 
 
     @Override
-    public java.util.List<Component> getOptionList(){
+    public OptionList getOptionList(){
         return s.getOptionList();
     }
 

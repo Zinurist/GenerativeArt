@@ -1,9 +1,7 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
 import image.Color;
+import option.OptionList;
 
 public class RandomPath extends Randomizer {
 
@@ -105,12 +103,9 @@ public class RandomPath extends Randomizer {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        List<Component> list = super.getOptionList();
-        JCheckBox spaceBox = new JCheckBox("spacing");
-        spaceBox.setSelected(space);
-        spaceBox.addItemListener(l->this.space = spaceBox.isSelected());
-        list.add(spaceBox);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("spacing", space, val -> space = val);
         return list;
     }
 

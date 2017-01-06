@@ -7,6 +7,7 @@ import gui.MainFrame;
 import java.awt.*;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class Balls extends Algorithm{
 
@@ -179,8 +180,8 @@ public class Balls extends Algorithm{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new java.util.LinkedList<>();
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
         return list;
     }
 }

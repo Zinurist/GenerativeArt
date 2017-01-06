@@ -1,17 +1,16 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class ImageTransition extends ImageEffect {
 
     private double offset;
-    private JComboBox<String> type;
+    private int type;
 
     public ImageTransition(){
         super();
-        type = new JComboBox<>(new String[]{"linear", "cubic"});
+        type = 0;
         offset = 0;
     }
 
@@ -39,13 +38,13 @@ public class ImageTransition extends ImageEffect {
                 cm = new Color(mask.getRGB(x, y));
 
                 //!!! round by adding +0.5 and casting to int: (int)(x+0.5)
-                if(type.getSelectedIndex() == 0) {
+                if(type == 0) {
                     //linear, 2 conditions: f(0) = x0 = color original, f(1) = x1 = color mask
                     //x0 + (x1-x0)*x = f(x)
                     //co.getBlue() + (int)((cm.getBlue() - co.getBlue())*offset + 0.5)
                     IMG.setColor(new Color(co.getRed() + (int) ((cm.getRed() - co.getRed()) * offset + 0.5), co.getGreen() + (int) ((cm.getGreen() - co.getGreen()) * offset + 0.5), co.getBlue() + (int) ((cm.getBlue() - co.getBlue()) * offset + 0.5)));
                     IMG.drawLine(x, y, x, y);
-                }else if(type.getSelectedIndex() == 1){
+                }else if(type == 1){
                     //cubic, 2 extra conditions: f'(0) = f'(1) = 0
                     //f(x) = ax^3 + bx^2 + cx + d, f'(x) = 3ax^2 + 2bx + c
                     //f'(0) = c = 0    |    f'(1) = 3a + 2b = 0
@@ -59,7 +58,7 @@ public class ImageTransition extends ImageEffect {
                     IMG.setColor(new Color( co.getRed() + (int)( (cm.getRed()-co.getRed()) * offset2 +0.5), co.getGreen() + (int)( (cm.getGreen()-co.getGreen()) * offset2 +0.5), co.getBlue() + (int)( (cm.getBlue()-co.getBlue()) * offset2 +0.5)  ));
                     IMG.drawLine(x, y, x, y);
                 }else{
-                    System.out.println("Shouldn't happen!");
+                    OptionList.displayError("Unknown type");
                 }
 
             }
@@ -75,10 +74,10 @@ public class ImageTransition extends ImageEffect {
 
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-        list.add(new JLabel("Interpolation:"));
-        list.add(type);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        String[] values = new String[]{"linear", "cubic"};
+        list.addOption("Interpolation", values, type, val -> type = val);
         return list;
     }
 

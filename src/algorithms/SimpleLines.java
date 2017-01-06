@@ -1,9 +1,7 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
 import image.Color;
+import option.OptionList;
 
 public class SimpleLines extends Algorithm {
 
@@ -43,17 +41,10 @@ public class SimpleLines extends Algorithm {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<Component>();
-        JCheckBox verticalBox = new JCheckBox("vertical lines");
-        verticalBox.setSelected(vertical);
-        verticalBox.addItemListener(l->this.vertical = verticalBox.isSelected());
-        JCheckBox horizontalBox = new JCheckBox("horizontal lines");
-        horizontalBox.setSelected(horizontal);
-        horizontalBox.addItemListener(l->this.horizontal = horizontalBox.isSelected());
-
-        list.add(verticalBox);
-        list.add(horizontalBox);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("vertical lines", vertical, val -> vertical = val);
+        list.addOption("horizontal lines", horizontal, val -> horizontal = val);
         return list;
     }
 

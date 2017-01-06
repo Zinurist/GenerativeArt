@@ -1,10 +1,7 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.LinkedList;
-import java.util.List;
 import image.Color;
+import option.OptionList;
 
 public class Squares extends Algorithm {
 
@@ -20,12 +17,9 @@ public class Squares extends Algorithm {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        List<Component> list = new LinkedList<>();
-        JCheckBox circlesBox = new JCheckBox("circles");
-        circlesBox.setSelected(circles);
-        circlesBox.addItemListener(l->this.circles = circlesBox.isSelected());
-        list.add(circlesBox);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("circles", circles, val -> circles = val);
         return list;
     }
 

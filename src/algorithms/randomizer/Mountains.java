@@ -1,8 +1,7 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class Mountains extends Randomizer{
 
@@ -87,36 +86,16 @@ public class Mountains extends Randomizer{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
 
-        JCheckBox cbSlopes = new JCheckBox("slopes",slopes);
-        cbSlopes.addChangeListener(l->{slopes = cbSlopes.isSelected();});
+        list.addOption("slopes", slopes, val -> slopes = val);
+        list.addOption("loop", loop, val -> loop = val);
+        list.addOption("reset at loop", resetAtLoop, val -> resetAtLoop = val);
+        list.addOption("step x", stepX, 1, 100, val -> stepX = val);
+        list.addOption("step y", stepY, 1, 100, val -> stepY = val);
+        list.addOption("instant", instant, val -> instant = val);
 
-        JCheckBox cbLoop = new JCheckBox("loop",loop);
-        cbLoop.addChangeListener(l->{loop = cbLoop.isSelected();});
-        JCheckBox cbReset = new JCheckBox("reset at loop",resetAtLoop);
-        cbReset.addChangeListener(l->{resetAtLoop = cbReset.isSelected();});
-
-        JCheckBox cbInstant = new JCheckBox("instant",instant);
-        cbInstant.addChangeListener(l->{instant = cbInstant.isSelected();});
-
-        JLabel lblX = new JLabel("step x: "+stepX);
-        JSlider slX = new JSlider(1,100,stepX);
-        slX.addChangeListener(l->{stepX = slX.getValue(); lblX.setText("step x: "+stepX);});
-
-        JLabel lblY = new JLabel("step y: "+stepY);
-        JSlider slY = new JSlider(1,100,stepY);
-        slY.addChangeListener(l->{stepY = slY.getValue(); lblY.setText("step y: "+stepY);});
-
-        list.add(cbSlopes);
-        list.add(cbLoop);
-        list.add(cbReset);
-        list.add(lblX);
-        list.add(slX);
-        list.add(lblY);
-        list.add(slY);
-        list.add(cbInstant);
         return list;
     }
 

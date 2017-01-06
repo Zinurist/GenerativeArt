@@ -1,9 +1,8 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
 import image.Image;
+import option.OptionList;
 
 public class ImageFilter extends ImageEffect {
 
@@ -54,7 +53,7 @@ public class ImageFilter extends ImageEffect {
             case 3://laplace - edges
                 filter = LAPLACE;
                 break;
-            case 4://edges 45°
+            case 4://edges 45ï¿½
                 filter = EDGES_45;
                 break;
             case 5://sobel x
@@ -128,15 +127,11 @@ public class ImageFilter extends ImageEffect {
     }
 
     @Override
-    public java.util.List<Component> getOptionList() {
-        java.util.List<Component> list = super.getOptionList();
+    public OptionList getOptionList() {
+        OptionList list = super.getOptionList();
 
         String[] filters = new String[]{"gauss","gauss blur","sharp","laplace","laplace 2","sobel x","sobel y","relief","islands","stars","vertical/hor.","custom"};
-        JComboBox<String> cbFilter = new JComboBox<>(filters);
-        cbFilter.setSelectedIndex(filterNum);
-        cbFilter.addActionListener(l -> filterNum = cbFilter.getSelectedIndex());
-        list.add(new JLabel("Filter:"));
-        list.add(cbFilter);
+        list.addOption("Filter", filters, filterNum, val -> filterNum = val);
 
         return list;
     }

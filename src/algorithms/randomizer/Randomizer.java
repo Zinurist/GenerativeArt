@@ -1,17 +1,9 @@
 package algorithms.randomizer;
 
 import algorithms.*;
-
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.JCheckBox;
-import java.awt.Component;
-
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 /**
  * An abstraction for algorithms which are mainly based on drawing randomly in the image.
@@ -34,7 +26,7 @@ public abstract class Randomizer extends Algorithm {
     /**
      * If the empty option is set to true, then the image get emptied at the start of every step.
      */
-    private static boolean empty = false;
+    private static boolean empty = true;
     /**
      * The random object to be used by randomizers.
      */
@@ -84,31 +76,15 @@ public abstract class Randomizer extends Algorithm {
 
     /**
      * The option list of randomizers already have default options. Subclasses should call this function and extend the list by own/new options, instead of creating a new list.
-     * @return
+     * @return the option list
      */
     @Override
-    public List<Component> getOptionList(){
-        List<Component> list = new LinkedList<Component>();
-        JCheckBox colorBox = new JCheckBox("Color mode");
-        colorBox.setSelected(color);
-        colorBox.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                color = colorBox.isSelected();
-            }
-        });
-        list.add(colorBox);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("Color mode", color, val -> color = val);
 
         if(emptiable) {
-            JCheckBox emptyBox = new JCheckBox("Empty");
-            emptyBox.setSelected(empty);
-            emptyBox.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    empty = emptyBox.isSelected();
-                }
-            });
-            list.add(emptyBox);
+            list.addOption("Empty", empty, val -> empty = val);
         }
 
         return list;

@@ -1,19 +1,16 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.LinkedList;
 import image.Color;
+import option.OptionList;
 
 public class Polar extends Algorithm{
 
     private static final int POINT_SIZE = 8;
 
-    private JSlider r_step_slider;
-    private int t, max_r;
+    private int t, max_r, r_step;
 
     public Polar(){
-        r_step_slider = new JSlider(2,100,30);
+        r_step = 30;
         reset();
     }
 
@@ -25,8 +22,6 @@ public class Polar extends Algorithm{
     @Override
     public void step() {
         emptyIMG();
-
-        int r_step = r_step_slider.getValue();
         IMG.setColor(Color.BLACK);
 
         int x0 = IMG.getWidth()/2;
@@ -52,10 +47,9 @@ public class Polar extends Algorithm{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<Component>();
-        list.add(r_step_slider);
-        list.add(new JLabel("r_step"));
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("r step", r_step, 2, 100, val -> r_step = val);
         return list;
     }
 }

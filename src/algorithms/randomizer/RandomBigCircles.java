@@ -1,8 +1,7 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class RandomBigCircles extends Randomizer{
 
@@ -30,16 +29,9 @@ public class RandomBigCircles extends Randomizer{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-
-        JLabel lblNum = new JLabel("#circles: "+num);
-
-        JSlider slNum = new JSlider(1, 100, num);
-        slNum.addChangeListener(l->{num = slNum.getValue(); lblNum.setText("#circles: "+num);});
-
-        list.add(lblNum);
-        list.add(slNum);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("#circles", num, 1, 100, val -> num = val);
         return list;
     }
 

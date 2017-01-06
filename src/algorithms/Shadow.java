@@ -1,65 +1,33 @@
 package algorithms;
 
-import algorithms.randomizer.RandomRifts;
 import algorithms.randomizer.Randomizer;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.LinkedList;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class Shadow extends Algorithm {
 
-    private Algorithm divider;
-    private Randomizer shadow, algo;
-    private JSpinner xOffset, yOffset;
-    JComboBox<Algorithm> dividerSelector;
-    JComboBox<Algorithm> shadowSelector;
-    JComboBox<Algorithm> algoSelector;
+    private int divider, shadow, algo;
+    private int yOffset, xOffset;
+    private Algorithm[] algs;
+    private Randomizer[] rands;
 
     public Shadow(){
-        this(new Grid(), new RandomRifts(), new RandomRifts());
+        this(0,0,0);
     }
 
-    public Shadow(Algorithm div, Randomizer sh, Randomizer alg){
+    public Shadow(int div, int sh, int alg){
         super();
         this.divider = div;
         this.shadow = sh;
         this.algo = alg;
 
-        xOffset = new JSpinner(new SpinnerNumberModel(-100,-1000,1000,10));
-        yOffset = new JSpinner(new SpinnerNumberModel(0,-1000,1000,10));
+        algs = Algorithm.getAlgorithmsList();
+        rands = Algorithm.getRandomizersList();
 
-        dividerSelector = new JComboBox<>(Algorithm.getAlgorithmsList());
-        shadowSelector = new JComboBox<>(Randomizer.getRandomizersList());
-        algoSelector = new JComboBox<>(Randomizer.getRandomizersList());
-
-        dividerSelector.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                divider = (Algorithm) dividerSelector.getSelectedItem();
-            }
-        });
-        dividerSelector.setSelectedItem(divider);
-
-        shadowSelector.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                shadow = (Randomizer) shadowSelector.getSelectedItem();
-            }
-        });
-        shadowSelector.setSelectedItem(shadow);
-
-        algoSelector.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                algo = (Randomizer) algoSelector.getSelectedItem();
-            }
-        });
-        algoSelector.setSelectedItem(algo);
+        xOffset = -100;
+        yOffset = -10;
     }
 
     @Override
@@ -72,40 +40,42 @@ public class Shadow extends Algorithm {
         init();
 
         IMG.setColor(Color.BLACK);
-        IMG.translate((Integer)xOffset.getValue(), (Integer)yOffset.getValue());
+        IMG.translate(xOffset, yOffset);
 
         Randomizer.color = true;
 
         long seed = System.currentTimeMillis();
         Randomizer.r = new Random(seed);
-        shadow.step(IMG.getWidth(),IMG.getHeight());
+        rands[shadow].step(IMG.getWidth(),IMG.getHeight());
 
-        divider.step();
+        algs[divider].step();
 
         IMG.untranslate();
 
         Randomizer.r = new Random(seed);
-        algo.step(IMG.getWidth(), IMG.getHeight());
+        rands[algo].step(IMG.getWidth(), IMG.getHeight());
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<Component>();
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
 
-        list.add(new JLabel("Divider: "));
-        list.add(dividerSelector);
-        list.add(new JLabel("Shadow: "));
-        list.add(shadowSelector);
-        list.add(new JLabel("Algorithm: "));
-        list.add(algoSelector);
-        list.add(new JLabel("x offset: "));
-        list.add(xOffset);
-        list.add(new JLabel("y offset: "));
-        list.add(yOffset);
+        String[] salgs = new String[algs.length];
+        String[] srands = new String[rands.length];
+        for(int i=0; i<algs.length; i++)
+            salgs[i] = algs[i].toString();
+        for(int i=0; i<rands.length; i++)
+            srands[i] = rands[i].toString();
 
-        list.addAll(divider.getOptionList());
-        list.addAll(shadow.getOptionList());
-        list.addAll(algo.getOptionList());
+        list.addOption("Divider", salgs, divider, val -> divider = val);
+        list.addOption("Shadow", srands, shadow, val -> shadow = val);
+        list.addOption("Algorithm", srands, algo, val -> algo = val);
+
+        list.addOption("x offset", xOffset, -1000, 1000, val -> xOffset = val);
+        list.addOption("y offset", yOffset, -1000, 1000, val -> yOffset = val);
+        list.addList(algs[divider].getOptionList());
+        list.addList(rands[shadow].getOptionList());
+        list.addList(rands[algo].getOptionList());
         return list;
     }
 

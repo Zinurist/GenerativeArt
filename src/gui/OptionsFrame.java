@@ -28,7 +28,7 @@ public class OptionsFrame extends JFrame {
      * @param algo the current algorithm
      */
     public void setAlgorithm(Algorithm algo){
-        initContentPane(algo.getOptionList());
+        initContentPane(algo.getOptionList().getList());
         setSize(new Dimension(300, 50 * rows));
     }
 

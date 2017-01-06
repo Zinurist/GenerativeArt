@@ -1,11 +1,8 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.util.ArrayList;
 import image.Color;
+import option.OptionList;
 
 public class Voronoi extends Randomizer{
 
@@ -109,29 +106,11 @@ public class Voronoi extends Randomizer{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-
-        JCheckBox cbEuclid = new JCheckBox("Euclid");
-        cbEuclid.addChangeListener(l -> {
-            euclid = cbEuclid.isSelected();
-        });
-        list.add(cbEuclid);
-        cbEuclid.setSelected(euclid);
-
-        JCheckBox cbShowPoints = new JCheckBox("Show points");
-        cbShowPoints.addChangeListener(l -> {
-            showPoints = cbShowPoints.isSelected();
-        });
-        list.add(cbShowPoints);
-        cbShowPoints.setSelected(showPoints);
-
-        JLabel lblNum = new JLabel("num of points: ");
-        JSpinner spNum = new JSpinner(new SpinnerNumberModel(25, 1, 1000, 5));
-        spNum.addChangeListener(l->{ num = (int)spNum.getValue(); });
-        list.add(lblNum);
-        list.add(spNum);
-
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("Euclid", euclid, val -> euclid = val);
+        list.addOption("Show points", showPoints, val -> showPoints = val);
+        list.addOption("#points", num, 1, 1000, 5, (OptionList.IntegerOptionListener)val -> num = val);
         return list;
     }
 

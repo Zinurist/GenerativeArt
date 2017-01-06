@@ -1,16 +1,15 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class LogEffect extends ImageEffect {
 
-    private JCheckBox mirrored;
+    private boolean mirrored;
 
     public LogEffect(){
         super();
-        mirrored = new JCheckBox("mirrored log");
+        mirrored = false;
     }
 
     @Override
@@ -22,7 +21,7 @@ public class LogEffect extends ImageEffect {
     public void step() {
         Color c;
 
-        if(mirrored.isSelected()){//rotated by 180° in [1;2]
+        if(mirrored){//rotated by 180Â° in [1;2]
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
                     c = new Color(IMG.getRGB(x, y));
@@ -47,9 +46,9 @@ public class LogEffect extends ImageEffect {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-        list.add(mirrored);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("mirrored log", mirrored, val -> mirrored = val);
         return list;
     }
 

@@ -1,7 +1,5 @@
 package algorithms;
 
-import java.awt.*;
-
 public class AntsAlgorithm extends Algorithm {
     @Override
     public String toString() {

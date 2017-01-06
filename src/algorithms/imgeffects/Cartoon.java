@@ -1,8 +1,7 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class Cartoon extends ImageFilter{
 
@@ -69,22 +68,10 @@ public class Cartoon extends ImageFilter{
 
 
     @Override
-    public java.util.List<Component> getOptionList() {
-        java.util.List<Component> list = super.getOptionList();
-        ((JComboBox)list.get(list.size()-1)).setSelectedIndex(filterNum);
-
-        JLabel lblLimit = new JLabel("limit: "+limit);
-        JLabel lblRad = new JLabel("radius: "+rad);
-
-        JSlider slLimit = new JSlider(0,255,limit);
-        slLimit.addChangeListener(l->{limit = slLimit.getValue(); lblLimit.setText("limit: "+limit);});
-        JSlider slRad = new JSlider(1,10,rad);
-        slRad.addChangeListener(l->{rad = slRad.getValue(); lblRad.setText("radius: "+rad);});
-
-        list.add(lblLimit);
-        list.add(slLimit);
-        list.add(lblRad);
-        list.add(slRad);
+    public OptionList getOptionList() {
+        OptionList list = super.getOptionList();
+        list.addOption("limit", limit, 0, 255, val -> limit = val);
+        list.addOption("radius", rad, 1, 10, val -> rad = val);
         return list;
     }
 }

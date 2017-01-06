@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import image.Color;
+import option.OptionList;
 
 public class YouTubeLoad extends Algorithm{
 
@@ -58,43 +59,13 @@ public class YouTubeLoad extends Algorithm{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<>();
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
 
-        JLabel lblNum = new JLabel(numOfCircles + " circles");
-        JSlider sliderNum = new JSlider(2,300,numOfCircles);
-        sliderNum.addChangeListener(l -> {
-            numOfCircles = sliderNum.getValue();
-            lblNum.setText(numOfCircles + " circles");
-        });
-        list.add(sliderNum);
-        list.add(lblNum);
-
-        JLabel lblRadius = new JLabel(circleRadius + " px radius");
-        JSlider sliderRadius = new JSlider(4,300,circleRadius);
-        sliderRadius.addChangeListener(l -> {
-            circleRadius = sliderRadius.getValue();
-            lblRadius.setText(circleRadius + " px radius");
-        });
-        list.add(sliderRadius);
-        list.add(lblRadius);
-
-        JLabel lblSize = new JLabel((int)r + " px size");
-        JSlider sliderSize = new JSlider(10,1000,(int)r);
-        sliderSize.addChangeListener(l -> {
-            r = sliderSize.getValue();
-            lblSize.setText((int)r + " px size");
-        });
-        list.add(sliderSize);
-        list.add(lblSize);
-
-
-        JCheckBox cbLoad = new JCheckBox("load ani");
-        cbLoad.addChangeListener(l -> {
-            loadAnimation = cbLoad.isSelected();
-        });
-        list.add(cbLoad);
-        cbLoad.setSelected(loadAnimation);
+        list.addOption("#circles", numOfCircles, 2, 300, val -> numOfCircles = val);
+        list.addOption("radius (in px)", circleRadius, 4, 300, val -> circleRadius = val);
+        list.addOption("size (in px)", (int)r, 10, 1000, val -> r = val);
+        list.addOption("load ani", loadAnimation, val -> loadAnimation = val);
 
         return list;
     }

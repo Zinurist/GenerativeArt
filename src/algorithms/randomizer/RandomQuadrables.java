@@ -1,8 +1,7 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class RandomQuadrables extends Randomizer{
 
@@ -35,11 +34,9 @@ public class RandomQuadrables extends Randomizer{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-        JSpinner numSpinner = new JSpinner(new SpinnerNumberModel(num, 0, 100, 5));
-        numSpinner.addChangeListener(l->this.num = (int)numSpinner.getValue());
-        list.add(numSpinner);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("#quadrables", num, 0, 100, 5, (OptionList.IntegerOptionListener)val -> num = val);
         return list;
     }
 

@@ -1,25 +1,21 @@
 package algorithms;
 
-import javax.swing.*;
 import java.util.LinkedList;
-import java.util.List;
-import java.awt.*;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class RandomSplitSquares extends Algorithm{
 
     private LinkedList<S> squares;
     private Random r;
-    private JCheckBox randomBox,topLeftBox;
+    private boolean random, topLeft;
 
     public RandomSplitSquares(){
         super();
-        r=new Random();
-        randomBox = new JCheckBox("random");
-        randomBox.setSelected(true);
-        topLeftBox = new JCheckBox("only top left");
-        topLeftBox.setSelected(false);
+        r = new Random();
+        random = true;
+        topLeft = false;
 
         reset();
     }
@@ -28,7 +24,7 @@ public class RandomSplitSquares extends Algorithm{
     public void step() {
 
         IMG.setColor(Color.WHITE);
-        if(!topLeftBox.isSelected()) {
+        if(!topLeft) {
             IMG.fillRect(0, 0, IMG.getWidth(), IMG.getHeight());
         }else{
             IMG.fillRect(0, 0, squares.get(0).x2-squares.get(0).x1, squares.get(0).y2-squares.get(0).y1);
@@ -53,7 +49,7 @@ public class RandomSplitSquares extends Algorithm{
                 s.x2 = s.x1+width/2-1;
                 s.y2 = s.y1+height/2-1;
 
-                if(randomBox.isSelected()){
+                if(random){
                     int rangeX = width>40? width/10:3;
                     int rangeY = height>40? height/10:3;
                     s.x2 -= r.nextInt(rangeX);
@@ -67,7 +63,7 @@ public class RandomSplitSquares extends Algorithm{
                 }
 
                 //...calculations
-                if(!topLeftBox.isSelected()) {
+                if(!topLeft) {
                     newS.add(s1);
                     newS.add(s2);
                     newS.add(s3);
@@ -78,7 +74,7 @@ public class RandomSplitSquares extends Algorithm{
             }
             IMG.fillRect(s.x1, s.y1, s.x2 - s.x1, s.y2 - s.y1);
         }
-        if(!topLeftBox.isSelected()) {
+        if(!topLeft) {
             squares.addAll(newS);
         }
     }
@@ -89,16 +85,16 @@ public class RandomSplitSquares extends Algorithm{
     }
 
     @Override
-    public List<Component> getOptionList(){
-        List<Component> list = new LinkedList<Component>();
-        list.add(randomBox);
-        list.add(topLeftBox);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("random", random, val -> random = val);
+        list.addOption("only top left", topLeft, val -> topLeft = val);
         return list;
     }
 
     @Override
     public void reset(){
-        squares = new LinkedList<S>();
+        squares = new LinkedList<>();
         squares.add(new S(0,0,IMG.getWidth()-1, IMG.getHeight()-1));
         r = new Random();
     }

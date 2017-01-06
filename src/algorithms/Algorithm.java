@@ -5,6 +5,7 @@ import algorithms.randomizer.*;
 import gui.MainFrame;
 import java.awt.Component;
 import image.*;
+import option.OptionList;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -142,8 +143,8 @@ public abstract class Algorithm {
      * Returns a list of GUI-elements to be displayed in the options menu.
      * @return the list of GUI-elements
      */
-    public List<Component> getOptionList(){
-        return new LinkedList<>();
+    public OptionList getOptionList(){
+        return new OptionList();
     }
 
     /**

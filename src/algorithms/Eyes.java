@@ -2,10 +2,9 @@ package algorithms;
 
 
 import gui.MainFrame;
-
-import javax.swing.*;
 import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class Eyes extends Algorithm{
 
@@ -74,31 +73,12 @@ public class Eyes extends Algorithm{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new java.util.LinkedList<>();
-
-        JLabel lblEye = new JLabel("rad eye: " + radEye);
-        JLabel lblPupil = new JLabel("rad pupil: " + radPupil);
-        JLabel lblZ = new JLabel("mouse z: " + mouseZ);
-        JLabel lblDis = new JLabel("distance: " + distanceEyes);
-
-        JSlider slEye = new JSlider(4,300,radEye);
-        slEye.addChangeListener( l -> {radEye = slEye.getValue(); lblEye.setText("rad eye: " + radEye);} );
-        JSlider slPupil = new JSlider(4,300,radPupil);
-        slPupil.addChangeListener( l -> {radPupil = slPupil.getValue(); lblPupil.setText("rad pupil: " + radPupil);} );
-        JSlider slZ = new JSlider(4,3000,mouseZ);
-        slZ.addChangeListener( l -> {mouseZ = slZ.getValue(); lblZ.setText("mouse z: " + mouseZ);} );
-        JSlider slDis = new JSlider(4,300,distanceEyes);
-        slDis.addChangeListener( l -> {distanceEyes = slDis.getValue(); lblDis.setText("distance: " + distanceEyes);} );
-
-        list.add(lblEye);
-        list.add(slEye);
-        list.add(lblPupil);
-        list.add(slPupil);
-        list.add(lblDis);
-        list.add(slDis);
-        list.add(lblZ);
-        list.add(slZ);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("rad eye", radEye, 4, 300, val -> radEye = val);
+        list.addOption("rad pupil", radPupil, 4, 300, val -> radPupil = val);
+        list.addOption("mouse z", mouseZ, 4, 3000, val -> mouseZ = val);
+        list.addOption("distance", distanceEyes, 4, 300, val -> distanceEyes = val);
         return list;
     }
 }

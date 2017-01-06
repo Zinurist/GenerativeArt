@@ -1,10 +1,7 @@
 package algorithms.randomizer;
 
-import java.util.List;
-
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class RandomLines extends Randomizer{
 
@@ -21,11 +18,9 @@ public class RandomLines extends Randomizer{
     }
 
     @Override
-    public List<Component> getOptionList(){
-        List<Component> list = super.getOptionList();
-        JSpinner linesSpinner = new JSpinner(new SpinnerNumberModel(lines, 0, 1000, 10));
-        linesSpinner.addChangeListener(l->lines = (int)linesSpinner.getValue());
-        list.add(linesSpinner);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("lines", lines, 0, 1000, 10, (OptionList.IntegerOptionListener)val -> lines = val);
         return list;
     }
 

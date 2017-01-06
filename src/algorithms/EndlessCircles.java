@@ -1,17 +1,15 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.LinkedList;
 import image.Color;
+import option.OptionList;
 
 public class EndlessCircles extends Algorithm{
 
 
-    private JSlider r_step_slider;
+    private int r_step;
 
     public EndlessCircles(){
-        r_step_slider = new JSlider(2,300,10);
+        r_step = 10;
     }
 
 
@@ -24,7 +22,6 @@ public class EndlessCircles extends Algorithm{
     public void step() {
         emptyIMG();
 
-        int r_step = r_step_slider.getValue();
         IMG.setColor(Color.BLACK);
 
         int x0 = IMG.getWidth()/2;
@@ -47,10 +44,9 @@ public class EndlessCircles extends Algorithm{
 
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<Component>();
-        list.add(r_step_slider);
-        list.add(new JLabel("r_step"));
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("r step", r_step, 2, 300, val -> r_step = val);
         return list;
     }
 }

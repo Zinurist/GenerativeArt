@@ -1,8 +1,8 @@
 package algorithms;
 
 import image.Color;
+import option.OptionList;
 
-import java.awt.Component;
 import java.util.*;
 
 public class BallAndWind extends Algorithm{
@@ -131,9 +131,8 @@ public class BallAndWind extends Algorithm{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new LinkedList<>();
-
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
         return list;
     }
 

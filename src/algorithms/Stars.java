@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class Stars extends Algorithm {
 
@@ -71,32 +72,13 @@ public class Stars extends Algorithm {
 
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
 
-        JLabel lblNum = new JLabel("#stars: "+num);
-        JLabel lblFac = new JLabel("factor: "+factor);
+        list.addOption("#stars", num, 1, 1000, val -> num = val);
+        list.addOption("factor", factor, 10., 100., 0.1, val -> factor = val);
+        list.addOption("connect", connect, val -> connect = val);
 
-        JSlider slNum = new JSlider(1, 1000, num);
-        slNum.addChangeListener(l -> {
-            num = slNum.getValue();
-            lblNum.setText("#stars: " + num);
-        });
-
-        JSlider slFac = new JSlider(10, 100, (int)(factor*10+0.5));
-        slFac.addChangeListener(l -> {
-            factor = slFac.getValue() / 10.0;
-            lblFac.setText("factor: " + factor);
-        });
-
-        JCheckBox cbConnect = new JCheckBox("connect", connect);
-        cbConnect.addChangeListener(l->connect = cbConnect.isSelected());
-
-        list.add(lblNum);
-        list.add(slNum);
-        list.add(lblFac);
-        list.add(slFac);
-        list.add(cbConnect);
         return list;
     }
 }

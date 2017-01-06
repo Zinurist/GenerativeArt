@@ -1,6 +1,5 @@
 package algorithms.randomizer;
 
-import java.awt.*;
 import image.Color;
 
 public class RandomPixelFog extends Randomizer {

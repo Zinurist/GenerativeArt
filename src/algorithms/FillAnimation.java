@@ -1,10 +1,8 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 import image.Color;
+import option.OptionList;
 
 public class FillAnimation extends Algorithm{
 
@@ -12,12 +10,12 @@ public class FillAnimation extends Algorithm{
 
     private ArrayList<int[]> points, npoints;
     private boolean[][] checked;
-    private JColorChooser color;
+    private Color color;
     private int startRGB;
 
     public FillAnimation(){
         super();
-        color = new JColorChooser(java.awt.Color.BLUE);
+        color = Color.BLUE;
         reset();
     }
 
@@ -36,12 +34,12 @@ public class FillAnimation extends Algorithm{
             y = r.nextInt(IMG.getHeight());
 
             startRGB = IMG.getRGB(x,y);
-            if(startRGB != color.getColor().getRGB()) {
+            if(startRGB != color.getRGB()) {
                 points.add(new int[]{x, y});
             }
         }
 
-        IMG.setColor(new Color(color.getColor().getRGB()));
+        IMG.setColor(color);
 
         npoints.ensureCapacity(points.size());
 
@@ -84,9 +82,9 @@ public class FillAnimation extends Algorithm{
     }
 
     @Override
-    public List<Component> getOptionList(){
-        List<Component> list = new LinkedList<>();
-        list.add(color);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption(color, val -> color = val);
         return list;
     }
 }

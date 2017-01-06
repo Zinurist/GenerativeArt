@@ -1,19 +1,13 @@
 package algorithms;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class Net extends Algorithm{
 
-    //these 3 settings are set in the reset-method, since they require a reset (changing them dynamically might result in out of bounds errors)
-    private JSpinner spWidth, spHeight, spDis;
-    //these are need in the reset function, since the fixed array needs to be set correctly there
-    private JToggleButton btnTL, btnTR, btnBL, btnBR;
-
     //settings, all in the options frame
-    private int width,height;
-    private int distance;
+    private int width,height,tmpWidth,tmpHeight;
+    private int distance,tmpDistance;
     private double restingDistance;
     private double hWind, vWind;
     private int linkUpdates;
@@ -24,9 +18,9 @@ public class Net extends Algorithm{
     private boolean[][] fixed;
 
     public Net() {
-        width = 20;
-        height = 20;
-        distance = 20;
+        width = tmpWidth = 20;
+        height = tmpHeight = 20;
+        distance = tmpDistance = 20;
         restingDistance = distance;
         hWind = 1.;
         vWind = 1.;
@@ -37,18 +31,10 @@ public class Net extends Algorithm{
         points = new double[height][width][4];
         fixed = new boolean[height][width];
 
-
-        spWidth = new JSpinner(new SpinnerNumberModel(width,2,500,1));
-        spHeight = new JSpinner(new SpinnerNumberModel(height,2,500,1));
-        spDis = new JSpinner(new SpinnerNumberModel(distance,2,100,1));
-        btnTL = new JToggleButton("top left",true);
-        btnTL.addChangeListener(l->fixed[0][0] = btnTL.isSelected());
-        btnTR = new JToggleButton("top right",true);
-        btnTR.addChangeListener(l->fixed[0][width-1] = btnTR.isSelected());
-        btnBL = new JToggleButton("bottom left",true);
-        btnBL.addChangeListener(l->fixed[height-1][0] = btnBL.isSelected());
-        btnBR = new JToggleButton("bottom right",true);
-        btnBR.addChangeListener(l->fixed[height-1][width-1] = btnBR.isSelected());
+        fixed[0][0] = true;
+        fixed[0][width-1] = true;
+        fixed[height-1][0] = true;
+        fixed[height-1][width-1] = true;
 
         reset();
     }
@@ -146,14 +132,20 @@ public class Net extends Algorithm{
 
     @Override
     public void reset() {
+        boolean tl,tr,bl,br;
+        tl = fixed[0][0];
+        tr = fixed[0][width-1];
+        bl = fixed[height-1][0];
+        br = fixed[height-1][width-1];
+
         //is the user changed the width/height settings, then points array needs to be reallocated
-        if(width != (int)spWidth.getValue() || height != (int)spHeight.getValue()){
-            width = (int)spWidth.getValue();
-            height = (int)spHeight.getValue();
+        if(width != tmpWidth || height != tmpHeight){
+            width = tmpWidth;
+            height = tmpHeight;
             points = new double[height][width][4];
             fixed = new boolean[height][width];
         }
-        distance = (int)spDis.getValue();
+        distance = tmpDistance;
 
         double midX = IMG.getWidth()/2 - distance * (width-1.)/2. ;
         double midY = IMG.getHeight()/2 - distance * (height-1.)/2. ;
@@ -168,75 +160,37 @@ public class Net extends Algorithm{
             }
         }
 
-        fixed[0][0] = btnTL.isSelected();
-        fixed[0][width-1] = btnTR.isSelected();
-        fixed[height-1][0] = btnBL.isSelected();
-        fixed[height-1][width-1] = btnBR.isSelected();
+        fixed[0][0] = tl;
+        fixed[0][width-1] = tr;
+        fixed[height-1][0] = bl;
+        fixed[height-1][width-1] = br;
 
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new java.util.LinkedList<>();
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
 
-        JLabel lblHWind = new JLabel("H Wind: "+hWind);
-        JLabel lblVWind = new JLabel("V Wind: "+vWind);
-        JLabel lblResDis = new JLabel("Resting dis: "+restingDistance);
-        JLabel lblUpdates = new JLabel("Link updates: " + linkUpdates);
+        list.addOption("H Wind", hWind, -10.0, 10.0, 1.0, val -> hWind = val);
+        list.addOption("V Wind", vWind, -10.0, 10.0, 1.0, val -> vWind = val);
+        list.addOption("Resting dis", restingDistance, 1., 100., 1., val -> restingDistance = val);
+        list.addOption("Link updates", linkUpdates, 1, 100, val -> linkUpdates = val);
 
-        JSlider slHWind = new JSlider(-1000, 1000, (int)(hWind*100 + 0.5));
-        slHWind.addChangeListener(l-> {
-            hWind = slHWind.getValue() / 100.0;
-            lblHWind.setText("H Wind: " + hWind);
-        });
-        JSlider slVWind = new JSlider(-1000, 1000, (int)(vWind*100 + 0.5));
-        slVWind.addChangeListener(l-> {
-            vWind = slVWind.getValue() / 100.0;
-            lblVWind.setText("V Wind: " + vWind);
-        });
-        JSlider slResDis = new JSlider(10, 1000, (int)(restingDistance*10 + 0.5));
-        slResDis.addChangeListener(l-> {
-            restingDistance = slResDis.getValue() / 10.0;
-            lblResDis.setText("Resting dis: " + restingDistance);
-        });
-        JSlider slUpdates = new JSlider(1, 100, linkUpdates);
-        slUpdates.addChangeListener(l-> {
-            linkUpdates = slUpdates.getValue();
-            lblUpdates.setText("Link updates: " + linkUpdates);
-        });
+        list.addOption("top left", fixed[0][0], val -> fixed[0][0] = val);
+        list.addOption("top right", fixed[0][width - 1], val -> fixed[0][width - 1] = val);
+        list.addOption("bottom left", fixed[height - 1][0], val -> fixed[height - 1][0] = val);
+        list.addOption("bottom right", fixed[height - 1][width - 1], val -> fixed[height - 1][width - 1] = val);
 
-        JLabel lblWidth = new JLabel("Width: ");
-        JLabel lblHeight = new JLabel("Height: ");
-        JLabel lblDis = new JLabel("Distance: ");
+        list.addInfo("Applies after reset:");
+        list.addInfo("");
 
+        list.addOption("Width", width, 2, 500, 1, (OptionList.IntegerOptionListener)val -> tmpWidth = val);
+        list.addOption("Height", height, 2, 500, 1, (OptionList.IntegerOptionListener)val -> tmpHeight = val);
+        list.addOption("Distance", distance, 2, 100, 1, (OptionList.IntegerOptionListener)val -> tmpDistance = val);
 
-        JCheckBox cbPoints = new JCheckBox("draw points", drawPoints);
-        cbPoints.addActionListener(l->drawPoints = cbPoints.isSelected());
-        JCheckBox cbLinks = new JCheckBox("draw links", drawLinks);
-        cbLinks.addActionListener(l->drawLinks = cbLinks.isSelected());
+        list.addOption("draw points", drawPoints, val -> drawPoints = val);
+        list.addOption("draw links", drawLinks, val -> drawLinks = val);
 
-        list.add(lblHWind);
-        list.add(slHWind);
-        list.add(lblVWind);
-        list.add(slVWind);
-        list.add(lblResDis);
-        list.add(slResDis);
-        list.add(lblUpdates);
-        list.add(slUpdates);
-        list.add(btnTL);
-        list.add(btnTR);
-        list.add(btnBL);
-        list.add(btnBR);
-        list.add(new JLabel("Applies after reset:"));
-        list.add(new JLabel(""));
-        list.add(lblWidth);
-        list.add(spWidth);
-        list.add(lblHeight);
-        list.add(spHeight);
-        list.add(lblDis);
-        list.add(spDis);
-        list.add(cbPoints);
-        list.add(cbLinks);
         return list;
     }
 }

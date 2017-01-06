@@ -1,24 +1,18 @@
 package algorithms;
 
-import javax.swing.*;
 import java.util.LinkedList;
-import java.util.List;
-import java.awt.*;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class RandomSplitSquaresBugged extends Algorithm{
 
     private LinkedList<S> squares;
-    private Random r;
-    private JCheckBox typeBox;
+    private boolean type;
 
     public RandomSplitSquaresBugged(){
         super();
-        r=new Random();
-        typeBox = new JCheckBox("First type");
-        typeBox.setSelected(true);
-
+        type = true;
         reset();
     }
 
@@ -39,7 +33,7 @@ public class RandomSplitSquaresBugged extends Algorithm{
                 s1 = new S(s.x1+width/2+1,s.y1,s.x2,s.y1+height/2-1);//top right
                 s2 = new S(s.x1+width/2+1,s.y1+height/2+1,s.x2,s.y2);//bottom right
                 s3 = new S(s.x1,s.y1+height/2+1,s.x1+width/2-1,s.y2);//bottom left
-                if(typeBox.isSelected()) {
+                if(type) {
                     s.x2 = width / 2 - 1;//<- Bug
                     s.y2 = height / 2 - 1;//<- Bug
                 }else{
@@ -70,9 +64,9 @@ public class RandomSplitSquaresBugged extends Algorithm{
     }
 
     @Override
-    public List<Component> getOptionList(){
-        List<Component> list = new LinkedList<Component>();
-        list.add(typeBox);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        list.addOption("First type", type, val -> type = val);
         return list;
     }
 
@@ -80,7 +74,6 @@ public class RandomSplitSquaresBugged extends Algorithm{
     public void reset(){
         squares = new LinkedList<S>();
         squares.add(new S(0,0,IMG.getWidth()-1, IMG.getHeight()-1));
-        r = new Random();
     }
 
     private class S{

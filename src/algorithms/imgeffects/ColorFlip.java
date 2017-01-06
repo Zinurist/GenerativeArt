@@ -1,8 +1,7 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class ColorFlip extends ImageEffect {
 
@@ -54,14 +53,10 @@ public class ColorFlip extends ImageEffect {
 
 
     @Override
-    public java.util.List<Component> getOptionList() {
-        java.util.List<Component> list = super.getOptionList();
-
-        JComboBox<String> cbColor = new JComboBox<>(new String[]{"Red", "Green", "Blue"});
-        cbColor.setSelectedIndex(type);
-        cbColor.addActionListener(l->type = cbColor.getSelectedIndex());
-
-        list.add(cbColor);
+    public OptionList getOptionList() {
+        OptionList list = super.getOptionList();
+        String[] colors = new String[]{"Red", "Green", "Blue"};
+        list.addOption("Color", colors, type, val -> type = val);
         return list;
     }
 

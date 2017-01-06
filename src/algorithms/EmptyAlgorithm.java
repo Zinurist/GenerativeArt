@@ -1,8 +1,6 @@
 package algorithms;
 
-
-import java.awt.Component;
-import image.Color;
+import option.OptionList;
 
 /**
  * Empty algorithm that does nothing. Serves as placeholder and template.
@@ -34,12 +32,9 @@ public class EmptyAlgorithm extends Algorithm{
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = new java.util.LinkedList<>();
-        //add components here
-        //JCheckBox cbBool = new JCheckBox("bool", bool);
-        //cbBool.addChangeListener(l->{ bool = cbBool.isSelected(); });
-        //list.add(cbBool);
+    public OptionList getOptionList(){
+        OptionList list = new OptionList();
+        //add options here
         return list;
     }
 }

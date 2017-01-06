@@ -1,16 +1,15 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class SineEffect extends ImageEffect {
 
-    private JCheckBox cosine;
+    private boolean cosine;
 
     public SineEffect(){
         super();
-        cosine = new JCheckBox("use cosine", false);
+        cosine = false;
     }
 
     @Override
@@ -22,7 +21,7 @@ public class SineEffect extends ImageEffect {
     public void step() {
         Color c;
 
-        if(cosine.isSelected()){
+        if(cosine){
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
                     c = new Color(IMG.getRGB(x, y));
@@ -48,9 +47,9 @@ public class SineEffect extends ImageEffect {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-        list.add(cosine);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("use cosine", cosine, val -> cosine = val);
         return list;
     }
 

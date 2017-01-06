@@ -1,8 +1,7 @@
 package algorithms.randomizer;
 
-import javax.swing.*;
-import java.awt.*;
 import image.Color;
+import option.OptionList;
 
 public class RandomHVLines extends Randomizer {
 
@@ -47,18 +46,10 @@ public class RandomHVLines extends Randomizer {
 
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-
-        JCheckBox verticalBox = new JCheckBox("vertical lines");
-        verticalBox.setSelected(vertical);
-        verticalBox.addItemListener(l->vertical = verticalBox.isSelected());
-        JCheckBox horizontalBox = new JCheckBox("horizontal lines");
-        horizontalBox.setSelected(horizontal);
-        horizontalBox.addItemListener(l->horizontal = horizontalBox.isSelected());
-
-        list.add(verticalBox);
-        list.add(horizontalBox);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("vertical lines", vertical, val -> vertical = val);
+        list.addOption("horizontal lines", horizontal, val -> horizontal = val);
         return list;
     }
 

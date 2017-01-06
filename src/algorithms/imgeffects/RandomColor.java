@@ -1,17 +1,16 @@
 package algorithms.imgeffects;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Random;
 import image.Color;
+import option.OptionList;
 
 public class RandomColor extends ImageEffect {
 
-    private JComboBox<String> box;
+    private int color;
 
     public RandomColor(){
         super();
-        box = new JComboBox<>(new String[]{"Blue", "Red", "Green", "All"});
+        color = 0;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class RandomColor extends ImageEffect {
         for(int y=0; y<height; y++){
             for(int x=0; x<width; x++){
                 c = new Color(original.getRGB(x, y));
-                switch(box.getSelectedIndex()){
+                switch(color){
                     case 0:
                         IMG.setColor(new Color(c.getRed(), c.getGreen(), (int)Math.min(Math.round(c.getBlue() * factor) , 255) ));
                         break;
@@ -57,9 +56,9 @@ public class RandomColor extends ImageEffect {
     }
 
     @Override
-    public java.util.List<Component> getOptionList(){
-        java.util.List<Component> list = super.getOptionList();
-        list.add(box);
+    public OptionList getOptionList(){
+        OptionList list = super.getOptionList();
+        list.addOption("Color", new String[]{"Blue", "Red", "Green", "All"}, color, val -> color = val);
         return list;
     }
 
