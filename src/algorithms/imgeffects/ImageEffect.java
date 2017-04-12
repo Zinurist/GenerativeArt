@@ -15,6 +15,7 @@ public abstract class ImageEffect extends Algorithm {
 
     /**
      * The original image to work on. Most image effects don't change this image. This image isn't drawn in the GUI, IMG of the Algorithm class is still used for that.
+     * This image can be used, if the effect needs the unmodified data of the original image.
      * Per default the image "test.jpg" is loaded. (might be changed)
      */
     protected static Image original = new Image(IMG.getWidth(),IMG.getHeight());

@@ -57,7 +57,7 @@ public abstract class Algorithm {
         randAlg[counter++] = new Mountains();
         randAlg[counter++] = new RandomGraph();
         randAlg[counter++] = new RandomBigCircles();
-        int I = 18;
+        int I = 19;
         counter = 0;
         imgAlg = new ImageEffect[I];
         imgAlg[counter++] = new Pixelate();
@@ -78,6 +78,7 @@ public abstract class Algorithm {
         imgAlg[counter++] = new Cartoon();
         imgAlg[counter++] = new ColorFlip();
         imgAlg[counter++] = new Checkerboard();
+        imgAlg[counter++] = new Dithering();
         int N = R+I+25;
         alg = new Algorithm[N];
         for(int i=0; i<R; i++) alg[i] = randAlg[i];
