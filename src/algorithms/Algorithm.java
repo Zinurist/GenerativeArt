@@ -9,6 +9,7 @@ import option.OptionList;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * The base structure for algorithms.
@@ -20,107 +21,102 @@ public abstract class Algorithm {
      */
     public static Image IMG = new Image(1000, 1000);
 
-    //these array are used to make the creation of the algorithms easier
-    private static Randomizer[] randAlg;
-    private static ImageEffect[] imgAlg;
-    private static Algorithm[] alg;
+    //these lists are used to make the creation of the algorithms easier
+    private static Vector<Randomizer> randAlg;
+    private static Vector<ImageEffect> imgAlg;
+    private static Vector<Algorithm> alg;
 
 
     //Register of all algorithms
     static {
         //initImageEffect();
 
-        //Adding a new algorithm: When adding a randomizer (/image effect/normal algorithm), increase R (/I/N) by 1,
-        //create a new object of the algorithm and add it at the end of randAlg (/imgAlg/alg).
-        //randAlg and imgAlg are both copied into alg (see for-loops below), changes to these arrays need to be done before that
-        int counter = 0;
-        int R = 21;
-        randAlg = new Randomizer[R];
-        randAlg[counter++] = new RandomPixels();
-        randAlg[counter++] = new RandomPixelFog();
-        randAlg[counter++] = new RandomFadingPixels();
-        randAlg[counter++] = new RandomConcentratingPixels();
-        randAlg[counter++] = new RandomRifts();
-        randAlg[counter++] = new RandomConnectedRifts();
-        randAlg[counter++] = new RandomThinRifts();
-        randAlg[counter++] = new RandomPixelBlocks();
-        randAlg[counter++] = new RandomLines();
-        randAlg[counter++] = new RandomVerticalPreset();
-        randAlg[counter++] = new RandomQuadrables();
-        randAlg[counter++] = new RandomPolygon();
-        randAlg[counter++] = new RandomStrings();
-        randAlg[counter++] = new RandomCircles();
-        randAlg[counter++] = new RandomHVLines(true, true);
-        randAlg[counter++] = new RandomPath();
-        randAlg[counter++] = new RandomPositions();
-        randAlg[counter++] = new Voronoi();
-        randAlg[counter++] = new Mountains();
-        randAlg[counter++] = new RandomGraph();
-        randAlg[counter++] = new RandomBigCircles();
-        int I = 19;
-        counter = 0;
-        imgAlg = new ImageEffect[I];
-        imgAlg[counter++] = new Pixelate();
-        imgAlg[counter++] = new ImageFilter();
-        imgAlg[counter++] = new ImageInvert();
-        imgAlg[counter++] = new ColorSwap();
-        imgAlg[counter++] = new SineEffect();
-        imgAlg[counter++] = new ExponentialEffect();
-        imgAlg[counter++] = new LogEffect();
-        imgAlg[counter++] = new BlackPixels();
-        imgAlg[counter++] = new Grey();
-        imgAlg[counter++] = new Rectify();
-        imgAlg[counter++] = new RandomColor();
-        imgAlg[counter++] = new TransitionMask();
-        imgAlg[counter++] = new ImageTransition();
-        imgAlg[counter++] = new SineWiggle();
-        imgAlg[counter++] = new SemiInvert();
-        imgAlg[counter++] = new Cartoon();
-        imgAlg[counter++] = new ColorFlip();
-        imgAlg[counter++] = new Checkerboard();
-        imgAlg[counter++] = new Dithering();
-        int N = R+I+25;
-        alg = new Algorithm[N];
-        for(int i=0; i<R; i++) alg[i] = randAlg[i];
-        for(int i=0; i<I; i++) alg[R+i] = imgAlg[i];
-        counter = R+I;
-        alg[counter++] = new ChaosAlgorithm();
-        alg[counter++] = new AntsAlgorithm();
-        alg[counter++] = new Squares();
-        alg[counter++] = new SimpleLines();
-        alg[counter++] = new Grid();
-        alg[counter++] = new Shadow();
-        alg[counter++] = new RandomSplitSquares();
-        alg[counter++] = new RandomSplitSquaresBugged();
-        alg[counter++] = new Ripples();
-        alg[counter++] = new SimpleSine();
-        alg[counter++] = new Polar();
-        alg[counter++] = new EndlessCircles();
-        alg[counter++] = new Vectorfield();
-        alg[counter++] = new Fractal();
-        alg[counter++] = new FillAnimation();
-        alg[counter++] = new YouTubeLoad();
-        alg[counter++] = new BallAndWind();
-        alg[counter++] = new CoordinateColor();
-        alg[counter++] = new Net();
-        alg[counter++] = new Circles();
-        alg[counter++] = new Eyes();
-        alg[counter++] = new Stars();
-        alg[counter++] = new Balls();
-        alg[counter++] = new Search();
-        alg[N-1] = new EmptyAlgorithm();
+        //Adding a new algorithm to the best fitting list.
+
+        randAlg = new Vector<>();
+        randAlg.add(new RandomPixels());
+        randAlg.add(new RandomPixelFog());
+        randAlg.add(new RandomFadingPixels());
+        randAlg.add(new RandomConcentratingPixels());
+        randAlg.add(new RandomRifts());
+        randAlg.add(new RandomConnectedRifts());
+        randAlg.add(new RandomThinRifts());
+        randAlg.add(new RandomPixelBlocks());
+        randAlg.add(new RandomLines());
+        randAlg.add(new RandomVerticalPreset());
+        randAlg.add(new RandomQuadrables());
+        randAlg.add(new RandomPolygon());
+        randAlg.add(new RandomStrings());
+        randAlg.add(new RandomCircles());
+        randAlg.add(new RandomHVLines(true, true));
+        randAlg.add(new RandomPath());
+        randAlg.add(new RandomPositions());
+        randAlg.add(new Voronoi());
+        randAlg.add(new Mountains());
+        randAlg.add(new RandomGraph());
+        randAlg.add(new RandomBigCircles());
+
+        imgAlg = new Vector<>();
+        imgAlg.add(new Pixelate());
+        imgAlg.add(new ImageFilter());
+        imgAlg.add(new ImageInvert());
+        imgAlg.add(new ColorSwap());
+        imgAlg.add(new SineEffect());
+        imgAlg.add(new ExponentialEffect());
+        imgAlg.add(new LogEffect());
+        imgAlg.add(new BlackPixels());
+        imgAlg.add(new Grey());
+        imgAlg.add(new Rectify());
+        imgAlg.add(new RandomColor());
+        imgAlg.add(new TransitionMask());
+        imgAlg.add(new ImageTransition());
+        imgAlg.add(new SineWiggle());
+        imgAlg.add(new SemiInvert());
+        imgAlg.add(new Cartoon());
+        imgAlg.add(new ColorFlip());
+        imgAlg.add(new Checkerboard());
+        imgAlg.add(new Dithering());
+
+        alg = new Vector<>();
+        alg.addAll(randAlg);
+        alg.addAll(imgAlg);
+        alg.add(new ChaosAlgorithm());
+        alg.add(new AntsAlgorithm());
+        alg.add(new Squares());
+        alg.add(new SimpleLines());
+        alg.add(new Grid());
+        alg.add(new Shadow());
+        alg.add(new RandomSplitSquares());
+        alg.add(new RandomSplitSquaresBugged());
+        alg.add(new Ripples());
+        alg.add(new SimpleSine());
+        alg.add(new Polar());
+        alg.add(new EndlessCircles());
+        alg.add(new Vectorfield());
+        alg.add(new Fractal());
+        alg.add(new FillAnimation());
+        alg.add(new YouTubeLoad());
+        alg.add(new BallAndWind());
+        alg.add(new CoordinateColor());
+        alg.add(new Net());
+        alg.add(new Circles());
+        alg.add(new Eyes());
+        alg.add(new Stars());
+        alg.add(new Balls());
+        alg.add(new Search());
+        alg.add(new EmptyAlgorithm());
     }
     /**
      * Returns the array of all algorithms.
      */
-    public static Algorithm[] getAlgorithmsList(){
+    public static Vector<Algorithm> getAlgorithmsList(){
         return alg;
     }
 
     /**
      * Returns the array of all randomizers.
      */
-    public static Randomizer[] getRandomizersList(){
+    public static Vector<Randomizer> getRandomizersList(){
         return randAlg;
     }
 
