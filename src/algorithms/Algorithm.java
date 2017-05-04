@@ -55,6 +55,7 @@ public abstract class Algorithm {
         randAlg.add(new Mountains());
         randAlg.add(new RandomGraph());
         randAlg.add(new RandomBigCircles());
+        randAlg.add(new ChaosGame());
 
         imgAlg = new Vector<>();
         imgAlg.add(new Pixelate());
@@ -104,6 +105,7 @@ public abstract class Algorithm {
         alg.add(new Stars());
         alg.add(new Balls());
         alg.add(new Search());
+        alg.add(new SandPile());
         alg.add(new EmptyAlgorithm());
     }
     /**

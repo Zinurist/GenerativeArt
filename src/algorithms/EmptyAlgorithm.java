@@ -21,7 +21,7 @@ public class EmptyAlgorithm extends Algorithm{
 
     @Override
     public void step() {
-        init();
+        emptyIMG();
         //IMG.setColor(Color.BLACK);
         //IMG.drawLine(0,0,x,y);
     }
