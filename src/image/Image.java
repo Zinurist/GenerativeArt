@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Ímage Interface class.
+ * ï¿½mage Interface class.
  */
 public class Image {
 
@@ -112,5 +112,16 @@ public class Image {
         g.drawImage(i.getData(), x, y, null);
     }
 
+    public void draw(int x, int y){
+        drawLine(x,y,x,y);
+    }
+
+    public void drawCircle(int x, int y, int r){
+        drawOval(x,y,r,r);
+    }
+
+    public void fillCircle(int x, int y, int r){
+        fillOval(x,y,r,r);
+    }
 
 }
