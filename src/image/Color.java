@@ -26,6 +26,28 @@ public class Color {
         color = new java.awt.Color(r,g,b);
     }
 
+    public Color(){
+        this(0,0,0);
+    }
+
+    //y: 0,1  cb/cr: -0.5,0.5
+    public void fromYCbCr(float y, float cb, float cr){
+        float kb = 0.114F;
+        float kr = 0.299F;
+        float kg = 1-kr-kb;
+
+        float b = 2*cb*(1-kb) + y;
+        float r = 2*cr*(1-kr) + y;
+        float g = (y - kb*b - kr*r)/kg;
+        System.out.println(y+" "+cr+" "+cb);
+        System.out.println(r+" "+g+" "+b);
+        color = new java.awt.Color(r,g,b);
+    }
+
+    public void fromHSB(float h, float s, float b){
+        color = new java.awt.Color(java.awt.Color.HSBtoRGB(h,s,b));
+    }
+
     public int getBlue(){
         return color.getBlue();
     }

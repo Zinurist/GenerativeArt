@@ -3,12 +3,9 @@ package algorithms;
 import algorithms.imgeffects.*;
 import algorithms.randomizer.*;
 import gui.MainFrame;
-import java.awt.Component;
 import image.*;
 import option.OptionList;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Vector;
 
 /**
@@ -99,6 +96,8 @@ public abstract class Algorithm {
         alg.add(new YouTubeLoad());
         alg.add(new BallAndWind());
         alg.add(new CoordinateColor());
+        alg.add(new ArithmeticPixel());
+        alg.add(new ArithmeticPixelHSB());
         alg.add(new Net());
         alg.add(new Circles());
         alg.add(new Eyes());
