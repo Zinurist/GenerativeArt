@@ -9,6 +9,10 @@ public class Color {
     public static final Color WHITE = new Color(255,255,255);
     public static final Color BLUE = new Color(java.awt.Color.BLUE.getRGB());
     public static final Color RED = new Color(java.awt.Color.RED.getRGB());
+    public static final Color GREEN = new Color(java.awt.Color.GREEN.getRGB());
+    public static final Color CYAN = new Color(java.awt.Color.CYAN.getRGB());
+    public static final Color YELLOW = new Color(java.awt.Color.YELLOW.getRGB());
+    public static final Color MAGENTA = new Color(java.awt.Color.MAGENTA.getRGB());
 
     java.awt.Color color;
 

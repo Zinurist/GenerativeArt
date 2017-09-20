@@ -31,6 +31,7 @@ public abstract class Algorithm {
         //Adding a new algorithm to the best fitting list.
 
         randAlg = new Vector<>();
+        randAlg.add(new PixelCube());
         randAlg.add(new RandomPixels());
         randAlg.add(new RandomPixelFog());
         randAlg.add(new RandomFadingPixels());
@@ -105,6 +106,7 @@ public abstract class Algorithm {
         alg.add(new Balls());
         alg.add(new Search());
         alg.add(new SandPile());
+        alg.add(new Cube());
         alg.add(new EmptyAlgorithm());
     }
     /**
